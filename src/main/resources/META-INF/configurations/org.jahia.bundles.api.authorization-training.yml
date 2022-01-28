@@ -1,0 +1,11 @@
+training:
+  description: Can access some graphql API
+  metadata:
+    visible: true
+  auto_apply:
+    - always: true
+  grants:
+    - api:
+        include: graphql
+    - node:
+        pathPattern: /.*

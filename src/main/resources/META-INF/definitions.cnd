@@ -1,0 +1,37 @@
+<foomix = 'http://www.foo.org/jahia/mix/1.0'>
+<foont = 'http://www.foo.org/jahia/nt/1.0'>
+<mix = 'http://www.jcp.org/jcr/mix/1.0'>
+<jcr = 'http://www.jcp.org/jcr/1.0'>
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+
+[foomix:trainingComponents] > jmix:droppableContent, jmix:editorialContent mixin
+
+[foont:employee] > jnt:content, mix:title, foomix:trainingComponents
+ - jcr:title (string) mandatory primary
+ - firstname (string) mandatory
+ - lastname (string) mandatory
+ - biography (string, richtext[ckeditor.customConfig='$context/modules/jahia-training-developer/javascript/ckconfig.js']) i18n
+ - mainPhoto (weakreference, picker[type='image']) < 'jmix:image'
+ - jobTitle (string, choicelist[resourceBundle]) < 'developer', 'it_administrator', 'it_consultant', 'manager'
+ - nationality (string, choicelist[country,flag])
+ - birthdate (date, datepicker)
+ - supervisor (weakreference) < 'foont:employee'
+ - phone (string)
+ - email (string) < '^$|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}'
+ - firm (weakreference) < 'foont:firm'
+ - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
+ - subcategory (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category', dependentProperties='category']) < 'jnt:category'
+
+[foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:browsableInEditorialPicker orderable
+ - jcr:title (string) mandatory i18n primary
+ + * (foont:employee) = foont:employee
+
+[foont:latestEmployees] > jnt:content, jmix:list, foomix:trainingComponents
+ - maxItems (long) = 10 autocreated indexed=no
+ - subNodesView (string, choicelist[templates=foont:employee]) = 'default' autocreated
+
+[foont:myGraphQLComponent] > jnt:content, foomix:trainingComponents
+ - employee (weakreference) < 'foont:employee'
+
+[foont:firm] > jnt:content, mix:title, foomix:trainingComponents
