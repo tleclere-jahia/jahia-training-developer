@@ -21,7 +21,7 @@
  - email (string) < '^$|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}'
  - firm (weakreference) < 'foont:firm'
  - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
- - subcategory (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category', dependentProperties='category']) < 'jnt:category'
+ - subcategory (weakreference, choicelist[dependantCategory, dependentProperties='category']) < 'jnt:category'
 
 [foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
@@ -35,3 +35,35 @@
  - employee (weakreference) < 'foont:employee'
 
 [foont:firm] > jnt:content, mix:title, foomix:trainingComponents
+
+[foont:simpleList] > jnt:content, jmix:list, foomix:trainingComponents orderable
+ - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
+
+[foont:text] > jnt:content, foomix:trainingComponents
+ - text (string)
+
+[foomix:textType] > jmix:templateMixin mixin
+ extends = foont:simpleList
+ + * (foont:text) = foont:text
+
+[foont:long] > jnt:content, foomix:trainingComponents
+ - long (long)
+
+[foomix:longType] > jmix:templateMixin mixin
+ extends = foont:simpleList
+ + * (foont:long) = foont:long
+
+[foont:date] > jnt:content, foomix:trainingComponents
+ - date (date, datepicker)
+
+[foomix:dateType] > jmix:templateMixin mixin
+ extends = foont:simpleList
+ + * (foont:date) = foont:date
+
+[foont:datetime] > jnt:content, foomix:trainingComponents
+ - datetime (date, datetimepicker)
+
+[foomix:datetimeType] > jmix:templateMixin mixin
+ extends = foont:simpleList
+ + * (foont:datetime) = foont:datetime
+

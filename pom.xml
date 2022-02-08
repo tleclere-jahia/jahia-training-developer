@@ -64,6 +64,8 @@
         <developerConnection>scm:dummy:uri</developerConnection>
     </scm>
     <properties>
+        <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>
+        <!--<jersey.version>2.18</jersey.version>-->
         <jahia-depends>default,location,graphql-dxm-provider</jahia-depends>
     </properties>
     <repositories>
@@ -97,7 +99,7 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>graphql-dxm-provider</artifactId>
-            <version>2.7.0</version>
+            <version>${graphql-dxm-provider.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
