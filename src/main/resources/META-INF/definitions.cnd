@@ -21,7 +21,7 @@
  - email (string) < '^$|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}'
  - firm (weakreference) < 'foont:firm'
  - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
- - subcategory (weakreference, choicelist[dependantCategory, dependentProperties='category']) < 'jnt:category'
+ - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
 
 [foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
