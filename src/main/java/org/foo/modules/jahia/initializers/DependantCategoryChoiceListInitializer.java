@@ -34,27 +34,36 @@ public class DependantCategoryChoiceListInitializer implements ModuleChoiceListI
     public List<ChoiceListValue> getChoiceListValues(ExtendedPropertyDefinition epd, String param, List<ChoiceListValue> values, Locale locale, Map<String, Object> context) {
         List<ChoiceListValue> result = new ArrayList<>();
         String propertyName = context.containsKey("dependentProperties") ? ((List<String>) context.get("dependentProperties")).get(0) : null;
-        if (StringUtils.isBlank(propertyName) || !context.containsKey(propertyName) || CollectionUtils.isEmpty((List<String>) context.get(propertyName))) {
+        if (StringUtils.isBlank(propertyName)) {
             return Collections.emptyList();
         }
 
-        if (StringUtils.isNotEmpty(propertyName) && context.containsKey(propertyName)) {
-            JCRNodeWrapper node = Optional.of(context).map(ctx -> (JCRNodeWrapper) Optional.ofNullable(context.get("contextParent")).orElse(context.get("contextNode"))).orElse(null);
-            if (node != null) {
-                try {
-                    String categoryUUID = ((List<String>) context.get(propertyName)).get(0);
-                    JCRNodeWrapper choosenNode = node.getSession().getNodeByIdentifier(categoryUUID);
-                    JCRNodeIteratorWrapper nodesIterator = choosenNode.getNodes();
-                    JCRNodeWrapper child;
-                    ChoiceListValue val;
-                    while (nodesIterator.hasNext()) {
-                        child = (JCRNodeWrapper) nodesIterator.nextNode();
-                        val = new ChoiceListValue(child.getPropertyAsString(Constants.JCR_TITLE), child.getIdentifier());
-                        result.add(val);
+        JCRNodeWrapper node = Optional.of(context).map(ctx -> (JCRNodeWrapper) Optional.ofNullable(context.get("contextParent")).orElse(context.get("contextNode"))).orElse(null);
+        if (node != null) {
+            try {
+                String categoryUUID;
+                if (!context.containsKey(propertyName) || CollectionUtils.isEmpty((List<String>) context.get(propertyName))) {
+                    if (!node.hasProperty(propertyName)) {
+                        return Collections.emptyList();
                     }
-                } catch (RepositoryException e) {
-                    logger.warn("Unable to load subcategories", e);
+                    categoryUUID = node.getProperty(propertyName).getNode().getIdentifier();
+                } else {
+                    categoryUUID = ((List<String>) context.get(propertyName)).get(0);
                 }
+                if (StringUtils.isBlank(categoryUUID)) {
+                    return Collections.emptyList();
+                }
+                JCRNodeWrapper choosenNode = node.getSession().getNodeByIdentifier(categoryUUID);
+                JCRNodeIteratorWrapper nodesIterator = choosenNode.getNodes();
+                JCRNodeWrapper child;
+                ChoiceListValue val;
+                while (nodesIterator.hasNext()) {
+                    child = (JCRNodeWrapper) nodesIterator.nextNode();
+                    val = new ChoiceListValue(child.getPropertyAsString(Constants.JCR_TITLE), child.getIdentifier());
+                    result.add(val);
+                }
+            } catch (RepositoryException e) {
+                logger.warn("Unable to load subcategories", e);
             }
         }
         return result;
