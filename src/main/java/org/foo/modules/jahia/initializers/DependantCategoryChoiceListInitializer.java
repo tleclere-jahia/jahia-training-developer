@@ -18,7 +18,7 @@ import java.util.*;
 @Component(service = ModuleChoiceListInitializer.class, immediate = true)
 public class DependantCategoryChoiceListInitializer implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(DependantCategoryChoiceListInitializer.class);
-    public static final String KEY = "dependantCategory";
+    private static final String KEY = "dependantCategory";
 
     @Override
     public void setKey(String key) {
