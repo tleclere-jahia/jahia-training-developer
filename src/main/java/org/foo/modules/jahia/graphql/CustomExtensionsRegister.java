@@ -10,6 +10,6 @@ import java.util.Collection;
 public class CustomExtensionsRegister implements DXGraphQLExtensionsProvider {
     @Override
     public Collection<Class<?>> getExtensions() {
-        return Arrays.asList(EmployeeGraphQLExtension.class, ResourceBundleExtension.class);
+        return Arrays.asList(EmployeeGraphQLExtension.class, ResourceBundleExtension.class, GqlNodeExtension.class);
     }
 }

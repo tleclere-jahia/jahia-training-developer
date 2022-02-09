@@ -20,4 +20,9 @@ public class GqlEmployee {
     public String getLastname() {
         return node.getNode().getPropertyAsString("lastname");
     }
+
+    @GraphQLField
+    public String getFullName() {
+        return getFirstname() + " " + getLastname();
+    }
 }

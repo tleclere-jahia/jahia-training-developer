@@ -4,6 +4,8 @@ import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 import graphql.annotations.annotationTypes.GraphQLTypeExtension;
 import org.jahia.modules.graphql.provider.dxm.DXGraphQLProvider;
+import org.jahia.modules.graphql.provider.dxm.DataFetchingException;
+import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.JCRSessionFactory;
 import org.jahia.services.content.JCRSessionWrapper;
 
@@ -17,6 +19,10 @@ public class EmployeeGraphQLExtension {
         if (!jcrSessionWrapper.nodeExists(path)) {
             return null;
         }
-        return new GqlEmployee(jcrSessionWrapper.getNode(path));
+        JCRNodeWrapper node = jcrSessionWrapper.getNode(path);
+        if (node.isNodeType("foont:employee")) {
+            return new GqlEmployee(node);
+        }
+        throw new DataFetchingException("Invalid nodetype");
     }
 }
