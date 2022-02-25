@@ -3,9 +3,12 @@ training:
   metadata:
     visible: true
   auto_apply:
-    - always: true
+#    - always: true
+    - origin: http://localhost:3000
   grants:
-    - api:
-        include: graphql
-    - node:
-        pathPattern: /.*
+#    - api: graphql.Query.jcr, graphql.JCRQuery, graphql.JCRNodeConnection, graphql.GenericJCRNode, graphql.JCRProperty, graphql.Query.employee
+    - api: graphql
+      node: none
+    - api: graphql.JCRQuery
+      node:
+        pathPattern: /sites/digitall/.*
