@@ -9,6 +9,7 @@
 <%@ taglib prefix="query" uri="http://www.jahia.org/tags/queryLib" %>
 <%@ taglib prefix="utility" uri="http://www.jahia.org/tags/utilityLib" %>
 <%@ taglib prefix="s" uri="http://www.jahia.org/tags/search" %>
+<%@ taglib prefix="jfunctions" uri="http://www.foo.org/jahia/tags/1.0" %>
 <%--@elvariable id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"--%>
 <%--@elvariable id="out" type="java.io.PrintWriter"--%>
 <%--@elvariable id="script" type="org.jahia.services.render.scripting.Script"--%>
@@ -27,5 +28,7 @@
     <c:if test="${renderContext.previewMode || renderContext.liveMode}">
         <fmt:message key="foont_employee.fullname"/>: ${requestScope['fullname']}
     </c:if>
+    <jfunctions:timeago date="${currentNode.properties['jcr:created'].date}" var="timeAgo"/>
+    <c:out value="il y a ${timeAgo}"/>
 </div>
 <template:addResources type="javascript" resources="employee.js"/>
