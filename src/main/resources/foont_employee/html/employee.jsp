@@ -28,7 +28,9 @@
     <c:if test="${renderContext.previewMode || renderContext.liveMode}">
         <fmt:message key="foont_employee.fullname"/>: ${requestScope['fullname']}
     </c:if>
-    <jfunctions:timeago date="${currentNode.properties['jcr:created'].date}" var="timeAgo"/>
+    <utility:dateUtil currentDate="15/03/2021 19:30:42" datePattern="dd/MM/yyyy HH:mm:ss" var="date"/>
+    <utility:logger level="info" value="Date: ${date}"/>
+    <jfunctions:timeago date="${date}" var="timeAgo"/>
     <c:out value="il y a ${timeAgo}"/>
 </div>
 <template:addResources type="javascript" resources="employee.js"/>

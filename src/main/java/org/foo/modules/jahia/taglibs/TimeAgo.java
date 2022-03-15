@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Calendar;
+import java.util.Date;
 
 public final class TimeAgo extends ValueJahiaTag {
     private static final Logger logger = LoggerFactory.getLogger(TimeAgo.class);
@@ -19,9 +19,9 @@ public final class TimeAgo extends ValueJahiaTag {
     private static final String SECONDE = "seconde";
     private static final String NOW = "maintenant";
 
-    private Calendar date;
+    private Date date;
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
