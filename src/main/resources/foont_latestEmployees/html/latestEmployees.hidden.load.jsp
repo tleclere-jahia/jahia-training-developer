@@ -18,7 +18,6 @@
        value="SELECT * FROM [foont:employee] WHERE ISDESCENDANTNODE('${currentNode.resolveSite.path}') ORDER BY [jcr:created] DESC"/>
 
 <jcr:nodeProperty node="${currentNode}" name="maxItems" var="maxItems"/>
-<utility:logger level="info" value="Maxitem: ${maxItems}"/>
 <query:definition
         var="listQuery" statement="${statement}" limit="${maxItems.long}"/>
 <c:set target="${moduleMap}" property="editable" value="false"/>

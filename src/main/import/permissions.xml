@@ -6,7 +6,4 @@
         <displayHi jcr:primaryType="jnt:permission"/>
         <sayHi jcr:primaryType="jnt:permission"/>
     </actions>
-    <admin jcr:primaryType="jnt:permission" >
-        <graphql jcr:primaryType="jnt:permission"/>
-    </admin>
 </permissions>

@@ -14,7 +14,6 @@ public class CustomJCRNodeDecoratorDefinition extends JCRNodeDecoratorDefinition
         setJahiaModule(BundleUtils.getModule(FrameworkUtil.getBundle(JCRUserNodeDecorator.class)));
         Map<String, String> decorators = new HashMap<>();
         decorators.put("jnt:user", JCRUserNodeDecorator.class.getName());
-        decorators.put("jnt:externalUser", JCRUserNodeDecorator.class.getName());
         setDecorators(decorators);
     }
 }

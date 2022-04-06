@@ -40,7 +40,7 @@
 
     <c:if test="${not empty birthdate}">
         <dt><fmt:message key="foont_employee.birthdate"/></dt>
-        <dd><fmt:formatDate value="${birthdate}" dateStyle="short"/></dd>
+        <dd><fmt:formatDate value="${birthdate.date.time}" dateStyle="short" pattern="dd/MM/yyyy"/></dd>
     </c:if>
 
     <c:if test="${not empty biography}">
@@ -78,6 +78,7 @@
                 <c:url var="sayHiUrl" value="${url.base}${currentNode.path}.hi.do">
                     <c:param name="ajax" value="${true}"/>
                 </c:url>
+                <template:addResources type="javascript" resources="employee.js"/>
                 <a href="#" onclick="return sayHi(event,
                         '${sayHiUrl}',
                         '<fmt:message key="foont_employee.sayHiInAjax.success"/>',
@@ -87,19 +88,3 @@
         </c:if>
     </c:if>
 </ul>
-
-<template:addResources type="inlinejavascript">
-    <script type="text/javascript">
-        function sayHi(event, url, successMessage, errorMessage) {
-            event.preventDefault();
-
-            fetch(url, {headers: {'Accept': 'application/json'}}).then(response => response.json()).then(data => {
-                alert(successMessage.replace('$firstname', data.firstname).replace('$lastname', data.lastname));
-            }).catch(() => {
-                alert(errorMessage);
-            });
-
-            return false;
-        }
-    </script>
-</template:addResources>

@@ -49,7 +49,7 @@
                         }
                     })
                 }).then(response => response.json()).then(data => {
-                    document.getElementById('${currentNode.identifier}').innerHTML = '<pre>' + JSON.stringify(data) + '</pre>';
+                    document.getElementById('${currentNode.identifier}').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
                 }).catch(() => {
                     alert('<fmt:message key="foont_employee.sayHiInAjax.error"/>');
                 });

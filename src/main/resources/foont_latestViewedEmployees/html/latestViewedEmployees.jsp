@@ -9,7 +9,6 @@
 <%@ taglib prefix="query" uri="http://www.jahia.org/tags/queryLib" %>
 <%@ taglib prefix="utility" uri="http://www.jahia.org/tags/utilityLib" %>
 <%@ taglib prefix="s" uri="http://www.jahia.org/tags/search" %>
-<%@ taglib prefix="jfunctions" uri="http://www.foo.org/jahia/tags/1.0" %>
 <%--@elvariable id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"--%>
 <%--@elvariable id="out" type="java.io.PrintWriter"--%>
 <%--@elvariable id="script" type="org.jahia.services.render.scripting.Script"--%>
@@ -18,18 +17,9 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
-<jcr:nodeProperty node="${currentNode}" name="jcr:title" var="badgeNumber"/>
-<jcr:nodeProperty node="${currentNode}" name="firstname" var="firstname"/>
-<jcr:nodeProperty node="${currentNode}" name="lastname" var="lastname"/>
-<c:url var="href" value="${currentNode.url}"/>
-<%--- ${url.base}${currentNode.path}.html --%>
-<div>
-    <a href="${href}"><c:out value="${firstname} ${lastname} (#${badgeNumber})"/></a>
-    <c:if test="${renderContext.previewMode || renderContext.liveMode}">
-        <fmt:message key="foont_employee.fullname"/>: ${requestScope['fullname']}
-    </c:if>
-    <utility:dateUtil currentDate="15/03/2021 19:30:42" datePattern="dd/MM/yyyy HH:mm:ss" var="date"/>
-    <utility:logger level="info" value="Date: ${date}"/>
-    <jfunctions:timeago date="${date}" var="timeAgo"/>
-    <utility:logger level="info" value="il y a ${timeAgo}"/>
-</div>
+<c:if test="${renderContext.editMode}">${currentNode.properties['jcr:title'].string}</c:if>
+<c:forEach items="${sessionScope.latestViewedEmployees}" var="employeePath"
+           begin="0" end="${currentNode.properties.maxEmployees.long - 1}">
+    <template:module path="${employeePath}" view="${currentNode.properties.employeesView.string}"
+                     editable="false"/><br/>
+</c:forEach>

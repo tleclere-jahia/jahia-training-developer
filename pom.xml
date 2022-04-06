@@ -65,8 +65,7 @@
     </scm>
     <properties>
         <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>
-        <!--<jersey.version>2.18</jersey.version>-->
-        <jahia-depends>default,location,graphql-dxm-provider</jahia-depends>
+        <jahia-depends>default,graphql-dxm-provider,location</jahia-depends>
     </properties>
     <repositories>
         <repository>

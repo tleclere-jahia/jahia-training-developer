@@ -19,8 +19,9 @@ public class EmployeeNameFilter extends AbstractFilter {
     }
 
     @Override
-    public String prepare(RenderContext renderContext, Resource resource, RenderChain chain) throws Exception {
-        renderContext.getRequest().setAttribute("fullname", resource.getNode().getPropertyAsString("firstname") + " " + resource.getNode().getPropertyAsString("lastname"));
+    public String prepare(RenderContext renderContext, Resource resource, RenderChain chain) {
+        renderContext.getRequest().setAttribute("fullname",
+                resource.getNode().getPropertyAsString("firstname") + " " + resource.getNode().getPropertyAsString("lastname"));
         return null;
     }
 }

@@ -28,11 +28,11 @@ public class HelloAction extends Action {
     }
 
     @Override
-    public ActionResult doExecute(HttpServletRequest httpServletRequest, RenderContext renderContext, Resource resource, JCRSessionWrapper jcrSessionWrapper, Map<String, List<String>> map, URLResolver urlResolver) throws Exception {
+    public ActionResult doExecute(HttpServletRequest httpServletRequest, RenderContext renderContext, Resource resource, JCRSessionWrapper jcrSessionWrapper, Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
         String firstname = resource.getNode().getPropertyAsString("firstname");
         String lastname = resource.getNode().getPropertyAsString("lastname");
         logger.info("Hi {} {}!", firstname, lastname);
-        if (map.containsKey("ajax")) {
+        if (parameters.containsKey("ajax")) {
             JSONObject jsonData = new JSONObject();
             jsonData.put("firstname", firstname);
             jsonData.put("lastname", lastname);

@@ -7,9 +7,9 @@
 
 [foomix:trainingComponents] > jmix:droppableContent, jmix:editorialContent mixin
 
-[foont:employee] > jnt:content, mix:title, foomix:trainingComponents
+[foont:employee] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware
  - jcr:title (string) mandatory primary
- - firstname (string) mandatory
+ - firstname (string) mandatory < '^\\D+$'
  - lastname (string) mandatory
  - biography (string, richtext[ckeditor.customConfig='$context/modules/jahia-training-developer/javascript/ckconfig.js']) i18n
  - mainPhoto (weakreference, picker[type='image']) < 'jmix:image'
@@ -23,13 +23,17 @@
  - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
 
-[foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:browsableInEditorialPicker orderable
+[foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
  + * (foont:employee) = foont:employee
 
 [foont:latestEmployees] > jnt:content, jmix:list, foomix:trainingComponents
  - maxItems (long) = 10 autocreated indexed=no
- - subNodesView (string, choicelist[templates=foont:employee]) = 'default' autocreated
+ - subNodesView (string, choicelist[templates=foont:employee,resourceBundle]) = 'default' autocreated
+
+[foont:latestViewedEmployees] > jnt:content, mix:title, foomix:trainingComponents
+ - maxEmployees (long) = 3 mandatory autocreated < '[2,10]'
+ - employeesView (string, choicelist[templates=foont:employee,resourceBundle]) = 'default' autocreated
 
 [foont:myGraphQLComponent] > jnt:content, foomix:trainingComponents
  - employee (weakreference) < 'foont:employee'
@@ -37,33 +41,37 @@
 [foont:firm] > jnt:content, mix:title, foomix:trainingComponents
 
 [foont:simpleList] > jnt:content, jmix:list, foomix:trainingComponents orderable
- - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
+ - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
 
 [foont:text] > jnt:content, foomix:trainingComponents
- - text (string)
+ - text (string) mandatory
 
-[foomix:textType] > jmix:templateMixin mixin
+[foomix:textType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList
  + * (foont:text) = foont:text
 
 [foont:long] > jnt:content, foomix:trainingComponents
- - long (long)
+ - long (long) mandatory
 
-[foomix:longType] > jmix:templateMixin mixin
+[foomix:longType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList
  + * (foont:long) = foont:long
 
 [foont:date] > jnt:content, foomix:trainingComponents
- - date (date, datepicker)
+ - date (date, datepicker) mandatory
+ - pattern (string)
 
-[foomix:dateType] > jmix:templateMixin mixin
+[foomix:dateType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList
+ - pattern (string) = 'dd/MM/yyyy' mandatory autocreated
  + * (foont:date) = foont:date
 
 [foont:datetime] > jnt:content, foomix:trainingComponents
- - datetime (date, datetimepicker)
+ - datetime (date, datetimepicker) mandatory
+ - pattern (string)
 
-[foomix:datetimeType] > jmix:templateMixin mixin
+[foomix:datetimeType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList
+ - pattern (string) = 'dd/MM/yyyy HH:mm:ss' mandatory autocreated
  + * (foont:datetime) = foont:datetime
 

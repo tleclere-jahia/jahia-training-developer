@@ -40,7 +40,7 @@
                     })
                 }).then(response => response.json()).then(data => {
                     alert('<fmt:message key="foont_employee.sayHiInAjax.success"/>'.replace('$firstname', data.data.employee.firstname).replace('$lastname', data.data.employee.lastname));
-                    document.getElementById('${currentNode.identifier}').innerHTML = '<pre>' + JSON.stringify(data) + '</pre>';
+                    document.getElementById('${currentNode.identifier}').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
                 }).catch(() => {
                     alert('<fmt:message key="foont_employee.sayHiInAjax.error"/>');
                 });
