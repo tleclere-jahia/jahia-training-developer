@@ -65,23 +65,8 @@
     </scm>
     <properties>
         <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>
-        <jahia-depends>default,graphql-dxm-provider,location</jahia-depends>
+        <jahia-depends>default,graphql-dxm-provider,location,rating</jahia-depends>
     </properties>
-    <repositories>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>jahia-public</id>
-            <name>Jahia Public Repository</name>
-            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>com.graphql-java</groupId>
@@ -125,7 +110,20 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>jahia-public</id>
+            <name>Jahia Public Repository</name>
+            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

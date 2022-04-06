@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
    <modules jcr:primaryType="jnt:modules">
-      <jahia-training-developer j:dependencies="default graphql-dxm-provider location"
+      <jahia-training-developer j:dependencies="default graphql-dxm-provider location rating"
                                 j:modulePriority="0"
                                 j:moduleType="module"
                                 j:title="jahia-training-developer"
@@ -35,6 +35,9 @@
                                        jcr:primaryType="jnt:translation"
                                        jcr:title="Back"/>
                   </back>
+                  <rating jcr:primaryType="jnt:rateable"/>
+                  <display-comments jcr:primaryType="jnt:commentsList"/>
+                  <commentable jcr:primaryType="jnt:addComment"/>
                </pagecontent>
             </employee-content-template>
          </templates>
