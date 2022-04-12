@@ -65,7 +65,8 @@
     </scm>
     <properties>
         <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>
-        <jahia-depends>default,graphql-dxm-provider,location,rating</jahia-depends>
+        <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
+        <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,location,rating</jahia-depends>
     </properties>
     <dependencies>
         <dependency>
@@ -107,6 +108,12 @@
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>external-provider-users-groups</artifactId>
+            <version>${external-provider-users-groups.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

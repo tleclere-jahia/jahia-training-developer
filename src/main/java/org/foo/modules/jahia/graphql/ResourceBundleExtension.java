@@ -4,12 +4,13 @@ import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.annotations.annotationTypes.GraphQLTypeExtension;
+import org.jahia.api.settings.SettingsBean;
 import org.jahia.data.templates.JahiaTemplatesPackage;
 import org.jahia.modules.graphql.provider.dxm.node.GqlJcrProperty;
+import org.jahia.osgi.BundleUtils;
 import org.jahia.registries.ServicesRegistry;
 import org.jahia.services.content.JCRContentUtils;
 import org.jahia.services.content.nodetypes.ExtendedPropertyDefinition;
-import org.jahia.settings.SettingsBean;
 import org.jahia.utils.LanguageCodeConverters;
 import org.jahia.utils.i18n.Messages;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class ResourceBundleExtension {
     }
 
     @GraphQLField
-    public String getResourceBundleValue(@GraphQLName("language") String language) {
+    public String getResourceBundleValue(@GraphQLName("language") @GraphQLNonNull String language) {
         if (property == null) {
             return null;
         }
@@ -37,7 +38,7 @@ public class ResourceBundleExtension {
 
         Locale locale = LanguageCodeConverters.languageCodeToLocale(language);
         if (locale == null) {
-            locale = SettingsBean.getInstance().getDefaultLocale();
+            locale = BundleUtils.getOsgiService(SettingsBean.class, null).getDefaultLocale();
         }
 
         try {
