@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class GqlHelper {
-    public static final Logger logger = LoggerFactory.getLogger(GqlHelper.class);
+    private static final Logger logger = LoggerFactory.getLogger(GqlHelper.class);
 
     private GqlHelper() {
     }

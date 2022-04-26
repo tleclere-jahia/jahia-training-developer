@@ -60,8 +60,10 @@
     <name>jahia-training-developer</name>
     <description>This is the custom module (jahia-training-developer) for running on a Jahia server.</description>
     <scm>
-        <connection>scm:dummy:uri</connection>
-        <developerConnection>scm:dummy:uri</developerConnection>
+        <connection>scm:git:git@github.com:tleclere-jahia/jahia-training-developer.git</connection>
+        <url>https://github.com/tleclere-jahia/jahia-training-developer</url>
+        <developerConnection>scm:git:git@github.com:tleclere-jahia/jahia-training-developer.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>

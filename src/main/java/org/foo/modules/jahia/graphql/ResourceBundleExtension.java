@@ -5,10 +5,10 @@ import graphql.annotations.annotationTypes.GraphQLName;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.annotations.annotationTypes.GraphQLTypeExtension;
 import org.jahia.api.settings.SettingsBean;
+import org.jahia.api.templates.JahiaTemplateManagerService;
 import org.jahia.data.templates.JahiaTemplatesPackage;
 import org.jahia.modules.graphql.provider.dxm.node.GqlJcrProperty;
 import org.jahia.osgi.BundleUtils;
-import org.jahia.registries.ServicesRegistry;
 import org.jahia.services.content.JCRContentUtils;
 import org.jahia.services.content.nodetypes.ExtendedPropertyDefinition;
 import org.jahia.utils.LanguageCodeConverters;
@@ -44,7 +44,8 @@ public class ResourceBundleExtension {
         try {
             ExtendedPropertyDefinition propertyDefinition = (ExtendedPropertyDefinition) property.getProperty().getDefinition();
             JahiaTemplatesPackage pkg = propertyDefinition.getDeclaringNodeType().getTemplatePackage();
-            return Messages.get(pkg != null ? pkg : ServicesRegistry.getInstance().getJahiaTemplateManagerService().getTemplatePackageById(JahiaTemplatesPackage.ID_DEFAULT),
+            return Messages.get(pkg != null ? pkg : BundleUtils.getOsgiService(JahiaTemplateManagerService.class, null)
+                            .getTemplatePackageById(JahiaTemplatesPackage.ID_DEFAULT),
                     propertyDefinition.getResourceBundleKey() + "." + JCRContentUtils.replaceColon(propValue),
                     locale, propValue);
         } catch (RepositoryException e) {

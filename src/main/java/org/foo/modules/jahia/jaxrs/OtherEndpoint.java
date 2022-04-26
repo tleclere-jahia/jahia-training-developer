@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 @Path("/training/other")
 @Produces(MediaType.APPLICATION_JSON)
 public class OtherEndpoint {
-    public static final Logger logger = LoggerFactory.getLogger(OtherEndpoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(OtherEndpoint.class);
 
     @GET
     public Response test(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse) {

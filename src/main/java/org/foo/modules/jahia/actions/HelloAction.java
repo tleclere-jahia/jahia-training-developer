@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Component(service = Action.class, immediate = true)
 public class HelloAction extends Action {
-    public static final Logger logger = LoggerFactory.getLogger(HelloAction.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloAction.class);
 
     public HelloAction() {
         setName("hi");
