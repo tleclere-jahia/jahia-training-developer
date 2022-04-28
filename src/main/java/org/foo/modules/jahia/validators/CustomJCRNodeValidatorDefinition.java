@@ -13,6 +13,6 @@ public class CustomJCRNodeValidatorDefinition extends JCRNodeValidatorDefinition
     @Activate
     private void onActivate(BundleContext bundleContext) {
         setJahiaModule(BundleUtils.getModule(bundleContext.getBundle()));
-        setValidators(Collections.singletonMap("foont:text", FoontTextValidator.class.getName()));
+        setValidators(Collections.singletonMap("foomix:richText", FoomixTextValidator.class.getName()));
     }
 }

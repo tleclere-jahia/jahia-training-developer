@@ -43,7 +43,10 @@
 [foont:simpleList] > jnt:content, jmix:list, foomix:trainingComponents orderable
  - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
 
-[foont:text] > jnt:content, foomix:trainingComponents
+[foomix:richText] mixin
+ - text (string, richtext)
+
+[foont:text] > jnt:content, foomix:trainingComponents, foomix:richText
  - text (string, richtext) mandatory
 
 [foomix:textType] > jmix:dynamicFieldset mixin
