@@ -44,7 +44,7 @@
  - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
 
 [foont:text] > jnt:content, foomix:trainingComponents
- - text (string) mandatory
+ - text (string, richtext) mandatory
 
 [foomix:textType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList

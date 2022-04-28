@@ -68,6 +68,7 @@
     <properties>
         <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
+        <unirest.version>1.4.9</unirest.version>
         <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,location,rating</jahia-depends>
     </properties>
     <dependencies>
@@ -117,6 +118,11 @@
             <artifactId>external-provider-users-groups</artifactId>
             <version>${external-provider-users-groups.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>${unirest.version}</version>
         </dependency>
     </dependencies>
     <repositories>
