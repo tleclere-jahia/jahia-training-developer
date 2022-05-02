@@ -3,6 +3,7 @@ package org.foo.modules.jahia.validators;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.decorator.validation.JCRNodeValidator;
 
+@HtmlValid
 public class FoomixTextValidator implements JCRNodeValidator {
     private final JCRNodeWrapper jcrNodeWrapper;
 
@@ -10,8 +11,7 @@ public class FoomixTextValidator implements JCRNodeValidator {
         this.jcrNodeWrapper = jcrNodeWrapper;
     }
 
-    @HtmlValid
-    public String getText() {
-        return jcrNodeWrapper.getPropertyAsString("text");
+    public JCRNodeWrapper getJcrNodeWrapper() {
+        return jcrNodeWrapper;
     }
 }

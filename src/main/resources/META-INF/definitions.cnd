@@ -44,7 +44,6 @@
  - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
 
 [foomix:richText] mixin
- - text (string, richtext)
 
 [foont:text] > jnt:content, foomix:trainingComponents, foomix:richText
  - text (string, richtext) mandatory
