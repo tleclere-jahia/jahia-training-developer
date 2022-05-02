@@ -19,4 +19,4 @@
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <jcr:nodeProperty node="${currentNode}" name="text" var="text"/>
 <c:if test="${empty text && renderContext.editMode}">${currentNode.name}</c:if>
-<c:out value="${text.string}"/>
+${text.string}
