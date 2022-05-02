@@ -20,3 +20,14 @@ rule "Update page pending modifications"
         Log "Update page pending modifications"
         Execute the action "newpublication" now on the node
 end
+
+rule "Increment counter"
+    when
+        A node is published
+            - the node has the type foomix:simpleItem
+    then
+        Log "Increment counter"
+        Execute the action "increment" now on the node
+>       if(node.getNode().getResolveSite().hasNode("counter")) node.getNode().setProperty("itemNumber", node.getNode().getResolveSite().getNode("counter").getProperty("count").getLong());
+        Log "Item number #" + node.getNode().getPropertyAsString("itemNumber")
+end

@@ -43,23 +43,26 @@
 [foont:simpleList] > jnt:content, jmix:list, foomix:trainingComponents orderable
  - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
 
+[foomix:simpleItem] mixin
+ - itemNumber (long) hidden
+
 [foomix:richText] mixin
 
-[foont:text] > jnt:content, foomix:trainingComponents, foomix:richText
+[foont:text] > jnt:content, foomix:trainingComponents, foomix:richText, foomix:simpleItem
  - text (string, richtext) mandatory
 
 [foomix:textType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList
  + * (foont:text) = foont:text
 
-[foont:long] > jnt:content, foomix:trainingComponents
+[foont:long] > jnt:content, foomix:trainingComponents, foomix:simpleItem
  - long (long) mandatory
 
 [foomix:longType] > jmix:dynamicFieldset mixin
  extends = foont:simpleList
  + * (foont:long) = foont:long
 
-[foont:date] > jnt:content, foomix:trainingComponents
+[foont:date] > jnt:content, foomix:trainingComponents, foomix:simpleItem
  - date (date, datepicker) = useClass('org.foo.modules.jahia.initializers.FirstDayOfWeekInitializer') mandatory autocreated
  - pattern (string)
 
@@ -68,7 +71,7 @@
  - pattern (string) = 'dd/MM/yyyy' mandatory autocreated
  + * (foont:date) = foont:date
 
-[foont:datetime] > jnt:content, foomix:trainingComponents
+[foont:datetime] > jnt:content, foomix:trainingComponents, foomix:simpleItem
  - datetime (date, datetimepicker) = useClass('org.foo.modules.jahia.initializers.FirstDayOfWeekInitializer') mandatory autocreated
  - pattern (string)
 
@@ -77,3 +80,5 @@
  - pattern (string) = 'dd/MM/yyyy HH:mm:ss' mandatory autocreated
  + * (foont:datetime) = foont:datetime
 
+[foont:counter] > jnt:content, jmix:autoPublish
+ - count (long) = 0 mandatory autocreated
