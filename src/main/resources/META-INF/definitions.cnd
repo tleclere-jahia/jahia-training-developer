@@ -61,7 +61,7 @@
  + * (foont:long) = foont:long
 
 [foont:date] > jnt:content, foomix:trainingComponents
- - date (date, datepicker) mandatory
+ - date (date, datepicker) = useClass('org.foo.modules.jahia.initializers.FirstDayOfWeekInitializer') mandatory autocreated
  - pattern (string)
 
 [foomix:dateType] > jmix:dynamicFieldset mixin
@@ -70,7 +70,7 @@
  + * (foont:date) = foont:date
 
 [foont:datetime] > jnt:content, foomix:trainingComponents
- - datetime (date, datetimepicker) mandatory
+ - datetime (date, datetimepicker) = useClass('org.foo.modules.jahia.initializers.FirstDayOfWeekInitializer') mandatory autocreated
  - pattern (string)
 
 [foomix:datetimeType] > jmix:dynamicFieldset mixin
