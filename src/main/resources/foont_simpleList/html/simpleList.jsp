@@ -4,6 +4,7 @@
 <%@ taglib prefix="utility" uri="http://www.jahia.org/tags/utilityLib" %>
 <%@ taglib prefix="template" uri="http://www.jahia.org/tags/templateLib" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="jfunctions" uri="http://www.foo.org/jahia/tags/1.0" %>
 <%--@elvariable id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"--%>
 <%--@elvariable id="out" type="java.io.PrintWriter"--%>
 <%--@elvariable id="script" type="org.jahia.services.render.scripting.Script"--%>
@@ -33,3 +34,17 @@
 <c:if test="${moduleMap.editable and renderContext.editMode && !resourceReadOnly}">
     <template:module path="*"/>
 </c:if>
+
+<%-- <jfunctions:osgiconfiguration factoryPid="org.jahia.modules.jahiacsrfguard" property="whitelist"
+                              varIsMultivalued="isMultiValued" var="value"/> --%>
+<jfunctions:osgiconfiguration property="training.description" varIsMultivalued="isMultiValued" var="value"/>
+<c:choose>
+    <c:when test="${isMultiValued}">
+        <c:forEach items="${value}" var="item" varStatus="status">
+            <utility:logger level="info" value="Value:[${status.index}] ${item}"/>
+        </c:forEach>
+    </c:when>
+    <c:otherwise>
+        <utility:logger level="info" value="Value: ${value}"/>
+    </c:otherwise>
+</c:choose>

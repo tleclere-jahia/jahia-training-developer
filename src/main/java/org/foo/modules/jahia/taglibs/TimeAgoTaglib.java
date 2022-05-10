@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
-public final class TimeAgo extends ValueJahiaTag {
-    private static final Logger logger = LoggerFactory.getLogger(TimeAgo.class);
+public final class TimeAgoTaglib extends ValueJahiaTag {
+    private static final Logger logger = LoggerFactory.getLogger(TimeAgoTaglib.class);
 
     private static final String DAY = "jour";
     private static final String HOUR = "heure";
