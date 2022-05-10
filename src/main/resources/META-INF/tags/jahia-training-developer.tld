@@ -8,8 +8,35 @@
     <uri>http://www.foo.org/jahia/tags/1.0</uri>
 
     <tag>
+        <name>osgiconfiguration</name>
+        <tag-class>org.foo.modules.jahia.taglibs.OsgiConfigurationTaglib</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>factoryPid</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>property</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>varIsMultivalued</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Name of the page scope variable to expose the value.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
         <name>timeago</name>
-        <tag-class>org.foo.modules.jahia.taglibs.TimeAgo</tag-class>
+        <tag-class>org.foo.modules.jahia.taglibs.TimeAgoTaglib</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>date</name>
@@ -20,7 +47,7 @@
             <description>Name of the page scope variable to expose the value.</description>
             <name>var</name>
             <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
+            <rtexprvalue>false</rtexprvalue>
         </attribute>
     </tag>
 </taglib>
