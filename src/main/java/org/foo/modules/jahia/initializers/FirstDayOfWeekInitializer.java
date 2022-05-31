@@ -17,7 +17,7 @@ import java.util.List;
 @Component(service = ValueInitializer.class, immediate = true)
 public class FirstDayOfWeekInitializer implements ValueInitializer {
     @Override
-    public Value[] getValues(ExtendedPropertyDefinition declaringPropertyDefinition, List<String> params) {
+    public Value[] getValues(ExtendedPropertyDefinition extendedPropertyDefinition, List<String> params) {
         return new Value[]{new ValueImpl(
                 ISO8601.format(GregorianCalendar.from(
                         LocalDateTime.now(ZoneOffset.UTC)
