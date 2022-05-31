@@ -82,3 +82,38 @@
 
 [foont:counter] > jnt:content, jmix:autoPublish
  - count (long) = 0 mandatory autocreated
+
+[foont:table] > jnt:content, foomix:trainingComponents, jmix:list orderable
+ - nbRows (long)
+ + header (foont:thead) = foont:thead autocreated
+ + * (foont:trow)
+
+[foont:thead] > jnt:content, jmix:list orderable
+ + * (foont:tcell) = foont:tcell
+
+[foont:trow] > jnt:content, jmix:list orderable
+ + * (foont:tcell) = foont:tcell
+
+[foont:tcell] > jnt:content
+ - type (string,choicelist[cellTypeInitializer,resourceBundle]) mandatory < 'foomix:tCellBooleanType', 'foomix:tCellTextType', 'foomix:tCellLongType', 'foomix:tCellDateType', 'foomix:tCellDatetimeType'
+
+[foomix:tCellBooleanType] > jmix:dynamicFieldset mixin
+ extends = foont:tcell
+ - value (boolean)
+
+[foomix:tCellTextType] > jmix:dynamicFieldset, foomix:richText mixin
+ extends = foont:tcell
+ - value (string, richtext)
+
+[foomix:tCellLongType] > jmix:dynamicFieldset mixin
+ extends = foont:tcell
+ - value (long)
+// - type (string) = 'number' mandatory autocreated < 'price', 'number', 'year'
+
+[foomix:tCellDateType] > jmix:dynamicFieldset mixin
+ extends = foont:tcell
+ - value (date, datepicker)
+
+[foomix:tCellDatetimeType] > jmix:dynamicFieldset mixin
+ extends = foont:tcell
+ - value (date, datetimepicker)
