@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component(service = ModuleChoiceListInitializer.class, immediate = true)
 public class ItemTypeInitializer implements ModuleChoiceListInitializer {
-    public static final String KEY = "itemTypeInitializer";
+    private static final String KEY = "itemTypeInitializer";
 
     @Override
     public void setKey(String s) {
@@ -24,7 +24,7 @@ public class ItemTypeInitializer implements ModuleChoiceListInitializer {
     }
 
     @Override
-    public List<ChoiceListValue> getChoiceListValues(ExtendedPropertyDefinition extendedPropertyDefinition, String param, List<ChoiceListValue> values, Locale locale, Map<String, Object> map) {
+    public List<ChoiceListValue> getChoiceListValues(ExtendedPropertyDefinition extendedPropertyDefinition, String param, List<ChoiceListValue> values, Locale locale, Map<String, Object> context) {
         return Arrays.stream(extendedPropertyDefinition.getValueConstraints())
                 .map(mixin -> new ChoiceListValue(mixin, Collections.singletonMap("addMixin", mixin), new ValueImpl(mixin)))
                 .collect(Collectors.toList());
