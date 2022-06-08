@@ -1,13 +1,12 @@
 package org.foo.modules.jahia.validators;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import org.jahia.osgi.BundleUtils;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.nodetypes.ExtendedNodeType;
 import org.jahia.services.content.nodetypes.ExtendedPropertyDefinition;
 import org.jahia.services.content.nodetypes.SelectorType;
+import org.jahia.services.notification.HttpClientService;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,10 +14,7 @@ import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class TextValidator implements ConstraintValidator<HtmlValid, FoomixTextValidator> {
     private static final Logger logger = LoggerFactory.getLogger(TextValidator.class);
@@ -73,16 +69,16 @@ public class TextValidator implements ConstraintValidator<HtmlValid, FoomixTextV
 
     private boolean validate(String text) {
         try {
-            HttpResponse<JsonNode> uniResponse = Unirest.post("https://validator.w3.org/check")
-                    .field("fragment", text)
-                    .field("doctype", "Inline")
-                    .field("prefill", 1)
-                    .field("prefill_doctype", "html5")
-                    .field("group", 0)
-                    .field("output", "json")
-                    .asJson();
-            return uniResponse.getBody().getObject().getJSONArray("messages").length() == 0;
-        } catch (UnirestException e) {
+            HttpClientService httpClientService = BundleUtils.getOsgiService(HttpClientService.class, null);
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put("fragment", text);
+            parameters.put("doctype", "Inline");
+            parameters.put("prefill", "1");
+            parameters.put("prefill_doctype", "html5");
+            parameters.put("group", "0");
+            parameters.put("output", "json");
+            return new JSONObject(httpClientService.executePost("https://validator.w3.org/check", parameters, Collections.emptyMap())).getJSONArray("messages").length() == 0;
+        } catch (Exception e) {
             logger.error("", e);
         }
         return false;

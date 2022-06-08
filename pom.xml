@@ -119,11 +119,6 @@
             <version>${external-provider-users-groups.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.mashape.unirest</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>${unirest.version}</version>
-        </dependency>
     </dependencies>
     <repositories>
         <repository>
