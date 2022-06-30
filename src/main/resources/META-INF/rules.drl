@@ -31,3 +31,23 @@ rule "Increment counter"
 >       if(node.getNode().getResolveSite().hasNode("counter")) node.getNode().setProperty("itemNumber", node.getNode().getResolveSite().getNode("counter").getProperty("count").getLong());
         Log "Item number #" + node.getNode().getPropertyAsString("itemNumber")
 end
+
+rule "Auto set j:view"
+    when
+        A property view has been set on a node
+        - the node has the type foont:card
+        - not in operation import
+    then
+        Add the type jmix:renderable
+        Set the property j:view of the node with the value of propertyValue.get(0)
+end
+
+rule "Auto remove j:view"
+    when
+        A property view has been removed from a node
+        - the node has the type foont:card
+        - the node has the type jmix:renderable
+        - not in operation import
+    then
+        Remove the type jmix:renderable
+end

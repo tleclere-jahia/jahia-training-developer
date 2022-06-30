@@ -82,3 +82,6 @@
 
 [foont:counter] > jnt:content, jmix:autoPublish
  - count (long) = 0 mandatory autocreated
+
+[foont:card] > jnt:content, jmix:basicContent
+ - view (string, choicelist[templates,resourceBundle]) nofulltext
