@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 
-@Component(service = BackgroundAction.class, immediate = true)
+@Component(service = BackgroundAction.class)
 public class IncrementAction extends BaseBackgroundAction {
     private static final Logger logger = LoggerFactory.getLogger(IncrementAction.class);
 

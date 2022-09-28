@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.jcr.RepositoryException;
 import java.util.*;
 
-@Component(service = ModuleChoiceListInitializer.class, immediate = true)
+@Component(service = ModuleChoiceListInitializer.class)
 public class DependentCategoryChoiceListInitializer implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(DependentCategoryChoiceListInitializer.class);
     private static final String KEY = "dependentCategory";

@@ -32,7 +32,7 @@
                     body: JSON.stringify({
                         query: `query($path: String!) {
                             employee(path: $path) {
-                                firstname,
+                                firstname
                                 lastname
                             }
                         }`,

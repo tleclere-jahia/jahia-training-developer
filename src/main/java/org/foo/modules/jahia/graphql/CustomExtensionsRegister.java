@@ -6,7 +6,7 @@ import org.osgi.service.component.annotations.Component;
 import java.util.Arrays;
 import java.util.Collection;
 
-@Component(service = DXGraphQLExtensionsProvider.class, immediate = true)
+@Component(service = DXGraphQLExtensionsProvider.class)
 public class CustomExtensionsRegister implements DXGraphQLExtensionsProvider {
     @Override
     public Collection<Class<?>> getExtensions() {

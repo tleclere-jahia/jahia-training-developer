@@ -9,7 +9,7 @@ import org.osgi.service.component.annotations.Component;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component(service = ModuleChoiceListInitializer.class, immediate = true)
+@Component(service = ModuleChoiceListInitializer.class)
 public class ItemTypeInitializer implements ModuleChoiceListInitializer {
     private static final String KEY = "itemTypeInitializer";
 

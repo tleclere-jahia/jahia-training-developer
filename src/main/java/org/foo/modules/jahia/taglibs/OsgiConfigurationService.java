@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component(service = OsgiConfigurationService.class, immediate = true)
+@Component(service = OsgiConfigurationService.class)
 public class OsgiConfigurationService {
     private static final Logger logger = LoggerFactory.getLogger(OsgiConfigurationService.class);
 

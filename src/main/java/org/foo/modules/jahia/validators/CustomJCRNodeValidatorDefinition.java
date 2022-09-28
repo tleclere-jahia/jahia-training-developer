@@ -8,7 +8,7 @@ import org.osgi.service.component.annotations.Component;
 
 import java.util.Collections;
 
-@Component(service = JCRNodeValidatorDefinition.class, immediate = true)
+@Component(service = JCRNodeValidatorDefinition.class)
 public class CustomJCRNodeValidatorDefinition extends JCRNodeValidatorDefinition {
     @Activate
     private void onActivate(BundleContext bundleContext) {

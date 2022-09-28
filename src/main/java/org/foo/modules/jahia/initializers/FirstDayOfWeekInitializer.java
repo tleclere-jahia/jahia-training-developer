@@ -14,7 +14,7 @@ import java.time.temporal.ChronoField;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-@Component(service = ValueInitializer.class, immediate = true)
+@Component(service = ValueInitializer.class)
 public class FirstDayOfWeekInitializer implements ValueInitializer {
     @Override
     public Value[] getValues(ExtendedPropertyDefinition extendedPropertyDefinition, List<String> params) {

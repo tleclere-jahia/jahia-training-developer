@@ -1,7 +1,5 @@
 package org.foo.modules.jahia.filters;
 
-import org.jahia.services.cache.CacheHelper;
-import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.render.RenderContext;
 import org.jahia.services.render.Resource;
 import org.jahia.services.render.filter.AbstractFilter;
@@ -11,11 +9,9 @@ import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jcr.RepositoryException;
-import javax.jcr.query.Query;
 import java.util.LinkedList;
 
-@Component(service = RenderFilter.class, immediate = true)
+@Component(service = RenderFilter.class)
 public class LatestViewedEmployeesFilter extends AbstractFilter {
     private static final Logger logger = LoggerFactory.getLogger(LatestViewedEmployeesFilter.class);
 
@@ -47,21 +43,6 @@ public class LatestViewedEmployeesFilter extends AbstractFilter {
             latestViewedEmployees.removeLast();
         }
         renderContext.getRequest().getSession().setAttribute(SESSION_ATTRIBUTE, latestViewedEmployees);
-
-        flushCache(resource.getNode().getSession(), resource.getNode().getResolveSite().getPath());
-
         return null;
-    }
-
-    private void flushCache(JCRSessionWrapper jcrSessionWrapper, String sitePath) {
-        try {
-            jcrSessionWrapper.getWorkspace().getQueryManager().
-                    createQuery("SELECT * FROM [foont:latestViewedEmployees] WHERE ISDESCENDANTNODE('" + sitePath + "')", Query.JCR_SQL2).execute()
-                    .getNodes().forEach(node -> {
-                        CacheHelper.flushOutputCachesForPath(node.getPath(), false);
-                    });
-        } catch (RepositoryException e) {
-            logger.error("", e);
-        }
     }
 }

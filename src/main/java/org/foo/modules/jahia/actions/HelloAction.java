@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-@Component(service = Action.class, immediate = true)
+@Component(service = Action.class)
 public class HelloAction extends Action {
     private static final Logger logger = LoggerFactory.getLogger(HelloAction.class);
 
