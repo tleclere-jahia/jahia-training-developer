@@ -7,7 +7,7 @@ import org.jahia.services.render.filter.RenderChain;
 import org.jahia.services.render.filter.RenderFilter;
 import org.osgi.service.component.annotations.Component;
 
-@Component(service = RenderFilter.class, immediate = true)
+@Component(service = RenderFilter.class)
 public class EmployeeNameFilter extends AbstractFilter {
 
     public EmployeeNameFilter() {

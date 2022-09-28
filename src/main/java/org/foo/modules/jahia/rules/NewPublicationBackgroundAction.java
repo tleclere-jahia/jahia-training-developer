@@ -6,7 +6,7 @@ import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component(service = BackgroundAction.class, immediate = true)
+@Component(service = BackgroundAction.class)
 public class NewPublicationBackgroundAction implements BackgroundAction {
     private static final Logger logger = LoggerFactory.getLogger(NewPublicationBackgroundAction.class);
 

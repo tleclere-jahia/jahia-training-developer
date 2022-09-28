@@ -117,3 +117,6 @@
 [foomix:tCellDatetimeType] > jmix:dynamicFieldset mixin
  extends = foont:tcell
  - value (date, datetimepicker)
+
+[foont:card] > jnt:content, jmix:basicContent
+ - view (string, choicelist[templates,resourceBundle]) nofulltext

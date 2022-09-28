@@ -13,7 +13,7 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component(service = JCRNodeDecoratorDefinition.class, immediate = true)
+@Component(service = JCRNodeDecoratorDefinition.class)
 public class CustomJCRNodeDecoratorDefinition extends JCRNodeDecoratorDefinition {
     private final Map<String, Class<? extends JCRNodeDecorator>> savedDecorators;
     private JCRStoreService jcrStoreService;

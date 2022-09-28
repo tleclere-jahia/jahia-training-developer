@@ -10,7 +10,7 @@ import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 
-@Component(service = RenderFilter.class, immediate = true)
+@Component(service = RenderFilter.class)
 public class HtmlGenerationInfoFilter extends AbstractFilter {
     private long startTime;
 
