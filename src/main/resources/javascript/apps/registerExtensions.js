@@ -7,19 +7,26 @@ window.jahia.uiExtender.registry.add('callback', 'training', {
             buttonLabel: 'jahia-training-developer:label.contentActions.3dotsSampleAction',
             buttonIcon: window.jahia.moonstone.toIconComponent('Love'),
             targets: ['contentActions:9999'],
+            requireModuleInstalledOnSite: 'jahia-training-developer',
             onClick: () => {
                 localStorage.setItem('jcontent_view_mode', 'view');
                 location.reload();
             }
         });
 
-        window.jahia.uiExtender.registry.add('adminRoute', 'toolsEntry', {
-            targets: ['developerTools:9999'],
+        window.jahia.uiExtender.registry.add('route', 'toolsRoute', {
+            targets: ['main:2'],
+            requiredPermission: 'systemToolsAccess',
+            path: '/tools',
+            render: () => window.jahia.uiExtender.getIframeRenderer(`${window.contextJsParameters.contextPath}/tools`)
+        });
+
+        window.jahia.uiExtender.registry.add('primary-nav-item', 'toolsEntry', {
+            targets: ['nav-root-top:9999'],
             icon: window.jahia.moonstone.toIconComponent('HelpOutline'),
             requiredPermission: 'systemToolsAccess',
             label: 'jahia-training-developer:label.developerTools.toolsEntry',
-            isSelectable: true,
-            iframeUrl: `${window.contextJsParameters.contextPath}/tools`
+            path: '/tools'
         });
     }
 });
