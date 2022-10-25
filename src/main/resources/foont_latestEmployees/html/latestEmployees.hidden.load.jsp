@@ -17,6 +17,8 @@
 <c:set var="statement"
        value="SELECT * FROM [foont:employee] WHERE ISDESCENDANTNODE('${currentNode.resolveSite.path}') ORDER BY [jcr:created] DESC"/>
 
+<template:addCacheDependency flushOnPathMatchingRegexp="${currentNode.resolveSite.path}/.*"/>
+
 <jcr:nodeProperty node="${currentNode}" name="maxItems" var="maxItems"/>
 <query:definition
         var="listQuery" statement="${statement}" limit="${maxItems.long}"/>

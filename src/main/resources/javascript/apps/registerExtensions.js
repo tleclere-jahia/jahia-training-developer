@@ -6,7 +6,7 @@ window.jahia.uiExtender.registry.add('callback', 'training', {
         window.jahia.uiExtender.registry.add('action', '3dotsSampleAction', {
             buttonLabel: 'jahia-training-developer:label.contentActions.3dotsSampleAction',
             buttonIcon: window.jahia.moonstone.toIconComponent('Love'),
-            targets: ['contentActions:9999'],
+            targets: ['headerPrimaryActions:9999', 'content-editor/header/3dots:99'],
             requireModuleInstalledOnSite: 'jahia-training-developer',
             onClick: () => {
                 localStorage.setItem('jcontent_view_mode', 'view');
@@ -27,6 +27,15 @@ window.jahia.uiExtender.registry.add('callback', 'training', {
             requiredPermission: 'systemToolsAccess',
             label: 'jahia-training-developer:label.developerTools.toolsEntry',
             path: '/tools'
+        });
+
+        window.jahia.uiExtender.registry.add('adminRoute', 'toolsEntry', {
+            targets: ['developerTools:9999'],
+            icon: window.jahia.moonstone.toIconComponent('HelpOutline'),
+            requiredPermission: 'systemToolsAccess',
+            label: 'jahia-training-developer:label.developerTools.toolsEntry',
+            isSelectable: true,
+            iframeUrl: `${window.contextJsParameters.contextPath}/tools`
         });
     }
 });

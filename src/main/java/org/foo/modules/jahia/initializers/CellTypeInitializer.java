@@ -14,7 +14,7 @@ import javax.jcr.RepositoryException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component(service = ModuleChoiceListInitializer.class, immediate = true)
+@Component(service = ModuleChoiceListInitializer.class)
 public class CellTypeInitializer implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(CellTypeInitializer.class);
     private static final String KEY = "cellTypeInitializer";

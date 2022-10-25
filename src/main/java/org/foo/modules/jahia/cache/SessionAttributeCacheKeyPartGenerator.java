@@ -16,7 +16,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Component(service = CacheKeyPartGenerator.class, immediate = true)
+@Component(service = CacheKeyPartGenerator.class)
 public class SessionAttributeCacheKeyPartGenerator implements CacheKeyPartGenerator {
     private static final Pattern SESSION_ATTRIBUTES_REGEXP = Pattern.compile("(.*)(_sa_\\[([^\\]]+)\\]_)(.*)");
 

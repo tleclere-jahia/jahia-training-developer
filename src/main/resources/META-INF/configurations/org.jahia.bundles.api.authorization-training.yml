@@ -5,6 +5,7 @@ training:
   auto_apply:
 #    - always: true
     - origin: http://localhost:3000
+    - origin: hosted
   grants:
 #    - api: graphql.Query.jcr, graphql.JCRQuery, graphql.JCRNodeConnection, graphql.GenericJCRNode, graphql.JCRProperty, graphql.Query.employee
     - api: graphql
@@ -12,3 +13,7 @@ training:
     - api: graphql.JCRQuery
       node:
         pathPattern: /sites/digitall/.*
+    - api: graphql.Query.employee
+      node:
+        pathPattern: /sites/digitall/.*
+    - api: view.json.default

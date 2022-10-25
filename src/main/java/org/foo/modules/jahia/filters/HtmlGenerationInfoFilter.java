@@ -7,15 +7,19 @@ import org.jahia.services.render.filter.AbstractFilter;
 import org.jahia.services.render.filter.RenderChain;
 import org.jahia.services.render.filter.RenderFilter;
 import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Component(service = RenderFilter.class)
 public class HtmlGenerationInfoFilter extends AbstractFilter {
+    private static final Logger logger = LoggerFactory.getLogger(HtmlGenerationInfoFilter.class);
+
     private long startTime;
 
     public HtmlGenerationInfoFilter() {
-        setApplyOnMainResource(true);
+        setApplyOnConfigurations(Resource.CONFIGURATION_PAGE);
         setApplyOnModes("preview,live");
         setPriority(10f);
     }
@@ -29,6 +33,7 @@ public class HtmlGenerationInfoFilter extends AbstractFilter {
     @Override
     public String execute(String previousOut, RenderContext renderContext, Resource resource, RenderChain chain) throws Exception {
         double timeEllapsed = (System.currentTimeMillis() - startTime) / 1000f;
+        logger.info("Time ellapsed: {}", String.format("%.2f", timeEllapsed));
 
         Source source = new Source(previousOut);
         OutputDocument outputDocument = new OutputDocument(source);

@@ -4,6 +4,7 @@ import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 import graphql.annotations.annotationTypes.GraphQLTypeExtension;
 import org.apache.commons.lang.StringUtils;
+import org.jahia.api.Constants;
 import org.jahia.modules.graphql.provider.dxm.DXGraphQLProvider;
 import org.jahia.modules.graphql.provider.dxm.DataFetchingException;
 import org.jahia.osgi.BundleUtils;
@@ -17,7 +18,7 @@ import javax.jcr.RepositoryException;
 public class EmployeeGraphQLExtension {
     @GraphQLField
     public static GqlEmployee getEmployee(@GraphQLName("path") String path) throws RepositoryException {
-        JCRSessionWrapper jcrSessionWrapper = BundleUtils.getOsgiService(JCRSessionFactory.class, null).getCurrentUserSession();
+        JCRSessionWrapper jcrSessionWrapper = BundleUtils.getOsgiService(JCRSessionFactory.class, null).getCurrentUserSession(Constants.LIVE_WORKSPACE);
         if (StringUtils.isBlank(path) || !jcrSessionWrapper.nodeExists(path)) {
             return null;
         }
