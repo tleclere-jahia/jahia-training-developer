@@ -38,7 +38,7 @@ public class DependentCategoryChoiceListInitializer implements ModuleChoiceListI
         }
 
         List<ChoiceListValue> result = new ArrayList<>();
-        JCRNodeWrapper node = Optional.of(context).map(ctx -> (JCRNodeWrapper) Optional.ofNullable(context.get("contextParent")).orElse(context.get("contextNode"))).orElse(null);
+        JCRNodeWrapper node = Optional.of(context).map(ctx -> (JCRNodeWrapper) Optional.ofNullable(context.get("contextNode")).orElse(context.get("contextParent"))).orElse(null);
         if (node != null) {
             try {
                 String categoryUUID;
