@@ -1,5 +1,6 @@
 package org.foo.modules.jahia.jaxrs;
 
+import org.foo.modules.jahia.graphql.GqlHelper;
 import org.json.JSONException;
 
 import javax.servlet.ServletException;
