@@ -22,6 +22,7 @@
  - firm (weakreference) < 'foont:firm'
  - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
+ - subsubcategory (weakreference, choicelist[subdependent, dependentProperties='category,subcategory']) < 'jnt:category'
 
 [foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
