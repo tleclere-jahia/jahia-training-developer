@@ -1,20 +1,23 @@
 package org.foo.modules.jahia.validators;
 
-import org.jahia.osgi.BundleUtils;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.nodetypes.ExtendedNodeType;
 import org.jahia.services.content.nodetypes.ExtendedPropertyDefinition;
 import org.jahia.services.content.nodetypes.SelectorType;
-import org.jahia.services.notification.HttpClientService;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.InputSource;
 
 import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.*;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class TextValidator implements ConstraintValidator<HtmlValid, FoomixTextValidator> {
     private static final Logger logger = LoggerFactory.getLogger(TextValidator.class);
@@ -23,7 +26,6 @@ public class TextValidator implements ConstraintValidator<HtmlValid, FoomixTextV
 
     @Override
     public void initialize(HtmlValid htmlValid) {
-        // Nothing to do
         errorMessage = htmlValid.message();
     }
 
@@ -69,18 +71,11 @@ public class TextValidator implements ConstraintValidator<HtmlValid, FoomixTextV
 
     private boolean validate(String text) {
         try {
-            HttpClientService httpClientService = BundleUtils.getOsgiService(HttpClientService.class, null);
-            Map<String, String> parameters = new HashMap<>();
-            parameters.put("fragment", text);
-            parameters.put("doctype", "Inline");
-            parameters.put("prefill", "1");
-            parameters.put("prefill_doctype", "html5");
-            parameters.put("group", "0");
-            parameters.put("output", "json");
-            return new JSONObject(httpClientService.executePost("https://validator.w3.org/check", parameters, Collections.emptyMap())).getJSONArray("messages").length() == 0;
+            SAXParserFactory.newInstance().newSAXParser().getXMLReader().parse(new InputSource(new StringReader("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>" + text)));
+            return true;
         } catch (Exception e) {
-            logger.error("", e);
+            // not valid XML String
+            return false;
         }
-        return false;
     }
 }

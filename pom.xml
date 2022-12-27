@@ -68,6 +68,8 @@
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
         <graphql-dxm-provider.version>2.7.0</graphql-dxm-provider.version>
         <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,location,rating</jahia-depends>
+        <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"
+        </require-capability>
     </properties>
     <dependencies>
         <dependency>
@@ -81,6 +83,13 @@
             <artifactId>graphql-java-annotations</artifactId>
             <version>${graphql-java-annotations.version}</version>
             <scope>provided</scope>
+            <exclusions>
+                <!-- WARN: Conflict with org.jahia.test:module-test-framework -->
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jahia.modules</groupId>
@@ -93,6 +102,13 @@
             <artifactId>jaxrs-ri</artifactId>
             <version>${jersey.version}</version>
             <scope>provided</scope>
+            <exclusions>
+                <!-- WARN: Conflict with org.jahia.test:module-test-framework -->
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -126,6 +142,31 @@
                     <groupId>commons-el</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jahia.test</groupId>
+            <artifactId>module-test-framework</artifactId>
+            <version>8.1.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.test</groupId>
+            <artifactId>jahia-test-module</artifactId>
+            <version>8.1.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>location</artifactId>
+            <version>3.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>rating</artifactId>
+            <version>3.2.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <repositories>
