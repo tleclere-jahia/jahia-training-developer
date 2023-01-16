@@ -13,5 +13,6 @@
         <property name="parent" value="editmode.tabs[0].treeContextMenu"/>
         <property name="positionAfter" value="Toolbar.Item.EditContent"/>
         <property name="hideWhenDisabled" value="true"/>
+        <property name="requiredModule" value="jahia-training-developer"/>
     </bean>
 </beans>
