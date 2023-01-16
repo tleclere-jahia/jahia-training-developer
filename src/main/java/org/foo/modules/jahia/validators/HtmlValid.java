@@ -7,7 +7,6 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = TextValidator.class)
-@Documented
 public @interface HtmlValid {
     Class<?>[] groups() default {};
 
