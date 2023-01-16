@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+        <property name="actionItem">
+            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.ExecuteActionItem">
+                <property name="action" value="menuNewEntry"/>
+                <property name="allowedNodeTypes" value="jnt:page"/>
+            </bean>
+        </property>
+        <property name="requiredPermission" value="menuCreatePageArticle"/>
+        <property name="titleKey" value="label.menuNewEntry@resources.jahia-training-developer"/>
+        <property name="parent" value="editmode.tabs[0].treeContextMenu"/>
+        <property name="positionAfter" value="Toolbar.Item.EditContent"/>
+        <property name="hideWhenDisabled" value="true"/>
+    </bean>
+</beans>
