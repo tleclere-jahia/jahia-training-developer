@@ -50,4 +50,40 @@
             <rtexprvalue>false</rtexprvalue>
         </attribute>
     </tag>
+
+    <tag>
+        <name>orbeonForm</name>
+        <tag-class>org.foo.modules.jahia.taglibs.OrbeonTaglib</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>app</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>form</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>mode</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>documentId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>query</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>headers</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
 </taglib>

@@ -121,3 +121,6 @@
 
 [foont:card] > jnt:content, jmix:basicContent
  - view (string, choicelist[templates,resourceBundle]) nofulltext
+
+[foont:orbeonForm] > jnt:content, jmix:formContent
+

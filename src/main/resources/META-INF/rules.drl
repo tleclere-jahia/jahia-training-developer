@@ -44,6 +44,22 @@ rule "Auto create table rows"
 >           new AddedNodeFact(node, "trow", "foont:trow", drools, true);
 end
 
+rule "Auto create table row cells"
+    when
+        Not in operation import
+        A new node is created
+        - the node has the type foont:trow
+        - the parent has the type foont:table
+        The node has a parent
+    then
+        Log "Auto create cells for row " + node.getPath()
+>       int i = 0; long nbHeaders = parent.getNode("header").getNumberOfChildren(); while(i++ < nbHeaders) {
+>           AddedNodeFact cell = new AddedNodeFact(node, "cell", "foont:tcell", drools, true);
+>           cell.getNode().setProperty("type", "foomix:tCellTextType");
+>           cell.addType("foomix:tCellTextType", drools);
+>       }
+end
+
 rule "Auto set j:view"
     when
         A property view has been set on a node

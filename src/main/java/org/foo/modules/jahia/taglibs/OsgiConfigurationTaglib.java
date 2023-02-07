@@ -8,8 +8,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class OsgiConfigurationTaglib extends ValueJahiaTag {
+public final class OsgiConfigurationTaglib extends ValueJahiaTag {
     private static final Logger logger = LoggerFactory.getLogger(OsgiConfigurationTaglib.class);
+    private static final long serialVersionUID = 620377504883338760L;
 
     private String factoryPid;
     private String property;

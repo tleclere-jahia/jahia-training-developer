@@ -12,6 +12,7 @@ import java.util.Date;
 
 public final class TimeAgoTaglib extends ValueJahiaTag {
     private static final Logger logger = LoggerFactory.getLogger(TimeAgoTaglib.class);
+    private static final long serialVersionUID = -8917096606954088285L;
 
     private static final String DAY = "jour";
     private static final String HOUR = "heure";
