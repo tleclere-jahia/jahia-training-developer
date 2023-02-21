@@ -3,6 +3,7 @@ package org.foo.modules.jahia.rules
 // list any import classes here.
 import org.jahia.services.content.rules.*
 import org.jahia.services.content.JCRContentUtils
+import org.jahia.services.content.JCRNodeWrapper
 import org.slf4j.Logger
 
 expander rules.dsl
@@ -39,9 +40,8 @@ rule "Auto create table rows"
         - the node has the type foont:table
         The node has a property nbRows
     then
-        Log "Create " + Long.valueOf(property.getStringValue()) + " rows under table " + property.getNode().getPath()
->       int i = 0; while(i++ < Long.valueOf(property.getStringValue()))
->           new AddedNodeFact(node, "trow", "foont:trow", drools, true);
+        Log "Create " + property.getStringValue() + " rows under table " + property.getNode().getPath()
+>       int i = 0; while(i++ < Long.valueOf(property.getStringValue())) node.getNode().addNode("trow-"+i, "foont:trow");
 end
 
 rule "Auto create table row cells"
@@ -52,11 +52,11 @@ rule "Auto create table row cells"
         - the parent has the type foont:table
         The node has a parent
     then
-        Log "Auto create cells for row " + node.getPath()
+        Log "Auto create " + parent.getNode("header").getNumberOfChildren() + " cells for row " + node.getPath()
 >       int i = 0; long nbHeaders = parent.getNode("header").getNumberOfChildren(); while(i++ < nbHeaders) {
->           AddedNodeFact cell = new AddedNodeFact(node, "cell", "foont:tcell", drools, true);
->           cell.getNode().setProperty("type", "foomix:tCellTextType");
->           cell.addType("foomix:tCellTextType", drools);
+>           JCRNodeWrapper cellNode = node.getNode().addNode("cell-"+i, "foont:tcell");
+>           cellNode.setProperty("type", "foomix:tCellTextType");
+>           cellNode.addMixin("foomix:tCellTextType");
 >       }
 end
 
