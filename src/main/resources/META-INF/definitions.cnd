@@ -120,7 +120,7 @@
  - value (date, datetimepicker)
 
 [foont:card] > jnt:content, jmix:basicContent
- - view (string, choicelist[templates,resourceBundle]) nofulltext
+ - view (string, choicelist[viewCachedInitializer,resourceBundle]) nofulltext
 
 [foont:orbeonForm] > jnt:content, jmix:formContent
 
