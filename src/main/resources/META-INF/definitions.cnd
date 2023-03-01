@@ -24,7 +24,7 @@
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
  - subsubcategory (weakreference, choicelist[subdependent, dependentProperties='category,subcategory']) < 'jnt:category'
 
-[foont:company] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
+[foont:company] > jnt:content, jmix:list, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
  + * (foont:employee) = foont:employee
 
@@ -124,3 +124,6 @@
 
 [foont:orbeonForm] > jnt:content, jmix:formContent
 
+[foont:frequentlyAskedQuestions] > jnt:content, jmix:list, jmix:basicContent
+ - faq (string)
+ + * (jmix:droppableContent) = jmix:droppableContent
