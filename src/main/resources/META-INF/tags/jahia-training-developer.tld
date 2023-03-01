@@ -86,4 +86,70 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+    <tag>
+        <description>
+            Exposes into the template scope the result (as the javax.jcr.query.QueryResult instance) of the JCR query
+            based on the provided JCR_SQL2 expression.
+            You can then access to javax.jcr.NodeIterator using var.nodes or to javax.jcr.query.RowIterator using
+            var.rows.
+            If no items match the query an empty result is exposed. This condition can be checked using nodes.size or
+            rows.size method.
+        </description>
+        <name>jcr-sql2</name>
+        <tag-class>org.jahia.taglibs.jcr.query.JCRSQLTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>the name of the exposed bean will received a javax.jcr.query.QueryResult</description>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>the SQL expression</description>
+            <name>sql</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>the scope of the bean (see PageContext)</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>the maximum size of the result set, expressed in terms of the number of Rows</description>
+            <name>limit</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Long</type>
+        </attribute>
+        <attribute>
+            <description>the start offset of the result set</description>
+            <name>offset</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Long</type>
+        </attribute>
+        <attribute>
+            <description>
+                If set to 'true' the query will be run with using the root user instead of the currently logged on user.
+                This is useful if you want to run queries with constraints on attributes, on which the current user has
+                no access.
+                This option will work-around access control, so be very careful, when using this option to then not
+                display results,
+                on which the current user has no access.
+            </description>
+            <name>useRootUser</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>the JCR workspace</description>
+            <name>workspace</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
 </taglib>
