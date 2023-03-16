@@ -1,9 +1,11 @@
 package org.foo.modules.jahia;
 
+import org.jahia.bin.Logout;
 import org.jahia.exceptions.JahiaException;
 import org.jahia.modules.jahiaauth.service.ConnectorConfig;
 import org.jahia.modules.jahiaauth.service.SettingsService;
 import org.jahia.params.valves.LoginUrlProvider;
+import org.jahia.params.valves.LogoutUrlProvider;
 import org.jahia.services.sites.JahiaSite;
 import org.jahia.services.sites.JahiaSitesService;
 import org.osgi.service.component.annotations.Component;
@@ -13,9 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Component(service = LoginUrlProvider.class)
-public class SamlLoginUrlProvider implements LoginUrlProvider {
-    private static final Logger logger = LoggerFactory.getLogger(SamlLoginUrlProvider.class);
+@Component(service = {LoginUrlProvider.class, LogoutUrlProvider.class})
+public class SamlLoginLogoutUrlProvider implements LoginUrlProvider, LogoutUrlProvider {
+    private static final Logger logger = LoggerFactory.getLogger(SamlLoginLogoutUrlProvider.class);
 
     private JahiaSitesService jahiaSitesService;
     private SettingsService settingsService;
@@ -70,5 +72,15 @@ public class SamlLoginUrlProvider implements LoginUrlProvider {
             logger.error("", e);
             return null;
         }
+    }
+
+    @Override
+    public boolean hasCustomLogoutUrl() {
+        return true;
+    }
+
+    @Override
+    public String getLogoutUrl(HttpServletRequest request) {
+        return Logout.getLogoutServletPath();
     }
 }
