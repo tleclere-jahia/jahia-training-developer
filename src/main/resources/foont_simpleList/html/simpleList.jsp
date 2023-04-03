@@ -38,6 +38,8 @@
 <%-- <jfunctions:osgiconfiguration factoryPid="org.jahia.modules.jahiacsrfguard" property="whitelist"
                               varIsMultivalued="isMultiValued" var="value"/> --%>
 <jfunctions:osgiconfiguration property="training.description" varIsMultivalued="isMultiValued" var="value"/>
+<jfunctions:properties property="cluster.node.serverId" var="nodeId"/>
+<utility:logger level="info" value="NodeID: ${nodeId}"/>
 <c:choose>
     <c:when test="${isMultiValued}">
         <c:forEach items="${value}" var="item" varStatus="status">
