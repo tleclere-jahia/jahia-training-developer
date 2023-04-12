@@ -6,10 +6,11 @@ import org.jahia.taglibs.ValueJahiaTag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
 public final class JahiaPropertiesTaglib extends ValueJahiaTag {
-    private static final Logger logger = LoggerFactory.getLogger(OsgiConfigurationTaglib.class);
+    private static final Logger logger = LoggerFactory.getLogger(JahiaPropertiesTaglib.class);
     private static final long serialVersionUID = -7003920708028255020L;
 
     private String property;
@@ -22,7 +23,7 @@ public final class JahiaPropertiesTaglib extends ValueJahiaTag {
     public int doStartTag() {
         String valueToSet = BundleUtils.getOsgiService(SettingsBean.class, null).getPropertyValue(property);
         if (getVar() != null) {
-            pageContext.setAttribute(getVar(), valueToSet);
+            pageContext.setAttribute(getVar(), valueToSet, PageContext.REQUEST_SCOPE);
         } else {
             try {
                 pageContext.getOut().print(valueToSet);
