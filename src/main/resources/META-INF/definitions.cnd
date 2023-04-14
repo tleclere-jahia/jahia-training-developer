@@ -119,11 +119,16 @@
  extends = foont:tcell
  - value (date, datetimepicker)
 
+[foont:choiceListOption] > jnt:content, jmix:basicContent, jmix:editorialContent, mix:title
+ - value (string)
+ - isDefaultValue (boolean) = 'false' autocreated
+
 [foont:card] > jnt:content, jmix:basicContent
  - view (string, choicelist[viewCachedInitializer,resourceBundle]) nofulltext
+ - option (weakreference, choicelist[choiceListOption='$currentSite/contents/choicelistoptions;foont:choiceListOption']) < 'foont:choiceListOption'
 
 [foont:orbeonForm] > jnt:content, jmix:formContent
 
-[foont:frequentlyAskedQuestions] > jnt:content, jmix:list, jmix:basicContent
+[foont:frequentlyAskedQuestions] > jnt:content, jmix:list, jmix:basicContent, jmix:editorialContent
  - faq (string)
  + * (jmix:droppableContent) = jmix:droppableContent
