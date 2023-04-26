@@ -130,9 +130,30 @@
  - value (string)
  - isDefaultValue (boolean) = 'false' autocreated
 
-[foont:card] > jnt:content, jmix:basicContent
+[foont:card] > jnt:content, jmix:basicContent, jmix:editorialContent
  - view (string, choicelist[viewCachedInitializer,resourceBundle]) nofulltext
+ - type (string, choicelist[cardTypeInitializer,resourceBundle]) nofulltext
  - option (weakreference, choicelist[choiceListOption='$currentSite/contents/choicelistoptions;foont:choiceListOption']) < 'foont:choiceListOption'
+
+[foomix:cardDefault] > jmix:templateMixin, foomix:oldCardStyle mixin
+ extends = foont:card
+[foomix:cardType1] > jmix:templateMixin, foomix:newCardStyle mixin
+ extends = foont:card
+[foomix:cardType2] > jmix:templateMixin, foomix:oldCardStyle mixin
+ extends = foont:card
+
+[foomix:oldCardStyle] > foomix:cardStyle, foomix:badgePossible mixin
+
+[foomix:cardStyle] mixin
+ - style (string)
+
+[foomix:badgePossible] mixin
+ - badge (string)
+
+[foomix:newCardStyle] > foomix:parametrageLien mixin
+
+[foomix:parametrageLien] mixin
+ - lien (string)
 
 [foont:orbeonForm] > jnt:content, jmix:formContent
 
