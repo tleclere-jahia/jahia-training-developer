@@ -84,6 +84,13 @@
 [foont:counter] > jnt:content, jmix:autoPublish
  - count (long) = 0 mandatory autocreated
 
+[foomix:categorySubscription] > jmix:autoPublish mixin
+ extends = jnt:category
+ - emails (string) multiple
+ - confirmedEmails (string) multiple
+
+[foont:formCategory] > jnt:content, jmix:basicContent
+
 [foont:table] > jnt:content, foomix:trainingComponents, jmix:list orderable
  - nbRows (long)
  + header (foont:thead) = foont:thead autocreated

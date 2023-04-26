@@ -10,10 +10,13 @@ training:
 #    - api: graphql.Query.jcr, graphql.JCRQuery, graphql.JCRNodeConnection, graphql.GenericJCRNode, graphql.JCRProperty, graphql.Query.employee
     - api: graphql
       node: none
-    - api: graphql.JCRQuery
+    - api: graphql.JCRQuery, graphql.JCRProperty
+      requiredPermission: jcr:read_default
       node:
         pathPattern: /sites/digitall/.*
     - api: graphql.Query.employee
       node:
         pathPattern: /sites/digitall/.*
     - api: view.json.default
+    - api: graphql.subscribeCategories
+      node: none
