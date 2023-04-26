@@ -8,10 +8,7 @@ window.jahia.uiExtender.registry.add('callback', 'training', {
             buttonIcon: window.jahia.moonstone.toIconComponent('Love'),
             targets: ['headerPrimaryActions:9999', 'content-editor/header/3dots:99'],
             requireModuleInstalledOnSite: 'jahia-training-developer',
-            onClick: () => {
-                localStorage.setItem('jcontent_view_mode', 'view');
-                location.reload();
-            }
+            onClick: () => alert(window.jahia.i18n.t('jahia-training-developer:label.contentActions.3dotsSampleAction'))
         });
 
         window.jahia.uiExtender.registry.add('route', 'toolsRoute', {
