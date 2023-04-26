@@ -53,7 +53,7 @@ public class SubDependentInitializer implements ModuleChoiceListInitializer {
                     } catch (RepositoryException e) {
                         logger.warn("Unable to load subcategories", e);
                     }
-                    logger.info("{}: {}", propertyName, value);
+                    logger.debug("{}: {}", propertyName, value);
                 }));
         return Collections.emptyList();
     }
