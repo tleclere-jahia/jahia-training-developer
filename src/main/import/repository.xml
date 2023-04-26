@@ -9,7 +9,37 @@
                                 jcr:primaryType="jnt:module">
          <portlets jcr:primaryType="jnt:portletFolder"/>
          <files jcr:primaryType="jnt:folder"/>
-         <contents jcr:primaryType="jnt:contentFolder"/>
+         <contents jcr:primaryType="jnt:contentFolder">
+            <training jcr:primaryType="jnt:contentFolder">
+               <j:translation_en jcr:language="en"
+                                 jcr:primaryType="jnt:translation"
+                                 jcr:title="Training"/>
+               <jahia-solutions-group j:geocodeAutomatically="true"
+                                      jcr:mixinTypes="jmix:geotagged"
+                                      jcr:primaryType="foont:company">
+                  <j:translation_en jcr:language="en"
+                                    jcr:primaryType="jnt:translation"
+                                    jcr:title="Jahia Solutions Group"/>
+                  <tlc firstname="Thomas"
+                       j:geocodeAutomatically="true"
+                       jcr:mixinTypes="jmix:geotagged"
+                       jcr:primaryType="foont:employee"
+                       jcr:title="TLC"
+                       lastname="LE CLERE">
+                     <j:translation_en biography="&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;&#xA;"
+                                       jcr:language="en"
+                                       jcr:primaryType="jnt:translation"/>
+                  </tlc>
+               </jahia-solutions-group>
+               <trainees j:geocodeAutomatically="true"
+                         jcr:mixinTypes="jmix:geotagged"
+                         jcr:primaryType="foont:company">
+                  <j:translation_en jcr:language="en"
+                                    jcr:primaryType="jnt:translation"
+                                    jcr:title="Trainees"/>
+               </trainees>
+            </training>
+         </contents>
          <templates j:rootTemplatePath="/base" jcr:primaryType="jnt:templatesFolder">
             <files jcr:primaryType="jnt:folder"/>
             <contents jcr:primaryType="jnt:contentFolder"/>
