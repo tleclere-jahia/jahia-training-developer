@@ -12,6 +12,7 @@
  - firstname (string) mandatory < '^\\D+$'
  - lastname (string) mandatory
  - biography (string, richtext[ckeditor.customConfig='$context/modules/jahia-training-developer/javascript/ckconfig.js']) i18n
+ - image (weakreference, choicelist[image='$currentSite/files/images/people',resourceBundle]) < 'jmix:image'
  - mainPhoto (weakreference, picker[type='image']) < 'jmix:image'
  - jobTitle (string, choicelist[resourceBundle]) < 'developer', 'it_administrator', 'it_consultant', 'manager'
  - nationality (string, choicelist[country,flag])
@@ -132,7 +133,7 @@
 
 [foont:card] > jnt:content, jmix:basicContent, jmix:editorialContent
  - view (string, choicelist[viewCachedInitializer,resourceBundle]) nofulltext
- - type (string, choicelist[cardTypeInitializer,resourceBundle]) nofulltext
+ - type (string, choicelist[cardTypeInitializer,resourceBundle]) = 'default' autocreated mandatory nofulltext
  - option (weakreference, choicelist[choiceListOption='$currentSite/contents/choicelistoptions;foont:choiceListOption']) < 'foont:choiceListOption'
 
 [foomix:cardDefault] > jmix:templateMixin, foomix:oldCardStyle mixin
@@ -148,7 +149,7 @@
  - style (string)
 
 [foomix:badgePossible] mixin
- - badge (string)
+ - picto (weakreference, choicelist[image='$currentModule/pictos/buildings',resourceBundle])
 
 [foomix:newCardStyle] > foomix:parametrageLien mixin
 
