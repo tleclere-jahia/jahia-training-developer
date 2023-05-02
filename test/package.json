@@ -1,0 +1,24 @@
+{
+  "name": "jahia-training-developer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "instrument": "nyc instrument --compact=false cypress instrumented",
+    "e2e:ci": "cypress run --browser chrome",
+    "e2e:debug": "cypress open",
+    "e2e:ci:standalone": "cypress run --browser chrome",
+    "lint": "eslint . -c .eslintrc.json --ext .ts",
+    "report:merge": "mochawesome-merge results/reports/cypress*.json > results/reports/report.json && rm results/reports/cypress*.json",
+    "report:html": "marge --inline results/reports/report.json --reportDir results/reports/"
+  },
+  "dependencies": {
+    "@jahia/content-editor-cypress": "^4.2.0-tests.9",
+    "@jahia/cypress": "^3.11.0",
+    "cross-fetch": "^3.1.5",
+    "cypress": "^12.11.0",
+    "cypress-iframe": "^1.0.1",
+    "cypress-wait-until": "^1.7.2",
+    "typescript": "^5.0.4"
+  }
+}
