@@ -8,7 +8,23 @@ window.jahia.uiExtender.registry.add('callback', 'training', {
             buttonIcon: window.jahia.moonstone.toIconComponent('Love'),
             targets: ['headerPrimaryActions:9999', 'content-editor/header/3dots:99'],
             requireModuleInstalledOnSite: 'jahia-training-developer',
-            onClick: () => alert(window.jahia.i18n.t('jahia-training-developer:label.contentActions.3dotsSampleAction'))
+            onClick: () => {
+                fetch('/modules/graphql', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        query: `mutation {
+                          admin {
+                            jahia {
+                              configuration(pid: "org.jahia.modules.jcontent") {
+                                value(name: "showPageComposer", value: "true")
+                              }
+                            }
+                          }
+                        }`
+                    })
+                }).then(response => response.json()).then(() => alert(window.jahia.i18n.t('jahia-training-developer:label.contentActions.success')))
+                    .catch(e => console.error(window.jahia.i18n.t('jahia-training-developer:label.contentActions.error'), e));
+            }
         });
 
         window.jahia.uiExtender.registry.add('route', 'toolsRoute', {
