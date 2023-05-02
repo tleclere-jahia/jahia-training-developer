@@ -12,4 +12,7 @@ export default defineConfig({
         },
         baseUrl: 'http://localhost:8080',
     },
+    env: {
+        SUPER_USER_PASSWORD: 'root',
+    },
 });
