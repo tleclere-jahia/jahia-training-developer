@@ -18,7 +18,7 @@ public class GqlNodeExtension {
 
     @GraphQLField
     public String getPropertyValue(@GraphQLName("name") @GraphQLNonNull String name, @GraphQLName("language") String language) {
-        GqlJcrProperty property = gqlJcrNode.getProperty(name, language);
+        GqlJcrProperty property = gqlJcrNode.getProperty(name, language, false);
         if (property == null) {
             throw new DataFetchingException("Mandatory property: " + name);
         }
