@@ -29,7 +29,7 @@ public class DeployAllResourcesTestExecutionListener extends DeployResourcesTest
         Set<String> artifacts = new HashSet<>();
         Model pom = PomUtils.read(new File("pom.xml"));
         for (Dependency dependency : pom.getDependencies()) {
-            if (dependency.getVersion() != null && dependency.getVersion().matches("^[1-9].*$")) {
+            if (dependency.isOptional()) {
                 File module = ModuleTestHelper.getModuleFromMaven(dependency.getGroupId(), dependency.getArtifactId(), dependency.getVersion());
                 if (module != null) {
                     try (JarFile jarFile = new JarFile(module)) {
