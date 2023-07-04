@@ -23,6 +23,7 @@
 <jcr:nodeProperty node="${currentNode}" name="lastname" var="lastname"/>
 <c:url var="href" value="${currentNode.url}"/>
 <%--- ${url.base}${currentNode.path}.html --%>
+##dynamicjs##
 <div>
     <a href="${href}"><c:out value="${firstname} ${lastname} (#${badgeNumber})"/></a>
     <c:if test="${renderContext.previewMode || renderContext.liveMode}">
