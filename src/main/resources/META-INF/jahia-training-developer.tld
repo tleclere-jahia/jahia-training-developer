@@ -112,7 +112,7 @@
             rows.size method.
         </description>
         <name>jcr-sql2</name>
-        <tag-class>org.jahia.taglibs.jcr.query.JCRSQLTag</tag-class>
+        <tag-class>org.foo.modules.jahia.taglibs.JCRSQL2Tag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>the name of the exposed bean will received a javax.jcr.query.QueryResult</description>

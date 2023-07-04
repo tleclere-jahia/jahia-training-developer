@@ -21,6 +21,8 @@ import javax.servlet.jsp.PageContext;
 
 public final class JCRSQL2Tag extends JCRSQLTag {
     private static final Logger logger = LoggerFactory.getLogger(JCRSQL2Tag.class);
+    private static final long serialVersionUID = -5842291516923346680L;
+
     private boolean useRootUser = false;
     private int scope = PageContext.PAGE_SCOPE;
     private String var;
