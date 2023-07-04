@@ -35,18 +35,10 @@
     <template:module path="*"/>
 </c:if>
 
-<%-- <jfunctions:osgiconfiguration factoryPid="org.jahia.modules.jahiacsrfguard" property="whitelist"
-                              varIsMultivalued="isMultiValued" var="value"/> --%>
-<jfunctions:osgiconfiguration property="training.description" varIsMultivalued="isMultiValued" var="value"/>
+<jfunctions:osgiconfiguration factoryPid="org.jahia.modules.jahiacsrfguard" property="whitelist"
+                              varIsMultivalued="isMultiValued" var="whitelist"/>
+<utility:logger level="info" value="Whitelist: ${whitelist}"/>
+<jfunctions:osgiconfiguration pid="org.foo.modules.jahiatrainingdeveloper" property="training.description" var="description"/>
+<utility:logger level="info" value="training.description=${description}"/>
 <jfunctions:properties property="cluster.node.serverId" var="nodeId"/>
 <utility:logger level="info" value="NodeID: ${nodeId}"/>
-<c:choose>
-    <c:when test="${isMultiValued}">
-        <c:forEach items="${value}" var="item" varStatus="status">
-            <utility:logger level="info" value="Value:[${status.index}] ${item}"/>
-        </c:forEach>
-    </c:when>
-    <c:otherwise>
-        <utility:logger level="info" value="Value: ${value}"/>
-    </c:otherwise>
-</c:choose>

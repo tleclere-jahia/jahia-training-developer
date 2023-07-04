@@ -15,6 +15,13 @@
             <name>factoryPid</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
+            <!-- Be careful factoryPid must not contain dash `-` character -->
+        </attribute>
+        <attribute>
+            <name>pid</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <!-- Be careful pid must not contain dash `-` character -->
         </attribute>
         <attribute>
             <name>property</name>

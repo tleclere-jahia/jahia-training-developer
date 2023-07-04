@@ -24,11 +24,13 @@ public class OsgiConfigurationService {
         this.configurationAdmin = configurationAdmin;
     }
 
-    public List<Object> getPropertyFromConfiguration(String factoryPid, String property) {
+    public List<Object> getPropertyFromConfiguration(String factoryPid, String pid, String property) {
         try {
             Configuration[] configurations;
             if (factoryPid != null) {
                 configurations = configurationAdmin.listConfigurations("(service.factoryPid=" + factoryPid + ")");
+            } else if (pid != null) {
+                configurations = configurationAdmin.listConfigurations("(service.pid=" + pid + ")");
             } else {
                 configurations = configurationAdmin.listConfigurations(null);
             }
