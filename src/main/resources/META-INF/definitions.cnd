@@ -12,7 +12,7 @@
  - firstname (string) mandatory < '^\\D+$'
  - lastname (string) mandatory
  - biography (string, richtext[ckeditor.customConfig='$context/modules/jahia-training-developer/javascript/ckconfig.js']) i18n
- - image (weakreference, choicelist[image='$currentSite/files/images/people',resourceBundle]) < 'jmix:image'
+ - image (weakreference, choicelist[customimage='$currentSite/files/images/people',resourceBundle]) < 'jmix:image'
  - mainPhoto (weakreference, picker[type='image']) < 'jmix:image'
  - jobTitle (string, choicelist[resourceBundle]) < 'developer', 'it_administrator', 'it_consultant', 'manager'
  - nationality (string, choicelist[country,flag])
@@ -24,6 +24,7 @@
  - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
  - subsubcategory (weakreference, choicelist[subdependent, dependentProperties='category,subcategory']) < 'jnt:category'
+ - manager (weakreference, choicelist[nodes='$currentSite//*;foont:employee',excludeMe]) < 'foont:employee'
 
 [foont:company] > jnt:content, jmix:list, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
@@ -149,7 +150,7 @@
  - style (string)
 
 [foomix:badgePossible] mixin
- - picto (weakreference, choicelist[image='$currentModule/pictos/buildings',resourceBundle])
+ - picto (weakreference, choicelist[customimage='$currentModule/pictos/buildings',resourceBundle])
 
 [foomix:newCardStyle] > foomix:parametrageLien mixin
 

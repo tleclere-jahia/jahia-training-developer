@@ -28,8 +28,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component(service = ModuleChoiceListInitializer.class)
-public class ImageChoiceListInitializerImpl implements ModuleChoiceListInitializer {
-    private static final Logger logger = LoggerFactory.getLogger(ImageChoiceListInitializerImpl.class);
+public class CustomImageChoiceListInitializerImpl implements ModuleChoiceListInitializer {
+    private static final Logger logger = LoggerFactory.getLogger(CustomImageChoiceListInitializerImpl.class);
 
     private JahiaTemplatesPackage module;
 
@@ -45,7 +45,7 @@ public class ImageChoiceListInitializerImpl implements ModuleChoiceListInitializ
 
     @Override
     public String getKey() {
-        return "image";
+        return "customimage";
     }
 
     @Override
