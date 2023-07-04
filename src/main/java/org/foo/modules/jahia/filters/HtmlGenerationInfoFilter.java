@@ -16,22 +16,24 @@ import java.util.List;
 public class HtmlGenerationInfoFilter extends AbstractFilter {
     private static final Logger logger = LoggerFactory.getLogger(HtmlGenerationInfoFilter.class);
 
-    private long startTime;
+    private static final String ATTRIBUTE_NAME = "startime";
 
     public HtmlGenerationInfoFilter() {
         setApplyOnConfigurations(Resource.CONFIGURATION_PAGE);
         setApplyOnModes("preview,live");
-        setPriority(10f);
+        setPriority(10.1f);
     }
 
     @Override
-    public String prepare(RenderContext renderContext, Resource resource, RenderChain chain) throws Exception {
-        startTime = System.currentTimeMillis();
+    public String prepare(RenderContext renderContext, Resource resource, RenderChain chain) {
+        long startTime = System.currentTimeMillis();
+        renderContext.getRequest().setAttribute(ATTRIBUTE_NAME, startTime);
         return null;
     }
 
     @Override
-    public String execute(String previousOut, RenderContext renderContext, Resource resource, RenderChain chain) throws Exception {
+    public String execute(String previousOut, RenderContext renderContext, Resource resource, RenderChain chain) {
+        long startTime = (long) renderContext.getRequest().getAttribute(ATTRIBUTE_NAME);
         double timeEllapsed = (System.currentTimeMillis() - startTime) / 1000f;
         logger.info("Time ellapsed: {}", String.format("%.2f", timeEllapsed));
 
