@@ -1,0 +1,37 @@
+{
+  "nodeType": "nt:base",
+  "priority": 9.0,
+  "sections": [
+    {
+      "name": "content",
+      "expanded": true
+    },
+    {
+      "name": "classification"
+    },
+    {
+      "name": "metadata",
+      "hide": true
+    },
+    {
+      "name": "layout"
+    },
+    {
+      "name": "options"
+    },
+    {
+      "name": "seo",
+      "hide": true
+    },
+    {
+      "name": "listOrdering",
+      "expanded": true
+    },
+    {
+      "name": "visibility"
+    },
+    {
+      "name": "systemSection"
+    }
+  ]
+}

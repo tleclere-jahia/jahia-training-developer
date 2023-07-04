@@ -1,0 +1,35 @@
+{
+  "nodeType": "jnt:page",
+  "priority": 1.0,
+  "sections": [
+    {
+      "name": "content",
+      "expanded": true
+    },
+    {
+      "name": "classification"
+    },
+    {
+      "name": "metadata"
+    },
+    {
+      "name": "layout"
+    },
+    {
+      "name": "options"
+    },
+    {
+      "name": "seo"
+    },
+    {
+      "name": "listOrdering",
+      "expanded": true
+    },
+    {
+      "name": "visibility"
+    },
+    {
+      "name": "systemSection"
+    }
+  ]
+}
