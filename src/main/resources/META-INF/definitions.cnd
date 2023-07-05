@@ -25,6 +25,7 @@
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
  - subsubcategory (weakreference, choicelist[subdependent, dependentProperties='category,subcategory']) < 'jnt:category'
  - manager (weakreference, choicelist[nodes='$currentSite//*;foont:employee',excludeMe]) < 'foont:employee'
+ - values (string) multiple
 
 [foont:company] > jnt:content, jmix:list, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
  - jcr:title (string) mandatory i18n primary
