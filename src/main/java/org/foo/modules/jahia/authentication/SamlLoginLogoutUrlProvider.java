@@ -1,4 +1,4 @@
-package org.foo.modules.jahia;
+package org.foo.modules.jahia.authentication;
 
 import org.jahia.bin.Logout;
 import org.jahia.exceptions.JahiaException;
