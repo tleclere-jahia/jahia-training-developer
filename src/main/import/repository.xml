@@ -12,12 +12,14 @@
          <contents jcr:primaryType="jnt:contentFolder">
             <training jcr:primaryType="jnt:contentFolder">
                <j:translation_en jcr:language="en"
+                                 jcr:mixinTypes="mix:title"
                                  jcr:primaryType="jnt:translation"
                                  jcr:title="Training"/>
                <jahia-solutions-group j:geocodeAutomatically="true"
                                       jcr:mixinTypes="jmix:geotagged"
                                       jcr:primaryType="foont:company">
                   <j:translation_en jcr:language="en"
+                                    jcr:mixinTypes="mix:title"
                                     jcr:primaryType="jnt:translation"
                                     jcr:title="Jahia Solutions Group"/>
                   <tlc firstname="Thomas"
@@ -35,6 +37,7 @@
                          jcr:mixinTypes="jmix:geotagged"
                          jcr:primaryType="foont:company">
                   <j:translation_en jcr:language="en"
+                                    jcr:mixinTypes="mix:title"
                                     jcr:primaryType="jnt:translation"
                                     jcr:title="Trainees"/>
                </trainees>
