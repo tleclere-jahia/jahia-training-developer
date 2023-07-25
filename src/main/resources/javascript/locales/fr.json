@@ -1,0 +1,12 @@
+{
+  "label": {
+    "contentActions": {
+      "3dotsSampleAction": "New feature",
+      "error": "New feature unset!",
+      "success": "New feature set!"
+    },
+    "developerTools": {
+      "toolsEntry": "Tools"
+    }
+  }
+}
