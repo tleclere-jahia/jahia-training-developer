@@ -67,7 +67,7 @@
     <properties>
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
         <graphql-dxm-provider.version>2.19.0</graphql-dxm-provider.version>
-        <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,location,rating</jahia-depends>
+        <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,rating,server-availability-manager</jahia-depends>
         <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"
         </require-capability>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
