@@ -16,3 +16,4 @@ repository.xml.generated
 
 # Node
 node_modules
+src/main/resources/javascript/apps

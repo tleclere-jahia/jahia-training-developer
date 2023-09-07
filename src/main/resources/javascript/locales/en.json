@@ -7,6 +7,7 @@
     },
     "developerTools": {
       "toolsEntry": "Tools"
-    }
+    },
+    "myComponent": "My component"
   }
 }
