@@ -1,6 +1,7 @@
 package org.foo.modules.jahia.taglibs;
 
 import org.jahia.taglibs.AbstractJahiaTag;
+import org.jahia.utils.ClassLoaderUtils;
 import org.jahia.utils.i18n.Messages;
 import org.orbeon.oxf.fr.embedding.servlet.API;
 import org.slf4j.Logger;
@@ -8,16 +9,14 @@ import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import java.io.IOException;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 public final class OrbeonTaglib extends AbstractJahiaTag {
     private static final Logger logger = LoggerFactory.getLogger(OrbeonTaglib.class);
     private static final long serialVersionUID = -798515610114553269L;
 
-    private static final String SESSION_ATTRIBUTE = "orbeon.form-runner.remote-session-id";
+    public static final String ORBEON_FORM_ATTRIBUTE = "orbeon.form-runner.remote-session-id";
     private static final String ERROR_MESSAGE = "foont_orbeonForm.error";
 
     private String app;
@@ -76,24 +75,54 @@ public final class OrbeonTaglib extends AbstractJahiaTag {
     }
 
     @Override
-    public int doEndTag() throws JspException {
-        final ClassLoader tccl = Thread.currentThread().getContextClassLoader();
-        try {
-            Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
-            API.embedFormJava((HttpServletRequest) pageContext.getRequest(), pageContext.getOut(), app, form, mode, documentId, query, headers);
-            return super.doEndTag();
-        } catch (ClassCastException e) {
+    public int doStartTag() {
+        /**
+         * <%
+         *             org.orbeon.oxf.fr.embedding.servlet.API.embedFormJava(
+         *                 request,                // HttpServletRequest: incoming HttpServletRequest
+         *                 out,                    // Writer: where the embedded form is written
+         *                 (String) pageContext.getAttribute("app"),           // String: Form Runner app name
+         *                 (String) pageContext.getAttribute("form"),          // String: Form Runner form name
+         *                 "new",            // String: Form Runner action name
+         *                 null,        // String: Form Runner document id (optional)
+         *                 null,                   // String: query string (optional)
+         *                 (Map) pageContext.getAttribute("headers")              // Map<String, String>: custom HTTP headers (optional)
+         *             );
+         *         %>
+         */
+        ClassLoaderUtils.executeWith(getClass().getClassLoader(), () -> {
             try {
-                pageContext.getOut().write(Messages.get(getResourceBundle(),
-                        getCurrentResource().getScript(getRenderContext()).getView().getModule(),
-                        ERROR_MESSAGE, getRenderContext().getMainResourceLocale()));
-            } catch (RepositoryException | IOException ex) {
-                logger.error("", e);
+                API.embedFormJava((HttpServletRequest) pageContext.getRequest(), pageContext.getOut(), app, form, mode, documentId, query, headers);
+                return true;
+            } catch (ClassCastException e) {
+                try {
+                    pageContext.getOut().write(Messages.get(getResourceBundle(),
+                            getCurrentResource().getScript(getRenderContext()).getView().getModule(),
+                            ERROR_MESSAGE, getRenderContext().getMainResourceLocale()));
+                } catch (RepositoryException | IOException ex) {
+                    logger.error("", e);
+                }
+                pageContext.getSession().removeAttribute(ORBEON_FORM_ATTRIBUTE);
+                return false;
             }
-            pageContext.getSession().removeAttribute(SESSION_ATTRIBUTE);
-            return SKIP_BODY;
-        } finally {
-            Thread.currentThread().setContextClassLoader(tccl);
-        }
+        });
+        return SKIP_BODY;
+    }
+
+    @Override
+    public int doEndTag() {
+        resetState();
+        return EVAL_PAGE;
+    }
+
+    @Override
+    protected void resetState() {
+        super.resetState();
+        setApp(null);
+        setForm(null);
+        setMode(mode);
+        setDocumentId(documentId);
+        setQuery(query);
+        setHeaders(headers);
     }
 }

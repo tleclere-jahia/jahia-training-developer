@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+    <var name="flowHandler" class="org.foo.modules.jahia.webflow.FlowHandler"/>
+
+    <on-start>
+        <evaluate expression="flowHandler.init(flowRequestContext)"/>
+    </on-start>
+
+    <action-state id="ready">
+        <evaluate expression="flowHandler.isReady(flowRequestContext)"/>
+        <transition on="ok" to="index"/>
+        <transition on="ko" to="error"/>
+    </action-state>
+    <view-state id="error"/>
+    <view-state id="index">
+        <on-entry>
+            <evaluate expression="flowHandler.index()" result="flowScope.data"/>
+        </on-entry>
+        <transition to="orbeonForm"/>
+    </view-state>
+    <view-state id="orbeonForm"/>
+</flow>
