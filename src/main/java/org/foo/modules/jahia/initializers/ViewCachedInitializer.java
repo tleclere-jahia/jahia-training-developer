@@ -43,6 +43,8 @@ import java.util.stream.Collectors;
 @Component(service = ModuleChoiceListInitializer.class)
 public class ViewCachedInitializer implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(ViewCachedInitializer.class);
+
+    private static final String MODULE_NAME = "jahia-training-developer";
     private static final String KEY = "viewCachedInitializer";
     private static final String CACHE_NAME = "viewCached";
     private static final long CACHE_TTL = 3600L;
@@ -109,7 +111,7 @@ public class ViewCachedInitializer implements ModuleChoiceListInitializer {
                     .filter(view -> !view.getKey().startsWith("wrapper.") && !view.getKey().contains("hidden."))
                     .collect(Collectors.toList());
             viewKeys = views.stream().map(View::getKey).collect(Collectors.toList());
-            cache.put(new Element(nodeType.getName(), new ModuleClassLoaderAwareCacheEntry(viewKeys, CACHE_NAME)));
+            cache.put(new Element(nodeType.getName(), new ModuleClassLoaderAwareCacheEntry(viewKeys, MODULE_NAME)));
             return views.stream().map(view -> {
                         JahiaTemplatesPackage pkg = view.getModule() != null ? view.getModule() : ServicesRegistry.getInstance().getJahiaTemplateManagerService().getTemplatePackageById(JahiaTemplatesPackage.ID_DEFAULT);
                         String displayName = Messages.get(pkg, declaringPropertyDefinition.getResourceBundleKey() + "." + JCRContentUtils.replaceColon(view.getKey()),
