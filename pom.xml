@@ -67,12 +67,23 @@
     <properties>
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
         <graphql-dxm-provider.version>2.19.0</graphql-dxm-provider.version>
-        <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,rating,server-availability-manager</jahia-depends>
+        <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,jahia-oauth-aws-cognito,location,rating,server-availability-manager</jahia-depends>
         <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"
         </require-capability>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>2.20.94</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>com.graphql-java</groupId>
@@ -151,6 +162,18 @@
             <version>1.7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>jahia-oauth</artifactId>
+            <version>3.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.community</groupId>
+            <artifactId>jahia-oauth-aws-cognito</artifactId>
+            <version>2.0.2-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.orbeon.oxf</groupId>
@@ -174,7 +197,7 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>server-availability-manager</artifactId>
-            <version>2.6.0</version>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
