@@ -65,6 +65,7 @@
         <url>https://github.com/tleclere-jahia/jahia-training-developer</url>
     </scm>
     <properties>
+        <jahia.plugin.version>6.8</jahia.plugin.version>
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
         <graphql-dxm-provider.version>2.19.0</graphql-dxm-provider.version>
         <jahia-depends>default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,rating,server-availability-manager</jahia-depends>
