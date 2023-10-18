@@ -152,6 +152,12 @@
             <version>1.7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>jahia-oauth</artifactId>
+            <version>3.3.0</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.orbeon.oxf</groupId>
