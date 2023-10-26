@@ -1,24 +1,29 @@
 package org.foo.modules.jahia.initializers;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
+import org.foo.modules.jahia.helpers.ChoiceListHelper;
 import org.jahia.api.Constants;
-import org.jahia.services.content.JCRNodeIteratorWrapper;
+import org.jahia.services.content.JCRContentUtils;
 import org.jahia.services.content.JCRNodeWrapper;
+import org.jahia.services.content.JCRSessionFactory;
 import org.jahia.services.content.nodetypes.ExtendedPropertyDefinition;
 import org.jahia.services.content.nodetypes.initializers.ChoiceListValue;
 import org.jahia.services.content.nodetypes.initializers.ModuleChoiceListInitializer;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component(service = ModuleChoiceListInitializer.class)
 public class DependentCategoryChoiceListInitializer implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(DependentCategoryChoiceListInitializer.class);
-    private static final String KEY = "dependentCategory";
 
     @Override
     public void setKey(String key) {
@@ -27,46 +32,39 @@ public class DependentCategoryChoiceListInitializer implements ModuleChoiceListI
 
     @Override
     public String getKey() {
-        return KEY;
+        return "dependentCategory";
+    }
+
+    private JCRSessionFactory jcrSessionFactory;
+
+    @Reference
+    private void setJcrSessionFactory(JCRSessionFactory jcrSessionFactory) {
+        this.jcrSessionFactory = jcrSessionFactory;
     }
 
     @Override
     public List<ChoiceListValue> getChoiceListValues(ExtendedPropertyDefinition extendedPropertyDefinition, String param, List<ChoiceListValue> values, Locale locale, Map<String, Object> context) {
-        String propertyName = context.containsKey("dependentProperties") ? ((List<String>) context.get("dependentProperties")).get(0) : null;
-        if (StringUtils.isBlank(propertyName)) {
-            return Collections.emptyList();
-        }
-
-        List<ChoiceListValue> result = new ArrayList<>();
-        JCRNodeWrapper node = Optional.of(context).map(ctx -> (JCRNodeWrapper) Optional.ofNullable(context.get("contextNode")).orElse(context.get("contextParent"))).orElse(null);
-        if (node != null) {
-            try {
-                String categoryUUID;
-                if (!context.containsKey(propertyName) || CollectionUtils.isEmpty((List<String>) context.get(propertyName))) {
-                    if (!node.hasProperty(propertyName)) {
-                        return Collections.emptyList();
-                    }
-                    categoryUUID = node.getProperty(propertyName).getNode().getIdentifier();
-                } else {
-                    categoryUUID = ((List<String>) context.get(propertyName)).get(0);
+        List<String> categories = ChoiceListHelper.getProperty("category", context);
+        if (categories != null && !categories.isEmpty()) {
+            for (String categoryIdentifier : categories) {
+                try {
+                    JCRNodeWrapper choosenNode = jcrSessionFactory.getCurrentUserSession(Constants.EDIT_WORKSPACE, locale).getNodeByIdentifier(categoryIdentifier);
+                    return JCRContentUtils.getChildrenOfType(choosenNode, "jnt:category").stream()
+                            .map(child -> {
+                                try {
+                                    return new ChoiceListValue(child.getPropertyAsString(Constants.JCR_TITLE), child.getIdentifier());
+                                } catch (RepositoryException e) {
+                                    logger.error("", e);
+                                    return null;
+                                }
+                            })
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList());
+                } catch (RepositoryException e) {
+                    logger.warn("Unable to load subcategories", e);
                 }
-                if (StringUtils.isBlank(categoryUUID)) {
-                    return Collections.emptyList();
-                }
-                JCRNodeWrapper choosenNode = node.getSession().getNodeByIdentifier(categoryUUID);
-                JCRNodeIteratorWrapper nodesIterator = choosenNode.getNodes();
-                JCRNodeWrapper child;
-                ChoiceListValue val;
-                while (nodesIterator.hasNext()) {
-                    child = (JCRNodeWrapper) nodesIterator.nextNode();
-                    val = new ChoiceListValue(child.getPropertyAsString(Constants.JCR_TITLE), child.getIdentifier());
-                    result.add(val);
-                }
-            } catch (RepositoryException e) {
-                logger.warn("Unable to load subcategories", e);
             }
         }
-        return result;
+        return Collections.emptyList();
     }
-
 }

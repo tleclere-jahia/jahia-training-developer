@@ -23,7 +23,6 @@
  - firm (weakreference) < 'foont:firm'
  - category (weakreference, choicelist[nodes='/sites/systemsite/categories//*;jnt:category']) < 'jnt:category'
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
- - subsubcategory (weakreference, choicelist[subdependent, dependentProperties='category,subcategory']) < 'jnt:category'
  - manager (weakreference, choicelist[nodes='$currentSite//*;foont:employee',excludeMe]) < 'foont:employee'
  - values (string) multiple
 
@@ -163,3 +162,9 @@
 [foont:frequentlyAskedQuestions] > jnt:content, jmix:list, jmix:basicContent, jmix:editorialContent
  - faq (string)
  + * (jmix:droppableContent) = jmix:droppableContent
+
+[foont:myComponentLocalizable] > jnt:content, jmix:basicContent, jmix:editorialContent
+ - country (string, choicelist[resourceBundle]) = 'france' < 'france', 'england', 'deutschland'
+ - region (string, choicelist[regionChoiceListInitializer, dependentProperties='country'])
+ - city (string, choicelist[cityChoiceListInitializer, dependentProperties='country,region'])
+

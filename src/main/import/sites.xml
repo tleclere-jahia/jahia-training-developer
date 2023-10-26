@@ -7,6 +7,12 @@
                                   jcr:mixinTypes="mix:title"
                                   jcr:primaryType="jnt:translation"
                                   jcr:title="Training"/>
+                <subcategory jcr:primaryType="jnt:category">
+                    <j:translation_en jcr:language="en"
+                                      jcr:mixinTypes="mix:title"
+                                      jcr:primaryType="jnt:translation"
+                                      jcr:title="Sub Category"/>
+                </subcategory>
             </training>
         </categories>
     </systemsite>
