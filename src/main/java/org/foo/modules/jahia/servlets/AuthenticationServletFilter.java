@@ -104,11 +104,12 @@ public class AuthenticationServletFilter extends AbstractServletFilter {
     }
 
     private boolean isEnabled(HttpServletRequest httpServletRequest, String siteKey) {
-        // robots.txt
-        // .ico
-        // .css
-        // css
-        return !StringUtils.endsWith(httpServletRequest.getRequestURI(), ".keycloakOAuthCallbackAction.do") &&
+        return !StringUtils.endsWith(httpServletRequest.getRequestURI(), "robots.txt") &&
+                !StringUtils.endsWith(httpServletRequest.getRequestURI(), ".css") &&
+                !StringUtils.contains(httpServletRequest.getRequestURI(), "/css/") &&
+                !StringUtils.endsWith(httpServletRequest.getRequestURI(), ".ico") &&
+                !StringUtils.contains(httpServletRequest.getRequestURI(), "error") &&
+                !StringUtils.endsWith(httpServletRequest.getRequestURI(), ".keycloakOAuthCallbackAction.do") &&
                 "Connect".equals(siteKey);
     }
 
