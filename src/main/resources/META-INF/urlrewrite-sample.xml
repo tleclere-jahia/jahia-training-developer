@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN" "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+
+<urlrewrite>
+    <rule>
+        <name>Redirect site protected</name>
+        <condition name="host">jahia-docker</condition>
+        <from>^/?$</from>
+        <to>/sites/digitall/home.html</to>
+    </rule>
+</urlrewrite>
