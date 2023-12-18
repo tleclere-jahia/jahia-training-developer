@@ -11,6 +11,9 @@
   "jahia": {
     "remotes": {
       "jahia": "javascript/apps/remoteEntry.js"
+    },
+    "apps": {
+      "jahia": "javascript/ui-extensions.js"
     }
   },
   "scripts": {

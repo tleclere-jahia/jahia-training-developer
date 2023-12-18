@@ -8,6 +8,12 @@
     "developerTools": {
       "toolsEntry": "Tools"
     },
-    "myComponent": "My component"
+    "myComponent": "My component",
+    "portlets": {
+      "title": "Portlets"
+    },
+    "portletmanager": {
+      "title": "Portlet manager"
+    }
   }
 }
