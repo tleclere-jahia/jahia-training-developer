@@ -7,6 +7,7 @@ window.jahia.uiExtender.registry.add('callback', 'jahia-training-developer-ui-ex
             targets: ['jcontent:40'],
             label: 'jahia-training-developer:label.portletmanager.title',
             isSelectable: true,
+            requireModuleInstalledOnSite: 'jahia-portlet',
             render: ({match}) => window.jahia.ui.getIframeRenderer(`${window.contextJsParameters.contextPath}/engines/manager.jsp?conf=portletmanager-anthracite&lang=${match.params.lang}&site=${window.contextJsParameters.siteUuid}`)
         })
     }
