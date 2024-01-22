@@ -168,3 +168,5 @@
  - region (string, choicelist[regionChoiceListInitializer, dependentProperties='country'])
  - city (string, choicelist[cityChoiceListInitializer, dependentProperties='country,region'])
 
+[foont:customWorkflowForm] > mix:title
+ - value (string)

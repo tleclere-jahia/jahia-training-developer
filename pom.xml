@@ -65,14 +65,12 @@
         <url>https://github.com/tleclere-jahia/jahia-training-developer</url>
     </scm>
     <properties>
-        <jahia.plugin.version>6.8</jahia.plugin.version>
+        <jahia.plugin.version>6.9</jahia.plugin.version>
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
         <graphql-dxm-provider.version>2.19.0</graphql-dxm-provider.version>
         <jahia-depends>
-            default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,rating,server-availability-manager
+            default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>
-        <require-capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"
-        </require-capability>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
     </properties>

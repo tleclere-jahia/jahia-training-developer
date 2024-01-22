@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
    <modules jcr:primaryType="jnt:modules">
-      <jahia-training-developer j:dependencies="default external-provider-users-groups graphql-dxm-provider jahia-authentication location rating server-availability-manager"
+      <jahia-training-developer j:dependencies="default external-provider-users-groups graphql-dxm-provider jahia-authentication location module-manager rating server-availability-manager workflow-extender"
                                 j:modulePriority="0"
                                 j:moduleType="module"
                                 j:title="jahia-training-developer"

@@ -1,0 +1,13 @@
+{
+  "packageName": "org.foo.modules.jahia.workflow",
+  "name": "custom-workflow",
+  "type": "publish",
+  "canBeUsedForDefault": true,
+  "defaultPriority": 1,
+  "permissions": {
+    "start": "publication-start"
+  },
+  "forms": {
+    "start": "foont:customWorkflowForm"
+  }
+}
