@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,6 @@ public class MenuNewEntryAction extends Action {
     public ActionResult doExecute(HttpServletRequest req, RenderContext renderContext, Resource resource, JCRSessionWrapper session, Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
         logger.info("Menu new entry");
 
-        ActionResult actionResult = ActionResult.OK_JSON;
         JSONObject jsonObject = new JSONObject();
         Map<String, Object> data = new HashMap<>();
         data.put(Linker.REFRESH_ALL, true);
@@ -61,7 +61,6 @@ public class MenuNewEntryAction extends Action {
         JSONObject messageDisplay = new JSONObject();
         messageDisplay.put("messageBoxType", "info");
         jsonObject.put("messageDisplay", messageDisplay);
-        actionResult.setJson(jsonObject);
-        return actionResult;
+        return new ActionResult(HttpServletResponse.SC_OK, null, jsonObject);
     }
 }
