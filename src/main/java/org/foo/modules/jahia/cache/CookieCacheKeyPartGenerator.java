@@ -1,6 +1,5 @@
 package org.foo.modules.jahia.cache;
 
-
 import org.apache.commons.lang.StringUtils;
 import org.jahia.services.render.RenderContext;
 import org.jahia.services.render.Resource;
@@ -10,7 +9,6 @@ import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jcr.RepositoryException;
 import javax.servlet.http.Cookie;
 import java.util.Arrays;
 import java.util.Properties;
@@ -37,7 +35,7 @@ public class CookieCacheKeyPartGenerator implements CacheKeyPartGenerator {
         if (!StringUtils.isEmpty(cookieNames)) {
             return KEY + Arrays.toString(Patterns.COMMA.split(cookieNames)) + "_";
         }
-        return "";
+        return StringUtils.EMPTY;
     }
 
     @Override
@@ -45,7 +43,7 @@ public class CookieCacheKeyPartGenerator implements CacheKeyPartGenerator {
         Cookie[] cookies = renderContext.getRequest().getCookies();
         SortedMap<String, Object> qs = new TreeMap<>();
         if (cookies == null || cookies.length == 0) {
-            return qs.toString();
+            return StringUtils.EMPTY;
         }
         Matcher m = COOKIE_NAMES_REGEXP.matcher(keyPart);
         if (m.matches()) {
@@ -67,7 +65,7 @@ public class CookieCacheKeyPartGenerator implements CacheKeyPartGenerator {
                             .ifPresent(value -> qs.put(value.getName(), value.getValue()));
                 }
             }
-            keyPart = keyPart.replace(qsString, qs.toString());
+            keyPart = keyPart.replace(qsString, qs.isEmpty() ? StringUtils.EMPTY : qs.toString());
         }
         return keyPart;
     }
