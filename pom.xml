@@ -51,7 +51,7 @@
     <parent>
         <groupId>org.jahia.modules</groupId>
         <artifactId>jahia-modules</artifactId>
-        <version>8.1.3.0</version>
+        <version>8.2.0.4</version>
     </parent>
     <groupId>org.foo.modules</groupId>
     <artifactId>jahia-training-developer</artifactId>
@@ -67,7 +67,13 @@
     <properties>
         <jahia.plugin.version>6.9</jahia.plugin.version>
         <external-provider-users-groups.version>2.1.0</external-provider-users-groups.version>
-        <graphql-dxm-provider.version>2.19.0</graphql-dxm-provider.version>
+        <graphql-dxm-provider.version>3.0.0</graphql-dxm-provider.version>
+        <jahia.version>8.2.0.4</jahia.version>
+        <jahia-authentication.version>1.8.0</jahia-authentication.version>
+        <location.version>3.2.0</location.version>
+        <module-manager.version>2.9.1</module-manager.version>
+        <rating.version>3.3.0</rating.version>
+        <server-availability-manager.version>3.2.0</server-availability-manager.version>
         <jahia-depends>
             default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>
@@ -150,7 +156,7 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>jahia-authentication</artifactId>
-            <version>1.7.0</version>
+            <version>${jahia-authentication.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -176,7 +182,7 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>server-availability-manager</artifactId>
-            <version>2.7.0</version>
+            <version>${server-availability-manager.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -188,20 +194,20 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>module-manager</artifactId>
-            <version>2.8.0</version>
+            <version>${module-manager.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jahia.test</groupId>
             <artifactId>module-test-framework</artifactId>
-            <version>8.1.3.0</version>
+            <version>${jahia.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jahia.test</groupId>
             <artifactId>jahia-test-module</artifactId>
-            <version>8.1.3.0</version>
+            <version>${jahia.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -213,14 +219,14 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>location</artifactId>
-            <version>3.2.0</version>
+            <version>${location.version}</version>
             <scope>test</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>rating</artifactId>
-            <version>3.2.0</version>
+            <version>${rating.version}</version>
             <scope>test</scope>
             <optional>true</optional>
         </dependency>
