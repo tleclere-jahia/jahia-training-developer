@@ -48,7 +48,10 @@ public class ModulesUpdateProbe implements Probe {
     @Override
     public ProbeStatus getStatus() {
         Map<String, Module> availableUpdate = getAvailableUpdates();
-        return new ProbeStatus(availableUpdate.size() + " modules must be updated", ProbeStatus.Health.GREEN);
+        if (availableUpdate.isEmpty()) {
+            return new ProbeStatus("No module must be updated", ProbeStatus.Health.GREEN);
+        }
+        return new ProbeStatus("Modules must be updated: " + availableUpdate.keySet(), ProbeStatus.Health.RED);
     }
 
     private Map<String, Module> getAvailableUpdates() {
