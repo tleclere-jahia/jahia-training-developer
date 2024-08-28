@@ -18,5 +18,4 @@ training:
       node:
         pathPattern: /sites/digitall/.*
     - api: view.json.default
-    - api: graphql.subscribeCategories
-      node: none
+
