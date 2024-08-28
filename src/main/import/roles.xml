@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles jcr:primaryType="jnt:role"
+       xmlns:j="http://www.jahia.org/jahia/1.0"
+       xmlns:jcr="http://www.jcp.org/jcr/1.0"
+       xmlns:jnt="http://www.jahia.org/jahia/nt/1.0">
+    <editor j:permissionNames="sayHi" jcr:primaryType="jnt:role"/>
+    <greetings j:hidden="false" j:permissionNames="jcr:all_default sayHi displayHi" j:privilegedAccess="true" j:roleGroup="edit-role" jcr:primaryType="jnt:role"/>
+</roles>
