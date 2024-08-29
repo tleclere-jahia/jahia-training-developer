@@ -1,95 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
-   <modules jcr:primaryType="jnt:modules">
-      <jahia-training-developer j:dependencies="default external-provider-users-groups graphql-dxm-provider jahia-authentication location module-manager rating server-availability-manager workflow-extender"
-                                j:modulePriority="0"
-                                j:moduleType="module"
-                                j:title="jahia-training-developer"
-                                jcr:mixinTypes="jmix:hasExternalProviderExtension"
-                                jcr:primaryType="jnt:module">
-         <portlets jcr:primaryType="jnt:portletFolder"/>
-         <files jcr:primaryType="jnt:folder"/>
-         <contents jcr:primaryType="jnt:contentFolder">
-            <training jcr:primaryType="jnt:contentFolder">
-               <j:translation_en jcr:language="en"
-                                 jcr:mixinTypes="mix:title"
-                                 jcr:primaryType="jnt:translation"
-                                 jcr:title="Training"/>
-               <jahia-solutions-group j:geocodeAutomatically="true"
-                                      jcr:mixinTypes="jmix:geotagged"
-                                      jcr:primaryType="foont:company">
-                  <j:translation_de jcr:language="de"
-                                    jcr:mixinTypes="mix:title"
-                                    jcr:primaryType="jnt:translation"
-                                    jcr:title="Jahia Solutions Group"/>
-                  <j:translation_en jcr:language="en"
-                                    jcr:mixinTypes="mix:title"
-                                    jcr:primaryType="jnt:translation"
-                                    jcr:title="Jahia Solutions Group"/>
-                  <j:translation_fr jcr:language="fr"
-                                    jcr:mixinTypes="mix:title"
-                                    jcr:primaryType="jnt:translation"
-                                    jcr:title="Jahia Solutions Group"/>
-                  <tlc firstname="Thomas"
-                       j:geocodeAutomatically="true"
-                       jcr:mixinTypes="jmix:geotagged"
-                       jcr:primaryType="foont:employee"
-                       jcr:title="TLC"
-                       lastname="LE CLERE">
-                     <j:translation_en biography="&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;&#xA;"
-                                       jcr:language="en"
-                                       jcr:primaryType="jnt:translation"/>
-                  </tlc>
-               </jahia-solutions-group>
-               <trainees j:geocodeAutomatically="true"
-                         jcr:mixinTypes="jmix:geotagged"
-                         jcr:primaryType="foont:company">
-                  <j:translation_de jcr:language="de"
-                                    jcr:mixinTypes="mix:title"
-                                    jcr:primaryType="jnt:translation"
-                                    jcr:title="Trainees"/>
-                  <j:translation_en jcr:language="en"
-                                    jcr:mixinTypes="mix:title"
-                                    jcr:primaryType="jnt:translation"
-                                    jcr:title="Trainees"/>
-                  <j:translation_fr jcr:language="fr"
-                                    jcr:mixinTypes="mix:title"
-                                    jcr:primaryType="jnt:translation"
-                                    jcr:title="Trainees"/>
-               </trainees>
-            </training>
-         </contents>
-         <templates j:rootTemplatePath="/base" jcr:primaryType="jnt:templatesFolder">
+    <users jcr:primaryType="jnt:usersFolder">
+        <ih jcr:primaryType="jnt:usersFolder">
+            <aa jcr:primaryType="jnt:usersFolder">
+                <ja jcr:primaryType="jnt:usersFolder">
+                    <jahia-tools
+                            j:password="s2:HFu1cjsIdmfrvGZXy6x4UU4ak+UTta2ef/IYnldzsf+ETqJTEgTRTSxcgIzPqXP1hjCoXBVHtOy946l8BfpmmQ=="
+                            jcr:primaryType="jnt:user">
+                        <j:acl jcr:primaryType="jnt:acl">
+                            <GRANT_u_jahia-tools j:aceType="GRANT"
+                                                 j:principal="u:jahia-tools"
+                                                 j:protected="false"
+                                                 j:roles="owner"
+                                                 jcr:primaryType="jnt:ace"/>
+                        </j:acl>
+                    </jahia-tools>
+                </ja>
+            </aa>
+        </ih>
+    </users>
+    <tools jcr:primaryType="nt:unstructured">
+        <j:acl jcr:primaryType="jnt:acl">
+            <GRANT_u_jahia-tools j:aceType="GRANT"
+                                 j:principal="u:jahia-tools"
+                                 j:protected="false"
+                                 j:roles="system-administrator"
+                                 jcr:primaryType="jnt:ace"/>
+        </j:acl>
+    </tools>
+    <j:acl jcr:primaryType="jnt:acl">
+        <REFsystem-administrator_rootNode-access_u_jahia-tools j:aceType="GRANT"
+                                                               j:externalPermissionsName="rootNode-access"
+                                                               j:principal="u:jahia-tools"
+                                                               j:protected="true"
+                                                               j:roles="system-administrator"
+                                                               j:sourceAce="/tools/j:acl/GRANT_u_jahia-tools"
+                                                               jcr:primaryType="jnt:externalAce"/>
+    </j:acl>
+    <modules jcr:primaryType="jnt:modules">
+        <jahia-training-developer
+                j:dependencies="default external-provider-users-groups graphql-dxm-provider jahia-authentication location module-manager rating server-availability-manager workflow-extender"
+                j:modulePriority="0"
+                j:moduleType="module"
+                j:title="jahia-training-developer"
+                jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                jcr:primaryType="jnt:module">
+            <portlets jcr:primaryType="jnt:portletFolder"/>
             <files jcr:primaryType="jnt:folder"/>
-            <contents jcr:primaryType="jnt:contentFolder"/>
-            <employee-content-template j:applyOn="foont:employee"
-                                       j:defaultTemplate="true"
-                                       j:hiddenTemplate="false"
-                                       jcr:primaryType="jnt:contentTemplate">
-               <j:translation_en jcr:language="en"
-                                 jcr:mixinTypes="mix:title"
-                                 jcr:primaryType="jnt:translation"
-                                 jcr:title="Employee content template"/>
-               <pagecontent jcr:mixinTypes="jmix:systemNameReadonly"
-                            jcr:primaryType="jnt:contentList">
-                  <main-resource-display j:mainResourceView="details" jcr:primaryType="jnt:mainResourceDisplay"/>
-                  <map j:height="300"
-                       j:mapType="roadmap"
-                       j:width="500"
-                       j:zoom="7"
-                       jcr:primaryType="jnt:map"/>
-                  <back jcr:primaryType="jnt:backToParentPage">
-                     <j:translation_en jcr:language="en"
-                                       jcr:mixinTypes="mix:title"
-                                       jcr:primaryType="jnt:translation"
-                                       jcr:title="Back"/>
-                  </back>
-                  <rating jcr:primaryType="jnt:rateable"/>
-                  <display-comments jcr:primaryType="jnt:commentsList"/>
-                  <commentable jcr:primaryType="jnt:addComment"/>
-               </pagecontent>
-            </employee-content-template>
-         </templates>
-      </jahia-training-developer>
-   </modules>
+            <contents jcr:primaryType="jnt:contentFolder">
+                <training jcr:primaryType="jnt:contentFolder">
+                    <j:translation_en jcr:language="en"
+                                      jcr:mixinTypes="mix:title"
+                                      jcr:primaryType="jnt:translation"
+                                      jcr:title="Training"/>
+                    <jahia-solutions-group j:geocodeAutomatically="true"
+                                           jcr:mixinTypes="jmix:geotagged"
+                                           jcr:primaryType="foont:company">
+                        <j:translation_de jcr:language="de"
+                                          jcr:mixinTypes="mix:title"
+                                          jcr:primaryType="jnt:translation"
+                                          jcr:title="Jahia Solutions Group"/>
+                        <j:translation_en jcr:language="en"
+                                          jcr:mixinTypes="mix:title"
+                                          jcr:primaryType="jnt:translation"
+                                          jcr:title="Jahia Solutions Group"/>
+                        <j:translation_fr jcr:language="fr"
+                                          jcr:mixinTypes="mix:title"
+                                          jcr:primaryType="jnt:translation"
+                                          jcr:title="Jahia Solutions Group"/>
+                        <tlc firstname="Thomas"
+                             j:geocodeAutomatically="true"
+                             jcr:mixinTypes="jmix:geotagged"
+                             jcr:primaryType="foont:employee"
+                             jcr:title="TLC"
+                             lastname="LE CLERE">
+                            <j:translation_en
+                                    biography="&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;&#xA;"
+                                    jcr:language="en"
+                                    jcr:primaryType="jnt:translation"/>
+                        </tlc>
+                    </jahia-solutions-group>
+                    <trainees j:geocodeAutomatically="true"
+                              jcr:mixinTypes="jmix:geotagged"
+                              jcr:primaryType="foont:company">
+                        <j:translation_de jcr:language="de"
+                                          jcr:mixinTypes="mix:title"
+                                          jcr:primaryType="jnt:translation"
+                                          jcr:title="Trainees"/>
+                        <j:translation_en jcr:language="en"
+                                          jcr:mixinTypes="mix:title"
+                                          jcr:primaryType="jnt:translation"
+                                          jcr:title="Trainees"/>
+                        <j:translation_fr jcr:language="fr"
+                                          jcr:mixinTypes="mix:title"
+                                          jcr:primaryType="jnt:translation"
+                                          jcr:title="Trainees"/>
+                    </trainees>
+                </training>
+            </contents>
+            <templates j:rootTemplatePath="/base" jcr:primaryType="jnt:templatesFolder">
+                <files jcr:primaryType="jnt:folder"/>
+                <contents jcr:primaryType="jnt:contentFolder"/>
+                <employee-content-template j:applyOn="foont:employee"
+                                           j:defaultTemplate="true"
+                                           j:hiddenTemplate="false"
+                                           jcr:primaryType="jnt:contentTemplate">
+                    <j:translation_en jcr:language="en"
+                                      jcr:mixinTypes="mix:title"
+                                      jcr:primaryType="jnt:translation"
+                                      jcr:title="Employee content template"/>
+                    <pagecontent jcr:mixinTypes="jmix:systemNameReadonly"
+                                 jcr:primaryType="jnt:contentList">
+                        <main-resource-display j:mainResourceView="details" jcr:primaryType="jnt:mainResourceDisplay"/>
+                        <map j:height="300"
+                             j:mapType="roadmap"
+                             j:width="500"
+                             j:zoom="7"
+                             jcr:primaryType="jnt:map"/>
+                        <back jcr:primaryType="jnt:backToParentPage">
+                            <j:translation_en jcr:language="en"
+                                              jcr:mixinTypes="mix:title"
+                                              jcr:primaryType="jnt:translation"
+                                              jcr:title="Back"/>
+                        </back>
+                        <rating jcr:primaryType="jnt:rateable"/>
+                        <display-comments jcr:primaryType="jnt:commentsList"/>
+                        <commentable jcr:primaryType="jnt:addComment"/>
+                    </pagecontent>
+                </employee-content-template>
+            </templates>
+        </jahia-training-developer>
+    </modules>
 </content>
