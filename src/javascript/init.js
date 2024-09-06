@@ -2,7 +2,8 @@ import React from "react";
 import i18next from "i18next";
 import {IframeRenderer, registry} from "@jahia/ui-extender";
 import MyComponent from "./mycomponent/MyComponent";
-import {HelpOutline, Love} from "@jahia/moonstone";
+import {HelpOutline} from "@jahia/moonstone";
+import {copyPathAction} from "./CopyPath";
 
 export default function () {
     registry.add('callback', 'jahia-training-developer', {
@@ -17,28 +18,10 @@ export default function () {
                 render: () => <MyComponent/>
             });
 
-            registry.add('action', '3dotsSampleAction', {
+            registry.add('action', '3dotsSampleAction', copyPathAction, {
                 buttonLabel: 'jahia-training-developer:label.contentActions.3dotsSampleAction',
-                buttonIcon: <Love/>,
-                targets: ['headerPrimaryActions:9999', 'content-editor/header/3dots:99'],
+                targets: ['content-editor/header/3dots:99'],
                 requireModuleInstalledOnSite: 'jahia-training-developer',
-                onClick: () => {
-                    fetch('/modules/graphql', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            query: `mutation {
-                          admin {
-                            jahia {
-                              configuration(pid: "org.jahia.modules.jcontent") {
-                                value(name: "showPageComposer", value: "true")
-                              }
-                            }
-                          }
-                        }`
-                        })
-                    }).then(response => response.json()).then(() => alert(window.jahia.i18n.t('jahia-training-developer:label.contentActions.success')))
-                        .catch(e => console.error(window.jahia.i18n.t('jahia-training-developer:label.contentActions.error'), e));
-                }
             });
 
             registry.add('route', 'toolsRoute', {

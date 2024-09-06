@@ -1,14 +1,12 @@
 {
   "label": {
     "contentActions": {
-      "3dotsSampleAction": "New feature",
-      "error": "New feature unset!",
-      "success": "New feature set!"
+      "3dotsSampleAction": "Copier le path JCR"
     },
     "developerTools": {
       "toolsEntry": "Tools"
     },
-    "myComponent": "My component",
+    "myComponent": "Mon composant",
     "portlets": {
       "title": "Portlets"
     },

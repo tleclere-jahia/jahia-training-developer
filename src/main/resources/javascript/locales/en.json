@@ -1,9 +1,7 @@
 {
   "label": {
     "contentActions": {
-      "3dotsSampleAction": "New feature",
-      "error": "New feature unset!",
-      "success": "New feature set!"
+      "3dotsSampleAction": "Copy JCR path"
     },
     "developerTools": {
       "toolsEntry": "Tools"

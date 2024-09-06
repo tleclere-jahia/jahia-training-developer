@@ -1,9 +1,10 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const shared = require('./webpack.shared')
+const getModuleFederationConfig = require('@jahia/webpack-config/getModuleFederationConfig');
+const packageJson = require('./package.json');
 
 const MODULE_NAME = 'jahia-training-developer';
 
@@ -46,20 +47,18 @@ module.exports = (env, argv) => {
             ]
         },
         plugins: [
-            new ModuleFederationPlugin({
-                name: MODULE_NAME,
-                library: { type: 'assign', name: `appShell.remotes.${MODULE_NAME.replaceAll('-', '')}` },
-                filename: 'remoteEntry.js',
-                exposes: {
-                    './init': './src/javascript/init',
-                },
+            new ModuleFederationPlugin(getModuleFederationConfig(packageJson, {
                 remotes: {
                     '@jahia/app-shell': 'appShellRemote',
-                },
-                shared
+                    // '@jahia/content-editor':'appShell.remotes.contentEditor'
+                    '@jahia/jcontent': 'appShell.remotes.jcontent'
+                }
+            })),
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns: [`${path.resolve(__dirname, 'src/main/resources/javascript/apps/')}/**/*`],
+                verbose: false
             }),
-            new CleanWebpackPlugin({verbose: false}),
-            new CopyWebpackPlugin({patterns: [{from: './package.json', to: ''}]}),
+            new CopyWebpackPlugin({patterns: [{from: './package.json', to: ''}]})
         ],
         mode: 'development'
     };
