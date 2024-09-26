@@ -5,7 +5,7 @@ import MyComponent from "./mycomponent/MyComponent";
 import {HelpOutline} from "@jahia/moonstone";
 import {copyPathAction} from "./CopyPath";
 
-export default function () {
+export default () => {
     registry.add('callback', 'jahia-training-developer', {
         targets: ['jahiaApp-init:5'],
         callback: async () => {

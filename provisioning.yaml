@@ -1,0 +1,4 @@
+- installBundle:
+  - "https://store.jahia.com/cms/mavenproxy/private-app-store/org/jahia/modules/workflow-extender/1.0.0/workflow-extender-1.0.0.jar"
+  - "mvn:org.jahia.modules/jahia-authentication/1.8.0"
+  autoStart: true
