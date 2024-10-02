@@ -14,6 +14,8 @@ import org.quartz.SimpleTrigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jcr.RepositoryException;
+
 @Component
 public class BackgroundSyncJob extends BackgroundJob {
     private static final Logger logger = LoggerFactory.getLogger(BackgroundSyncJob.class);
@@ -42,7 +44,7 @@ public class BackgroundSyncJob extends BackgroundJob {
     }
 
     @Override
-    public void executeJahiaJob(JobExecutionContext jobExecutionContext) {
+    public void executeJahiaJob(JobExecutionContext jobExecutionContext) throws RepositoryException {
         logger.info("Trigger job!");
         BundleUtils.getOsgiService(BackgroundSyncService.class, null).executeJahiaJob();
     }

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 
 @Component(service = BackgroundSyncService.class)
@@ -31,7 +32,7 @@ public class BackgroundSyncService {
     @Reference
     private JCRSessionFactory jcrSessionFactory;
 
-    public void executeJahiaJob() {
+    public void executeJahiaJob() throws RepositoryException {
         logger.info("Create and publish node");
         JahiaUser savedUser = jcrSessionFactory.getCurrentUser();
         jcrSessionFactory.setCurrentUser(jahiaUserManagerService.lookupRootUser().getJahiaUser());
@@ -45,8 +46,10 @@ public class BackgroundSyncService {
                 jcrPublicationService.publishByMainId(textNode.getIdentifier());
                 return null;
             });
-        } catch (RepositoryException e) {
-            logger.error("", e);
+
+            if (!new Random().nextBoolean()) {
+                throw new RuntimeException("Fake exception");
+            }
         } finally {
             jcrSessionFactory.setCurrentUser(savedUser);
         }
