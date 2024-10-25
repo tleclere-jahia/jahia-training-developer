@@ -49,7 +49,7 @@ public class MailAction extends Action {
     @Activate
     private void onActivate(Map<String, String> params) {
         auth = params.get("mail.smtp.auth");
-        startTls = params.get("mail.smtp.startTls");
+        startTls = params.get("mail.smtp.starttls");
         host = params.get("mail.smtp.host");
         port = params.get("mail.smtp.port");
         username = params.get("mail.smtp.username");
