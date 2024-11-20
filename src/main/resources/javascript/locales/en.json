@@ -12,6 +12,15 @@
     },
     "portletmanager": {
       "title": "Portlet manager"
+    },
+    "nodeInfoDialog": {
+      "title": "Node information",
+      "identifier": "UUID",
+      "path": "Path",
+      "type": "Primary nodetype",
+      "supertypes": "Super types",
+      "mixins": "Mixins",
+      "pasteAndClose": "Paste and close"
     }
   }
 }

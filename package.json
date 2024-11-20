@@ -28,12 +28,13 @@
     "clean:all": "yarn clean && rimraf node_modules node"
   },
   "dependencies": {
-    "@jahia/moonstone": "^2.8.0",
+    "@jahia/moonstone": "2",
     "@jahia/ui-extender": "^1.1.0",
+    "@material-ui/core": "3",
     "i18next": "^23.16.0",
-    "prop-types": "^15.8.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "16",
+    "react-dom": "16",
+    "react-i18next": "11"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",
@@ -64,5 +65,5 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.1"
 }

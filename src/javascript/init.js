@@ -3,7 +3,7 @@ import i18next from "i18next";
 import {IframeRenderer, registry} from "@jahia/ui-extender";
 import MyComponent from "./mycomponent/MyComponent";
 import {HelpOutline} from "@jahia/moonstone";
-import {copyPathAction} from "./CopyPath";
+import {nodeInfoDialogAction} from "./NodeInfoDialog";
 
 export default () => {
     registry.add('callback', 'jahia-training-developer', {
@@ -18,10 +18,9 @@ export default () => {
                 render: () => <MyComponent/>
             });
 
-            registry.add('action', '3dotsSampleAction', copyPathAction, {
-                buttonLabel: 'jahia-training-developer:label.contentActions.3dotsSampleAction',
-                targets: ['content-editor/header/3dots:99'],
-                requireModuleInstalledOnSite: 'jahia-training-developer',
+            registry.add('action', '3dotsNodeInfoDialog', nodeInfoDialogAction, {
+                buttonLabel: 'jahia-training-developer:label.nodeInfoDialog.title',
+                targets: ['content-editor/header/3dots:-99.9'],
             });
 
             registry.add('route', 'toolsRoute', {
@@ -46,6 +45,11 @@ export default () => {
                 label: 'jahia-training-developer:label.developerTools.toolsEntry',
                 isSelectable: true,
                 iframeUrl: `${window.contextJsParameters.contextPath}/tools`
+            });
+
+            const contentFoldersAccordionItem = registry.get('accordionItem', 'content-folders');
+            registry.addOrReplace('accordionItem', 'content-folders', contentFoldersAccordionItem, {
+                treeConfig: Object.assign({}, contentFoldersAccordionItem.treeConfig, {sortBy: null})
             });
         }
     });
