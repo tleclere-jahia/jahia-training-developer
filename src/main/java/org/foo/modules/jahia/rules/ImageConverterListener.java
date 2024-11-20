@@ -69,7 +69,7 @@ public class ImageConverterListener extends DefaultEventListener {
                                 IMOperation op = new IMOperation();
                                 op.addImage();
                                 op.addImage();
-                                new ConvertCmd().run(op, new Object[]{srcFile.getAbsolutePath(), destFile.getAbsolutePath()});
+                                new ConvertCmd().run(op, srcFile.getAbsolutePath(), destFile.getAbsolutePath());
 
                                 is = Files.newInputStream(destFile.toPath());
                                 fileNode.getParent().uploadFile(destFile.getName(), is, "image/jpeg");
