@@ -24,8 +24,7 @@
     "build:analyze": "yarn build --analyze",
     "build:production": "yarn build --mode=production",
     "build:production-analyze": "yarn build --mode=production --analyze",
-    "clean": "rimraf *.log src/main/resources/javascript/apps",
-    "clean:all": "yarn clean && rimraf node_modules node"
+    "clean": "rimraf *.log src/main/resources/javascript/apps"
   },
   "dependencies": {
     "@jahia/moonstone": "2",

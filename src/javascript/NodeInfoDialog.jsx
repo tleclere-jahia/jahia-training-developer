@@ -53,8 +53,8 @@ const NodeInfoDialog = ({nodeData, onCloseDialog}) => {
 export const nodeInfoDialogAction = {
     component: ({render: Render, ...otherProps}) => {
         const {render, destroy} = useContext(ComponentRendererContext);
-        const {nodeData} = useContentEditorContext();
-        return <Render {...otherProps} onClick={() => {
+        const {mode, nodeData} = useContentEditorContext();
+        return <Render enabled={mode !== 'create'} {...otherProps} onClick={() => {
             render('NodeInfoDialog', NodeInfoDialog, {
                 nodeData,
                 onCloseDialog: () => destroy('NodeInfoDialog')
