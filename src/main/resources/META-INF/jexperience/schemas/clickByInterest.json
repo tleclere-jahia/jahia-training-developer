@@ -1,0 +1,30 @@
+{
+  "$id": "https://jexperience.jahia.com/schemas/json/events/clickByInterest/1-0-0",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "self": {
+    "target": "events",
+    "vendor": "org.foo.modules.jahia-training-developer.jexperience",
+    "name": "clickByInterest",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "title": "ClickByInterest",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://unomi.apache.org/schemas/json/event/1-0-0"
+    }
+  ],
+  "properties": {
+    "flattenedProperties": {
+      "$ref": "https://jexperience.jahia.com/schemas/json/events/clickByInterest/flattenedProperties/1-0-0"
+    },
+    "source": {
+      "$ref": "https://unomi.apache.org/schemas/json/items/page/1-0-0"
+    },
+    "target": {
+      "$ref": "https://unomi.apache.org/schemas/json/item/1-0-0"
+    }
+  },
+  "unevaluatedProperties": false
+}

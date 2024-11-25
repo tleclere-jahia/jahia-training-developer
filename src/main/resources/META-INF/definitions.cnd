@@ -7,7 +7,7 @@
 
 [foomix:trainingComponents] > jmix:droppableContent, jmix:editorialContent mixin
 
-[foont:employee] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware
+[foont:employee] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:mainResource
  - jcr:title (string) mandatory primary
  - firstname (string) mandatory < '^\\D+$'
  - lastname (string) mandatory

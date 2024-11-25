@@ -70,12 +70,13 @@
         <graphql-dxm-provider.version>3.0.0</graphql-dxm-provider.version>
         <jahia.version>8.2.0.4</jahia.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
+        <jexperience.version>3.5.1</jexperience.version>
         <location.version>3.2.0</location.version>
         <module-manager.version>2.9.1</module-manager.version>
         <rating.version>3.3.0</rating.version>
         <server-availability-manager.version>3.2.0</server-availability-manager.version>
         <jahia-depends>
-            default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,module-manager,rating,server-availability-manager,workflow-extender
+            default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,jexperience,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
@@ -195,6 +196,12 @@
             <groupId>org.jahia.modules</groupId>
             <artifactId>module-manager</artifactId>
             <version>${module-manager.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>jexperience</artifactId>
+            <version>${jexperience.version}</version>
             <scope>provided</scope>
         </dependency>
 

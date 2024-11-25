@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "id": "incrementInterestsOnClickByInterest",
+    "name": "Increment profile interests on click by interest"
+  },
+  "raiseEventOnlyOnceForSession": false,
+  "condition": {
+    "parameterValues": {
+      "subConditions": [
+        {
+          "type": "eventTypeCondition",
+          "parameterValues": {
+            "eventTypeId": "clickByInterest"
+          }
+        },
+        {
+          "type": "eventPropertyCondition",
+          "parameterValues": {
+            "propertyName": "flattenedProperties.interests",
+            "comparisonOperator": "exists"
+          }
+        }
+      ],
+      "operator": "and"
+    },
+    "type": "booleanCondition"
+  },
+  "actions": [
+    {
+      "type": "logMeAction"
+    },
+    {
+      "type": "incrementJExperienceInterestsAction"
+    }
+  ]
+}

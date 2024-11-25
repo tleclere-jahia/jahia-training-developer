@@ -39,7 +39,7 @@
     </j:acl>
     <modules jcr:primaryType="jnt:modules">
         <jahia-training-developer
-                j:dependencies="default external-provider-users-groups graphql-dxm-provider jahia-authentication location module-manager rating server-availability-manager workflow-extender"
+                j:dependencies="default external-provider-users-groups graphql-dxm-provider jahia-authentication jexperience location module-manager rating server-availability-manager workflow-extender"
                 j:modulePriority="0"
                 j:moduleType="module"
                 j:title="jahia-training-developer"
