@@ -26,7 +26,7 @@
  - manager (weakreference, choicelist[nodes='$currentSite//*;foont:employee',excludeMe]) < 'foont:employee'
  - values (string) multiple
 
-[foont:company] > jnt:content, jmix:list, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker orderable
+[foont:company] > jnt:content, jmix:list, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker, jmix:mainResource orderable
  - jcr:title (string) mandatory i18n primary
  + * (foont:employee) = foont:employee
 

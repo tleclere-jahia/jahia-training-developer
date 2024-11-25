@@ -128,6 +128,19 @@
                         <commentable jcr:primaryType="jnt:addComment"/>
                     </pagecontent>
                 </employee-content-template>
+                <company-content-template j:applyOn="foont:company"
+                                          j:defaultTemplate="true"
+                                          j:hiddenTemplate="false"
+                                          jcr:primaryType="jnt:contentTemplate">
+                    <j:translation_en jcr:language="en"
+                                      jcr:mixinTypes="mix:title"
+                                      jcr:primaryType="jnt:translation"
+                                      jcr:title="Company content template"/>
+                    <pagecontent jcr:mixinTypes="jmix:systemNameReadonly"
+                                 jcr:primaryType="jnt:contentList">
+                        <main-resource-display j:mainResourceView="default" jcr:primaryType="jnt:mainResourceDisplay"/>
+                    </pagecontent>
+                </company-content-template>
             </templates>
         </jahia-training-developer>
     </modules>
