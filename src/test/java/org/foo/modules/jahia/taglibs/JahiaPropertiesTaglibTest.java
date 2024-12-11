@@ -27,8 +27,8 @@ public class JahiaPropertiesTaglibTest {
             myCustomTag.setProperty("cluster.node.serverId");
             int result = myCustomTag.doStartTag();
             String output = ((MockHttpServletResponse) mockPageContext.getResponse()).getContentAsString();
-            Assert.assertEquals(Tag.SKIP_BODY, result);
-            Assert.assertEquals("titi", output);
+            Assert.assertEquals(result, Tag.SKIP_BODY);
+            Assert.assertEquals(output, "titi");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -47,10 +47,10 @@ public class JahiaPropertiesTaglibTest {
             myCustomTag.setProperty("cluster.node.serverId");
             myCustomTag.setVar("nodeId");
             int result = myCustomTag.doStartTag();
-            Assert.assertEquals(Tag.SKIP_BODY, result);
+            Assert.assertEquals(result, Tag.SKIP_BODY);
             Assert.assertNull(mockPageContext.getAttribute("nodeId"));
-            Assert.assertEquals("tata", mockPageContext.getAttribute("nodeId", PageContext.REQUEST_SCOPE));
-            Assert.assertNotEquals("titi", mockPageContext.getAttribute("nodeId", PageContext.REQUEST_SCOPE));
+            Assert.assertEquals(mockPageContext.getAttribute("nodeId", PageContext.REQUEST_SCOPE), "tata");
+            Assert.assertNotEquals(mockPageContext.getAttribute("nodeId", PageContext.REQUEST_SCOPE), "titi");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
