@@ -21,6 +21,9 @@
       "supertypes": "Super types",
       "mixins": "Mixins",
       "pasteAndClose": "Paste and close"
+    },
+    "togglebox": {
+      "description": "Toggle me!"
     }
   }
 }

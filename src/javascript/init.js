@@ -1,7 +1,8 @@
 import React from "react";
 import i18next from "i18next";
 import {IframeRenderer, registry} from "@jahia/ui-extender";
-import MyComponent from "./mycomponent/MyComponent";
+import {MyComponent} from "./MyComponent";
+import {ToggleBox} from "./ToggleBox";
 import {HelpOutline} from "@jahia/moonstone";
 import {nodeInfoDialogAction} from "./NodeInfoDialog";
 
@@ -50,6 +51,19 @@ export default () => {
             const contentFoldersAccordionItem = registry.get('accordionItem', 'content-folders');
             registry.addOrReplace('accordionItem', 'content-folders', contentFoldersAccordionItem, {
                 treeConfig: Object.assign({}, contentFoldersAccordionItem.treeConfig, {sortBy: null})
+            });
+
+            registry.add('selectorType', 'ToggleBox', {
+                dataType: ['Boolean'],
+                cmp: ToggleBox,
+                labelKey: 'sampleAdmin:togglebox.displayValue',
+                properties: [
+                    {name: 'description', value: 'jahia-training-developer:label.togglebox.description'},
+                    {name: 'iconStart', value: 'Boolean'}
+                ],
+                supportMultiple: false,
+                initValue: field => field.mandatory && !field.multiple ? false : undefined,
+                adaptValue: (field, property) => field.multiple ? property.values.map(value => value === 'true') : property.value === 'true'
             });
         }
     });
