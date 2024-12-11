@@ -22,6 +22,9 @@
       "mixins": "Mixins",
       "pasteAndClose": "Paste and close"
     },
+    "lienservicepicker": {
+      "title": "Service link picker"
+    },
     "togglebox": {
       "description": "Toggle me!"
     }

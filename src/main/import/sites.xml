@@ -15,5 +15,37 @@
                 </subcategory>
             </training>
         </categories>
+        <services-link-list jcr:primaryType="jnt:contentList">
+            <j:translation_en jcr:language="en"
+                              jcr:primaryType="jnt:translation"
+                              jcr:title="Services link list"/>
+            <j:translation_fr jcr:language="fr"
+                              jcr:primaryType="jnt:translation"
+                              jcr:title="Liste de liens de service"/>
+            <link1 jcr:primaryType="jnt:text">
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:title="Link 1"/>
+                <j:translation_fr jcr:language="fr"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:title="Lien 1"/>
+            </link1>
+            <link2 jcr:primaryType="jnt:text">
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:title="Link 2"/>
+                <j:translation_fr jcr:language="fr"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:title="Lien 2"/>
+            </link2>
+            <link3 jcr:primaryType="jnt:text">
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:title="Link 3"/>
+                <j:translation_fr jcr:language="fr"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:title="Lien 3"/>
+            </link3>
+        </services-link-list>
     </systemsite>
 </sites>

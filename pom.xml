@@ -80,6 +80,7 @@
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
         <import-package>graphql.annotations.annotationTypes;version="[7.2,99)"</import-package>
+        <jahia-static-resources>/css,/icons,/images,/img,/javascript,/fonts</jahia-static-resources>
     </properties>
     <dependencies>
         <dependency>
