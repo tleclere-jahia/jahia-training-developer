@@ -174,3 +174,5 @@
 [foont:componentWithLinks] > jnt:content, jmix:basicContent, mix:title
  - protectedLink (weakreference)
  - publicLink (weakreference)
+
+[foont:ajaxForm] > jnt:content, jmix:formContent
