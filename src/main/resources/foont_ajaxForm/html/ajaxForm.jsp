@@ -17,8 +17,11 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
-<form id="form-${currentNode.identifier}" method="post"
-      action="<c:url value="${url.base}${renderContext.mainResource.node.path}.ajaxForm.do"/>" onsubmit="return false;">
+<c:url var="action" value="${url.base}${renderContext.mainResource.node.path}.ajaxForm.do"/>
+<form id="form-${currentNode.identifier}" method="post" action="${action}" onsubmit="return false;">
+    <label>
+        <input type="text" name="message"/>
+    </label>
     <input type="submit" value="<fmt:message key="label.clickme"/>"/>
 </form>
 <template:addResources type="inlinejavascript">
@@ -26,14 +29,12 @@
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('form-${currentNode.identifier}').addEventListener('submit', e => {
                 e.preventDefault();
-                fetch(e.target.action + '?CSRFTOKEN=' + new FormData(e.target).get('CSRFTOKEN'), {
+                fetch(e.target.action, {
                     method: e.target.method,
                     headers: {
-                        "Content-Type": "application/json",
+                        "Accept": "application/json",
                     },
-                    body: JSON.stringify({
-                        CSRFTOKEN: new FormData(e.target).get('CSRFTOKEN')
-                    }),
+                    body: new FormData(e.target)
                 }).then(response => {
                     if (response.ok) {
                         return response.text();
