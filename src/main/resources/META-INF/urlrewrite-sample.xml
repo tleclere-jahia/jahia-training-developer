@@ -8,4 +8,11 @@
         <from>^/?$</from>
         <to>/sites/digitall/home.html</to>
     </rule>
+
+    <rule>
+        <name>Test gone resource</name>
+        <condition name="host">jahia-docker</condition>
+        <from>^/toto$</from>
+        <to>/test.html</to>
+    </rule>
 </urlrewrite>
