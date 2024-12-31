@@ -17,7 +17,19 @@
       "name": "layout"
     },
     {
-      "name": "options"
+      "name": "options",
+      "fieldSets": [
+        {
+          "name": "system",
+          "fields": [
+            {
+              "name": "ce:systemName",
+              "descriptionKey": "jcontent:label.contentEditor.section.fieldSet.system.fields.systemNameDescriptionReadOnly",
+              "readOnly": true
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "seo",
