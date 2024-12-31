@@ -176,3 +176,7 @@
  - publicLink (weakreference)
 
 [foont:ajaxForm] > jnt:content, jmix:formContent
+
+[foomix:siteOptions] mixin
+ extends = jnt:virtualsite
+ - listeLiensServiceAdmin (weakreference)

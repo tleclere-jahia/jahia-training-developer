@@ -1,8 +1,34 @@
 window.jahia.i18n.loadNamespaces('jahia-training-developer');
 
+const getRootPath = async () => {
+    try {
+        const json = await (await fetch(`/modules/graphql`, {
+            method: 'POST',
+            body: JSON.stringify({
+                query: `query getSiteOption($sitePath:String!) {
+                                    jcr {
+                                        nodeByPath(path: $sitePath) {
+                                            property(name: "listeLiensServiceAdmin") {
+                                                refNode { 
+                                                    path
+                                                }
+                                            }
+                                        }
+                                    }
+                                }`,
+                variables: {sitePath: `/sites/systemsite`}
+            })
+        })).json();
+        return json.data?.jcr?.nodeByPath?.property?.refNode?.path || '/sites/{site}';
+    } catch (e) {
+        console.error(e);
+    }
+    return '/sites/{site}';
+};
+
 window.jahia.uiExtender.registry.add('callback', 'jahia-training-developer-ui-extensions', {
     targets: ['jahiaApp-init:6'],
-    callback: () => {
+    callback: async () => {
         window.jahia.uiExtender.registry.add('adminRoute', 'portletsite', {
             targets: ['jcontent:40'],
             label: 'jahia-training-developer:label.portletmanager.title',
@@ -25,9 +51,10 @@ window.jahia.uiExtender.registry.add('callback', 'jahia-training-developer-ui-ex
             }
         });
 
+        const rootPath = await getRootPath();
         window.jahia.uiExtender.registry.add('accordionItem', 'lienservicepicker-accordionItem', window.jahia.jcontent.jcontentUtils.mergeDeep({}, window.jahia.uiExtender.registry.get('accordionItem', 'picker-content-folders'), {
             targets: [],
-            rootPath: '/sites/systemsite/services-link-list',
+            rootPath: rootPath,
             tableConfig: {
                 viewSelector: null,
             }
