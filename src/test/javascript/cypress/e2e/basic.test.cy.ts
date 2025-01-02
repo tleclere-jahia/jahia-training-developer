@@ -19,11 +19,9 @@ describe('My first test', () => {
     before(() => {
         createSite(siteKey, siteConfig);
         enableModule('jahia-training-developer', siteKey);
-        publishAndWaitJobEnding(`/sites/${siteKey}/home`, ['fr', 'en']);
+        publishAndWaitJobEnding(`/sites/${siteKey}/home`, [langFR, langEN]);
     });
-    after(() => {
-        deleteSite(siteKey);
-    });
+    after(() => deleteSite(siteKey));
 
     it('Visit live homepage', () => {
         cy.visit(`/sites/${siteKey}/home.html`);
@@ -31,7 +29,7 @@ describe('My first test', () => {
 
     it('Create simple text', () => {
         cy.login();
-        const pageComposer: PageComposer = PageComposer.visit(siteKey, 'en', 'home.html');
+        const pageComposer: PageComposer = PageComposer.visit(siteKey, langEN, 'home.html');
         const contentEditor: ContentEditor = pageComposer
             .openCreateContent()
             .getContentTypeSelector()
@@ -46,9 +44,9 @@ describe('My first test', () => {
     it('Create an employee', () => {
         cy.login();
         cy.visit(`/cms/editframe/default/en/sites/${siteKey}.manageModules.html`).contains('jahia-training-developer');
-        const contentEditor: ContentEditor = JContent.visit(siteKey, 'en', 'content-folders/contents').createContent('Employee');
-        const field = contentEditor.getField(Field, 'foont:employee_jobTitle', false).get()
-        field.click()
+        JContent.visit(siteKey, langEN, 'content-folders/contents').createContent('Employee')
+            .getField(Field, 'foont:employee_jobTitle', false).get()
+            .click()
             .get('li.moonstone-menuItem[role="option"]')
             .should(elems => {
                 expect(elems).to.have.length(4);

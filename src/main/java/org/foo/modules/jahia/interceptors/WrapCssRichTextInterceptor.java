@@ -33,7 +33,8 @@ public class WrapCssRichTextInterceptor extends RichTextInterceptor {
 
     @Override
     public Value afterGetValue(JCRPropertyWrapper property, Value storedValue) throws RepositoryException {
-        return property.getSession().getValueFactory().createValue("<div class=\"richtext\">" + storedValue.getString() + "</div>");
+        // return property.getSession().getValueFactory().createValue("<div class=\"richtext\">" + storedValue.getString() + "</div>");
+        return storedValue;
     }
 
     @Override

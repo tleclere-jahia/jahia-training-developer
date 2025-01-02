@@ -42,3 +42,4 @@
 <utility:logger level="info" value="training.description=${description}"/>
 <jfunctions:properties property="cluster.node.serverId" var="nodeId"/>
 <utility:logger level="info" value="NodeID: ${nodeId}"/>
+<!-- cluster.node.serverId: ${nodeId} -->
