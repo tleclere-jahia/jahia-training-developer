@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "@jahia/content-editor-cypress": "^4.2.0-tests.9",
-    "@jahia/cypress": "^3.20.1",
-    "cross-fetch": "^4.0.0",
-    "cypress": "^13.11.0",
+    "@jahia/cypress": "^3.11.0",
+    "@types/cypress": "^1.1.0",
+    "cross-fetch": "3.1.5",
+    "cypress": "^13.17.0",
     "cypress-iframe": "^1.0.1",
-    "cypress-wait-until": "^3.0.1",
-    "typescript": "^5.4.5"
-  }
+    "cypress-wait-until": "^1.7.2",
+    "typescript": "3.9.10"
+  },
+  "packageManager": "yarn@1.22.22"
 }
