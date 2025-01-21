@@ -27,6 +27,7 @@
     "clean": "rimraf *.log src/main/resources/javascript/apps"
   },
   "dependencies": {
+    "@jahia/design-system-kit": "^1.2.1",
     "@jahia/moonstone": "2",
     "@jahia/ui-extender": "^1.1.0",
     "@material-ui/core": "3",

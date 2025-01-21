@@ -21,6 +21,14 @@
       "supertypes": "Super types",
       "mixins": "Mixins",
       "pasteAndClose": "Coller et fermer"
+    },
+    "lienservicepicker": {
+      "title": "Service link picker"
+    },
+    "togglebox": {
+      "description": "Active moi!",
+      "enabled": "Actif",
+      "disabled": "Inactif"
     }
   }
 }

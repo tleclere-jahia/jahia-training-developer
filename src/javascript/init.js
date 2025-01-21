@@ -56,7 +56,7 @@ export default () => {
             registry.add('selectorType', 'ToggleBox', {
                 dataType: ['Boolean'],
                 cmp: ToggleBox,
-                labelKey: 'sampleAdmin:togglebox.displayValue',
+                labelKey: 'jahia-training-developer:label.togglebox.displayValue',
                 properties: [
                     {name: 'description', value: 'jahia-training-developer:label.togglebox.description'},
                     {name: 'iconStart', value: 'Boolean'}

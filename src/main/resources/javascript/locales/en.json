@@ -26,7 +26,9 @@
       "title": "Service link picker"
     },
     "togglebox": {
-      "description": "Toggle me!"
+      "description": "Toggle me!",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
     }
   }
 }
