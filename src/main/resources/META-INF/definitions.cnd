@@ -180,3 +180,6 @@
 [foomix:siteOptions] mixin
  extends = jnt:virtualsite
  - listeLiensServiceAdmin (weakreference)
+
+[foomix:publicationMetaData] mixin
+ - firstPublicationDate (date) protected
