@@ -5,3 +5,7 @@
   autoStart: true
   uninstallPreviousVersion: true
 # curl -u root:root -X POST http://localhost:8080/modules/api/provisioning --form script="@provisioning.yaml;type=text/yaml"
+
+- editConfiguration: "org.jahia.modules.jcontent"
+  properties:
+    hideLegacyPageComposer: "false"

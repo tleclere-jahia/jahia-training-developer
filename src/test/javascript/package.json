@@ -4,13 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "instrument": "nyc instrument --compact=false cypress instrumented",
     "e2e:ci": "cypress run --browser chrome",
-    "e2e:debug": "cypress open",
-    "e2e:ci:standalone": "cypress run --browser chrome",
-    "lint": "eslint . -c .eslintrc.json --ext .ts",
-    "report:merge": "mochawesome-merge results/reports/cypress*.json > results/reports/report.json && rm results/reports/cypress*.json",
-    "report:html": "marge --inline results/reports/report.json --reportDir results/reports/"
+    "e2e:debug": "cypress open"
   },
   "dependencies": {
     "@jahia/content-editor-cypress": "^4.2.0-tests.9",
