@@ -20,22 +20,22 @@ public final class ChoiceListHelper {
             return (List<String>) context.get(propertyName);
         }
 
-        List<String> country = new ArrayList<>();
+        List<String> properties = new ArrayList<>();
         try {
             if (context.get("contextNode") != null) {
                 final JCRNodeWrapper contextNode = (JCRNodeWrapper) context.get("contextNode");
                 if (contextNode.hasProperty(propertyName)) {
                     String value = contextNode.getPropertyAsString(propertyName);
                     if (contextNode.getProperty(propertyName).isMultiple()) {
-                        country.addAll(Arrays.asList(StringUtils.split(value, " ")));
+                        properties.addAll(Arrays.asList(StringUtils.split(value, " ")));
                     } else {
-                        country.add(value);
+                        properties.add(value);
                     }
                 }
             }
         } catch (RepositoryException e) {
             throw new RuntimeException(e);
         }
-        return country;
+        return properties;
     }
 }
