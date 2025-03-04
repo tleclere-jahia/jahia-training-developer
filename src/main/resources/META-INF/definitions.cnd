@@ -5,10 +5,14 @@
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <mix = 'http://www.jcp.org/jcr/mix/1.0'>
 
+[foomix:colorizable] mixin
+ - color (string, choicelist[resourceBundle]) nofulltext < '#FF0000', '#00FF00', '#0000FF'
+
 [foomix:trainingComponents] > jmix:droppableContent, jmix:editorialContent mixin
 
-[foont:employee] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:mainResource
+[foont:employee] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:mainResource, jmix:description
  - jcr:title (string) mandatory primary
+ - jcr:description (string, textarea) i18n boost=1.5
  - firstname (string) mandatory < '^\\D+$'
  - lastname (string) mandatory
  - biography (string, richtext[ckeditor.customConfig='$context/modules/jahia-training-developer/javascript/ckconfig.js']) i18n
@@ -25,6 +29,7 @@
  - subcategory (weakreference, choicelist[dependentCategory, dependentProperties='category']) < 'jnt:category'
  - manager (weakreference, choicelist[nodes='$currentSite//*;foont:employee',excludeMe]) < 'foont:employee'
  - values (string) multiple
+ - url (string) < '(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})'
 
 [foont:company] > jnt:content, jmix:list, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:visibleInContentTree, jmix:browsableInEditorialPicker, jmix:mainResource orderable
  - jcr:title (string) mandatory i18n primary
@@ -51,7 +56,7 @@
 
 [foomix:richText] mixin
 
-[foont:text] > jnt:content, foomix:trainingComponents, foomix:richText, foomix:simpleItem
+[foont:text] > jnt:content, foomix:trainingComponents, foomix:richText, foomix:simpleItem, foomix:colorizable
  - text (string, richtext) mandatory
 
 [foomix:textType] > jmix:dynamicFieldset mixin

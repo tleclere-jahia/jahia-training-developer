@@ -1,0 +1,24 @@
+{
+  "nodeType": "foont:employee",
+  "priority": 2.0,
+  "sections": [
+    {
+      "name": "content",
+      "fieldSets": [
+        {
+          "name": "foont:employee",
+          "fields": [
+            {
+              "name": "jcr:description",
+              "rank": 0.1
+            },
+            {
+              "name": "j:defaultCategory",
+              "rank": 0.2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "nodeType": "foont:text",
+  "priority": 99.0,
+  "sections": [
+    {
+      "name": "content",
+      "fieldSets": [
+        {
+          "name": "<main>",
+          "rank": "2.0",
+          "fields": [
+            {
+              "name": "ce:systemName",
+              "hide": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

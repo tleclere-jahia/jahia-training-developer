@@ -29,6 +29,10 @@ module.exports = (env, argv) => {
                     type: 'javascript/auto'
                 },
                 {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader'],
+                },
+                {
                     test: /\.jsx?$/,
                     include: [path.join(__dirname, 'src')],
                     use: {

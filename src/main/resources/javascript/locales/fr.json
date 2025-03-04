@@ -26,7 +26,6 @@
       "title": "Service link picker"
     },
     "togglebox": {
-      "description": "Active moi!",
       "enabled": "Actif",
       "disabled": "Inactif"
     }

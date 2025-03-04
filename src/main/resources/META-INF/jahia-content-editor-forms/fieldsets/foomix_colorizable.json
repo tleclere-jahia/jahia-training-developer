@@ -1,0 +1,9 @@
+{
+  "name": "foomix:colorizable",
+  "fields": [
+    {
+      "name": "color",
+      "selectorType": "ColorPalette"
+    }
+  ]
+}

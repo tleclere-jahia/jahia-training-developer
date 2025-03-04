@@ -1,6 +1,6 @@
-import React from 'react';
-import {Toggle} from '@jahia/design-system-kit';
-import {useTranslation} from 'react-i18next';
+import React from "react";
+import {Toggle} from "@jahia/design-system-kit";
+import {useTranslation} from "react-i18next";
 
 export const ToggleBox = ({field, value, id, onChange, onBlur}) => {
     const {t} = useTranslation('jahia-training-developer');

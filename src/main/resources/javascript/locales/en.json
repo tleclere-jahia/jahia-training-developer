@@ -1,5 +1,11 @@
 {
   "label": {
+    "autoSplitDialog": {
+      "title": "Auto split",
+      "add": "Add",
+      "remove": "Remove",
+      "prompt": "Auto split configuration"
+    },
     "contentActions": {
       "3dotsSampleAction": "Copy JCR path"
     },
@@ -26,7 +32,6 @@
       "title": "Service link picker"
     },
     "togglebox": {
-      "description": "Toggle me!",
       "enabled": "Enabled",
       "disabled": "Disabled"
     }

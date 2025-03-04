@@ -5,6 +5,8 @@ import {MyComponent} from "./MyComponent";
 import {ToggleBox} from "./ToggleBox";
 import {HelpOutline} from "@jahia/moonstone";
 import {nodeInfoDialogAction} from "./NodeInfoDialog";
+import ColorPalette from "./ColorPalette";
+import {autoSplitDialogAction} from "./AutoSplitDialogAction";
 
 export default () => {
     registry.add('callback', 'jahia-training-developer', {
@@ -58,14 +60,23 @@ export default () => {
             registry.add('selectorType', 'ToggleBox', {
                 dataType: ['Boolean'],
                 cmp: ToggleBox,
-                labelKey: 'jahia-training-developer:label.togglebox.displayValue',
-                properties: [
-                    {name: 'description', value: 'jahia-training-developer:label.togglebox.description'},
-                    {name: 'iconStart', value: 'Boolean'}
-                ],
                 supportMultiple: false,
                 initValue: field => field.mandatory && !field.multiple ? false : undefined,
                 adaptValue: (field, property) => field.multiple ? property.values.map(value => value === 'true') : property.value === 'true'
+            });
+
+            registry.add('selectorType', 'ColorPalette', {
+                dataType: ['String'],
+                cmp: ColorPalette,
+                supportMultiple: true
+            });
+
+            registry.add('action', '3dotsAutoSplitDialog', autoSplitDialogAction, {
+                buttonLabel: 'jahia-training-developer:label.autoSplitDialog.title',
+                label: 'jahia-training-developer:label.autoSplitDialog.title',
+                showOnNodeTypes: ['jnt:contentFolder'],
+                hideOnExternal: true,
+                targets: ['contentActions:9.9'],
             });
         }
     });
