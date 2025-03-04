@@ -121,9 +121,13 @@ public class ModulesUpdateProbe implements Probe {
         Map<String, SortedMap<ModuleVersion, JahiaTemplatesPackage>> moduleStates = getAllModuleVersions();
         org.jahia.modules.modulemanager.forge.Module forgeModule;
         for (String key : moduleStates.keySet()) {
-            forgeModule = modules.get(key);
-            if (modules.containsKey(key) && isNewerVersionPresent(key, new ModuleVersion(forgeModule.getVersion()))) {
-                availableUpdate.put(key, forgeModule);
+            try {
+                forgeModule = modules.get(key);
+                if (modules.containsKey(key) && isNewerVersionPresent(key, new ModuleVersion(forgeModule.getVersion()))) {
+                    availableUpdate.put(key, forgeModule);
+                }
+            } catch (Exception e) {
+                logger.error("", e);
             }
         }
         return availableUpdate;
@@ -142,9 +146,7 @@ public class ModulesUpdateProbe implements Probe {
 
     private static boolean isNewerVersionPresent(String symbolicName, ModuleVersion forgeVersion) {
         for (Bundle bundle : FrameworkService.getBundleContext().getBundles()) {
-            String n = bundle.getSymbolicName();
-            ModuleVersion moduleVersion = new ModuleVersion(BundleUtils.getModuleVersion(bundle));
-            if (StringUtils.equals(n, symbolicName) && forgeVersion.compareTo(moduleVersion) > 0) {
+            if (StringUtils.equals(bundle.getSymbolicName(), symbolicName) && forgeVersion.compareTo(BundleUtils.getModule(bundle).getVersion()) > 0) {
                 // we've found a new version present
                 return true;
             }
