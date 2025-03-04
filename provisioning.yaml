@@ -1,7 +1,6 @@
 - installBundle:
   - "https://store.jahia.com/cms/mavenproxy/private-app-store/org/jahia/modules/workflow-extender/1.0.0/workflow-extender-1.0.0.jar"
   - "mvn:org.jahia.modules/jahia-authentication/1.8.0"
-  - "mvn:org.jahia.modules/site-settings-seo/5.3.0"
   autoStart: true
   uninstallPreviousVersion: true
 # curl -u root:root -X POST http://localhost:8080/modules/api/provisioning --form script="@provisioning.yaml;type=text/yaml"
