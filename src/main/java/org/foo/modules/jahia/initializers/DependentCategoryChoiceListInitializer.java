@@ -34,12 +34,8 @@ public class DependentCategoryChoiceListInitializer implements ModuleChoiceListI
         return "dependentCategory";
     }
 
-    private JCRSessionFactory jcrSessionFactory;
-
     @Reference
-    private void setJcrSessionFactory(JCRSessionFactory jcrSessionFactory) {
-        this.jcrSessionFactory = jcrSessionFactory;
-    }
+    private JCRSessionFactory jcrSessionFactory;
 
     @Override
     public List<ChoiceListValue> getChoiceListValues(ExtendedPropertyDefinition extendedPropertyDefinition, String param, List<ChoiceListValue> values, Locale locale, Map<String, Object> context) {

@@ -16,15 +16,12 @@ import java.util.Map;
 @Component(service = JCRNodeDecoratorDefinition.class)
 public class CustomJCRNodeDecoratorDefinition extends JCRNodeDecoratorDefinition {
     private final Map<String, Class<? extends JCRNodeDecorator>> savedDecorators;
+
+    @Reference
     private JCRStoreService jcrStoreService;
 
     public CustomJCRNodeDecoratorDefinition() {
         savedDecorators = new HashMap<>();
-    }
-
-    @Reference
-    private void setJcrStoreService(JCRStoreService jcrStoreService) {
-        this.jcrStoreService = jcrStoreService;
     }
 
     @Activate

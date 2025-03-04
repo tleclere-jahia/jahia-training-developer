@@ -19,18 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 public class SamlLoginLogoutUrlProvider implements LoginUrlProvider, LogoutUrlProvider {
     private static final Logger logger = LoggerFactory.getLogger(SamlLoginLogoutUrlProvider.class);
 
+    @Reference
     private JahiaSitesService jahiaSitesService;
+    @Reference
     private SettingsService settingsService;
-
-    @Reference
-    private void setJahiaSitesService(JahiaSitesService jahiaSitesService) {
-        this.jahiaSitesService = jahiaSitesService;
-    }
-
-    @Reference
-    private void setSettingsService(SettingsService settingsService) {
-        this.settingsService = settingsService;
-    }
 
     @Override
     public boolean hasCustomLoginUrl() {

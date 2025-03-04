@@ -14,12 +14,8 @@ import javax.jcr.Value;
 
 @Component(service = BaseInterceptor.class, immediate = true)
 public class WrapCssRichTextInterceptor extends RichTextInterceptor {
-    private JCRStoreService jcrStoreService;
-
     @Reference
-    private void setJcrStoreService(JCRStoreService jcrStoreService) {
-        this.jcrStoreService = jcrStoreService;
-    }
+    private JCRStoreService jcrStoreService;
 
     @Activate
     private void start() {

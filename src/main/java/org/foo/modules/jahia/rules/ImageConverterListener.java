@@ -30,12 +30,8 @@ import java.nio.file.Files;
 public class ImageConverterListener extends DefaultEventListener {
     private static final Logger logger = LoggerFactory.getLogger(ImageConverterListener.class);
 
-    private JCRTemplate jcrTemplate;
-
     @Reference
-    private void setJcrTemplate(JCRTemplate jcrTemplate) {
-        this.jcrTemplate = jcrTemplate;
-    }
+    private JCRTemplate jcrTemplate;
 
     @Override
     public int getEventTypes() {

@@ -17,12 +17,8 @@ import java.util.stream.Collectors;
 public class OsgiConfigurationService {
     private static final Logger logger = LoggerFactory.getLogger(OsgiConfigurationService.class);
 
-    private ConfigurationAdmin configurationAdmin;
-
     @Reference
-    private void setConfigurationAdmin(ConfigurationAdmin configurationAdmin) {
-        this.configurationAdmin = configurationAdmin;
-    }
+    private ConfigurationAdmin configurationAdmin;
 
     public List<Object> getPropertyFromConfiguration(String factoryPid, String pid, String property) {
         try {

@@ -16,12 +16,8 @@ import javax.jcr.RepositoryException;
 public class IncrementAction extends BaseBackgroundAction {
     private static final Logger logger = LoggerFactory.getLogger(IncrementAction.class);
 
-    private JCRTemplate jcrTemplate;
-
     @Reference
-    private void setJcrTemplate(JCRTemplate jcrTemplate) {
-        this.jcrTemplate = jcrTemplate;
-    }
+    private JCRTemplate jcrTemplate;
 
     public IncrementAction() {
         setName("increment");

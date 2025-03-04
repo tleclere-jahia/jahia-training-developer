@@ -20,12 +20,8 @@ import java.util.Map;
 public class ChoiceListOptionInitializer extends NodesChoiceListInitializerImpl implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(ChoiceListOptionInitializer.class);
 
-    private JCRTemplate jcrTemplate;
-
     @Reference
-    private void setJcrTemplate(JCRTemplate jcrTemplate) {
-        this.jcrTemplate = jcrTemplate;
-    }
+    private JCRTemplate jcrTemplate;
 
     @Override
     public void setKey(String key) {

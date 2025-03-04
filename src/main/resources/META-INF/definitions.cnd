@@ -49,7 +49,7 @@
 [foont:firm] > jnt:content, mix:title, foomix:trainingComponents
 
 [foont:simpleList] > jnt:content, jmix:list, foomix:trainingComponents orderable
- - itemType (string, choicelist[itemTypeInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
+ - itemType (string, choicelist[addMixinInitializer,resourceBundle]) mandatory < 'foomix:textType', 'foomix:longType', 'foomix:dateType', 'foomix:datetimeType'
 
 [foomix:simpleItem] mixin
  - itemNumber (long) hidden
