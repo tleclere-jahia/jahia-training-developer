@@ -1,34 +1,48 @@
 package org.foo.modules.jahia.probes;
 
 import org.apache.commons.lang.StringUtils;
+import org.jahia.bin.Jahia;
+import org.jahia.commons.Version;
 import org.jahia.data.templates.JahiaTemplatesPackage;
 import org.jahia.data.templates.ModuleState;
-import org.jahia.modules.modulemanager.forge.ForgeService;
-import org.jahia.modules.modulemanager.forge.Module;
 import org.jahia.modules.sam.Probe;
 import org.jahia.modules.sam.ProbeSeverity;
 import org.jahia.modules.sam.ProbeStatus;
 import org.jahia.osgi.BundleUtils;
 import org.jahia.osgi.FrameworkService;
-import org.jahia.services.SpringContextSingleton;
-import org.jahia.services.modulemanager.models.JahiaDepends;
+import org.jahia.services.notification.HttpClientService;
 import org.jahia.services.templates.JahiaTemplateManagerService;
 import org.jahia.services.templates.ModuleVersion;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.osgi.framework.Bundle;
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 @Component(service = Probe.class)
 public class ModulesUpdateProbe implements Probe {
+    private static final Logger logger = LoggerFactory.getLogger(ModulesUpdateProbe.class);
+
+    private static final Version JAHIA_VERSION = new Version(Jahia.VERSION);
+    private final Map<String, org.jahia.modules.modulemanager.forge.Module> modules;
+
+    public ModulesUpdateProbe() {
+        modules = new HashMap<>();
+    }
+
     @Reference
-    private MyOperationConstraintsService myOperationConstraintsService;
+    private HttpClientService httpClientService;
+
+    @Reference
+    private JahiaTemplateManagerService jahiaTemplateManagerService;
 
     @Override
     public String getName() {
@@ -47,36 +61,77 @@ public class ModulesUpdateProbe implements Probe {
 
     @Override
     public ProbeStatus getStatus() {
-        Map<String, Module> availableUpdate = getAvailableUpdates();
+        Map<String, org.jahia.modules.modulemanager.forge.Module> availableUpdate = getAvailableUpdates();
         if (availableUpdate.isEmpty()) {
             return new ProbeStatus("No module must be updated", ProbeStatus.Health.GREEN);
         }
-        return new ProbeStatus("Modules must be updated: " + availableUpdate.keySet(), ProbeStatus.Health.RED);
+        StringBuilder sb = new StringBuilder();
+        availableUpdate.forEach((moduleKey, module) -> {
+            if (sb.length() > 0) {
+                sb.append(", ");
+            }
+            sb.append(module.getGroupId()).append("/").append(module.getId()).append("/").append(module.getVersion());
+        });
+        return new ProbeStatus("Modules must be updated: " + sb, ProbeStatus.Health.RED);
     }
 
-    private Map<String, Module> getAvailableUpdates() {
-        Set<String> systemSiteRequiredModules = getSystemSiteRequiredModules();
-        ForgeService forgeService = (ForgeService) SpringContextSingleton.getBean("forgeService");
-        Map<String, Module> availableUpdate = new HashMap<>();
-        Map<String, SortedMap<ModuleVersion, JahiaTemplatesPackage>> moduleStates = getAllModuleVersions();
-        for (String key : moduleStates.keySet()) {
-            SortedMap<ModuleVersion, JahiaTemplatesPackage> moduleVersions = moduleStates.get(key);
-            Module forgeModule = forgeService.findModule(key, moduleVersions.get(moduleVersions.firstKey()).getGroupId());
-            if (forgeModule != null) {
-                ModuleVersion forgeVersion = new ModuleVersion(forgeModule.getVersion());
-                org.osgi.framework.Version osgiVersion = new org.osgi.framework.Version(JahiaDepends.toOsgiVersion(forgeVersion.toString()));
-                MyOperationConstraints ops = myOperationConstraintsService.getConstraintForBundle(key, osgiVersion);
-                if (!isSameOrNewerVersionPresent(key, forgeVersion) && !systemSiteRequiredModules.contains(key) && (ops == null || ops.canDeploy(osgiVersion))) {
-                    availableUpdate.put(key, forgeModule);
+    @Activate
+    private void loadModules() {
+        modules.clear();
+        try {
+            JSONArray moduleList = new JSONArray(httpClientService.executeGet("https://store.jahia.com/contents/modules-repository.moduleList.json")).getJSONObject(0).getJSONArray("modules");
+            for (int i = 0; i < moduleList.length(); i++) {
+                final JSONObject moduleObject = moduleList.getJSONObject(i);
+
+                SortedMap<Version, JSONObject> sortedVersions = new TreeMap<>();
+                final JSONArray moduleVersions = moduleObject.getJSONArray("versions");
+                for (int j = 0; j < moduleVersions.length(); j++) {
+                    JSONObject object = moduleVersions.getJSONObject(j);
+                    Version version = new Version(object.getString("version"));
+                    Version requiredVersion = new Version(StringUtils.substringAfter(object.getString("requiredVersion"), "version-"));
+                    if (requiredVersion.compareTo(JAHIA_VERSION) <= 0 && requiredVersion.getMajorVersion() == JAHIA_VERSION.getMajorVersion()) {
+                        sortedVersions.put(version, object);
+                    }
                 }
+                if (!sortedVersions.isEmpty()) {
+                    org.jahia.modules.modulemanager.forge.Module module = new org.jahia.modules.modulemanager.forge.Module();
+                    JSONObject versionObject = sortedVersions.get(sortedVersions.lastKey());
+                    module.setRemoteUrl(moduleObject.getString("remoteUrl"));
+                    module.setRemotePath(moduleObject.getString("path"));
+                    if (moduleObject.has("icon")) {
+                        module.setIcon(moduleObject.getString("icon"));
+                    }
+                    module.setVersion(versionObject.getString("version"));
+                    module.setName(moduleObject.getString("title"));
+                    module.setId(moduleObject.getString("name"));
+                    module.setGroupId(moduleObject.getString("groupId"));
+                    module.setDownloadUrl(versionObject.getString("downloadUrl"));
+                    module.setInstallable(!jahiaTemplateManagerService.differentModuleWithSameIdExists(module.getId(), module.getGroupId()));
+                    modules.put(moduleObject.getString("name"), module);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        logger.info("Modules updated");
+    }
+
+    private Map<String, org.jahia.modules.modulemanager.forge.Module> getAvailableUpdates() {
+        Map<String, org.jahia.modules.modulemanager.forge.Module> availableUpdate = new HashMap<>();
+        Map<String, SortedMap<ModuleVersion, JahiaTemplatesPackage>> moduleStates = getAllModuleVersions();
+        org.jahia.modules.modulemanager.forge.Module forgeModule;
+        for (String key : moduleStates.keySet()) {
+            forgeModule = modules.get(key);
+            if (modules.containsKey(key) && isNewerVersionPresent(key, new ModuleVersion(forgeModule.getVersion()))) {
+                availableUpdate.put(key, forgeModule);
             }
         }
         return availableUpdate;
     }
 
-    public static Map<String, SortedMap<ModuleVersion, JahiaTemplatesPackage>> getAllModuleVersions() {
+    public Map<String, SortedMap<ModuleVersion, JahiaTemplatesPackage>> getAllModuleVersions() {
         Map<String, SortedMap<ModuleVersion, JahiaTemplatesPackage>> result = new TreeMap<>();
-        Map<Bundle, ModuleState> moduleStatesByBundle = ((JahiaTemplateManagerService) SpringContextSingleton.getBean("JahiaTemplateManagerService")).getModuleStates();
+        Map<Bundle, ModuleState> moduleStatesByBundle = jahiaTemplateManagerService.getModuleStates();
         for (Bundle bundle : moduleStatesByBundle.keySet()) {
             JahiaTemplatesPackage module = BundleUtils.getModule(bundle);
             SortedMap<ModuleVersion, JahiaTemplatesPackage> modulesByVersion = result.computeIfAbsent(module.getId(), k -> new TreeMap<>());
@@ -85,30 +140,15 @@ public class ModulesUpdateProbe implements Probe {
         return result;
     }
 
-    private static boolean isSameOrNewerVersionPresent(String symbolicName, ModuleVersion forgeVersion) {
+    private static boolean isNewerVersionPresent(String symbolicName, ModuleVersion forgeVersion) {
         for (Bundle bundle : FrameworkService.getBundleContext().getBundles()) {
             String n = bundle.getSymbolicName();
-            if (StringUtils.equals(n, symbolicName)
-                    && forgeVersion.compareTo(new ModuleVersion(BundleUtils.getModuleVersion(bundle))) <= 0) {
-                // we've found either same or a new version present
+            ModuleVersion moduleVersion = new ModuleVersion(BundleUtils.getModuleVersion(bundle));
+            if (StringUtils.equals(n, symbolicName) && forgeVersion.compareTo(moduleVersion) > 0) {
+                // we've found a new version present
                 return true;
             }
         }
         return false;
-    }
-
-    private static Set<String> getSystemSiteRequiredModules() {
-        JahiaTemplateManagerService templateManagerService = (JahiaTemplateManagerService) SpringContextSingleton.getBean("JahiaTemplateManagerService");
-        Set<String> modules = new TreeSet<String>();
-        for (String module : templateManagerService.getNonManageableModules()) {
-            JahiaTemplatesPackage pkg = templateManagerService.getTemplatePackageById(module);
-            if (pkg != null) {
-                modules.add(pkg.getId());
-                for (JahiaTemplatesPackage dep : pkg.getDependencies()) {
-                    modules.add(dep.getId());
-                }
-            }
-        }
-        return modules;
     }
 }
