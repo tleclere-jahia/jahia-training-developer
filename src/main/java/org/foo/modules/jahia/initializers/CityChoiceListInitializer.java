@@ -1,6 +1,5 @@
 package org.foo.modules.jahia.initializers;
 
-import org.foo.modules.jahia.helpers.ChoiceListHelper;
 import org.jahia.services.content.nodetypes.ExtendedPropertyDefinition;
 import org.jahia.services.content.nodetypes.initializers.ChoiceListValue;
 import org.jahia.services.content.nodetypes.initializers.ModuleChoiceListInitializer;

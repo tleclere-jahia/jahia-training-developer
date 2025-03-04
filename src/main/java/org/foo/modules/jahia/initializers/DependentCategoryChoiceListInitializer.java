@@ -1,6 +1,5 @@
 package org.foo.modules.jahia.initializers;
 
-import org.foo.modules.jahia.helpers.ChoiceListHelper;
 import org.jahia.api.Constants;
 import org.jahia.services.content.JCRContentUtils;
 import org.jahia.services.content.JCRNodeWrapper;

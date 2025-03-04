@@ -1,4 +1,4 @@
-package org.foo.modules.jahia.helpers;
+package org.foo.modules.jahia.initializers;
 
 import org.apache.commons.lang.StringUtils;
 import org.jahia.services.content.JCRNodeWrapper;
