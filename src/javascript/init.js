@@ -12,6 +12,8 @@ export default () => {
         callback: async () => {
             await i18next.loadNamespaces('jahia-training-developer');
 
+            registry.remove('adminRoute', 'files');
+
             registry.add('adminRoute', 'myComponent', {
                 targets: ['jcontent:90'],
                 label: 'jahia-training-developer:label.myComponent',
