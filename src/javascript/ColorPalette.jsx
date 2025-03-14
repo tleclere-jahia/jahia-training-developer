@@ -4,7 +4,7 @@ import {Popover} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 
 const ColorPalette = ({classes, field, id, value, inputContext, onChange, onBlur}) => {
-    const colors = ['#FF0000', '#00FF00', '#0000FF']
+    const colors = field.valueConstraints?.map(v => v.displayValue);
     const [color, setColor] = React.useState(value);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
