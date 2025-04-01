@@ -32,24 +32,12 @@ public class AuthenticationServletFilter extends AbstractServletFilter {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationServletFilter.class);
     private static final Pattern PATTERN_SITEKEY = Pattern.compile("/sites/([^/]+)/");
 
+    @Reference
     private JahiaSitesService jahiaSitesService;
+    @Reference
     private SettingsService settingsService;
+    @Reference
     private JahiaOAuthService jahiaOAuthService;
-
-    @Reference
-    private void setJahiaSitesService(JahiaSitesService jahiaSitesService) {
-        this.jahiaSitesService = jahiaSitesService;
-    }
-
-    @Reference
-    private void setSettingsService(SettingsService settingsService) {
-        this.settingsService = settingsService;
-    }
-
-    @Reference
-    private void setJahiaOAuthService(JahiaOAuthService jahiaOAuthService) {
-        this.jahiaOAuthService = jahiaOAuthService;
-    }
 
     public AuthenticationServletFilter() {
         setMatchAllUrls(true);
@@ -77,7 +65,7 @@ public class AuthenticationServletFilter extends AbstractServletFilter {
         if (pattern.matches()) {
             return pattern.group(0);
         }
-        logger.warn("No site found in httpServletRequest {}", httpServletRequest.getRequestURL());
+        logger.debug("No site found in httpServletRequest {}", httpServletRequest.getRequestURL());
         return null;
     }
 

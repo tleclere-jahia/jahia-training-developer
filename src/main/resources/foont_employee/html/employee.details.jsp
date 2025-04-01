@@ -85,10 +85,10 @@
             </c:set>
         </c:if>
         <a href="#"
-           onclick='return sendJExperienceEvent(event,
+           onclick='return clickByInterest(event,
                    "${currentNode.identifier}",
                    "${currentNode.primaryNodeTypeName}",
-           ${interests},
+                   ${interests},
                    "<fmt:message key="foont_employee.jExperienceMe.error"/>")'>
             <fmt:message key="foont_employee.jExperienceMe"/>
         </a>

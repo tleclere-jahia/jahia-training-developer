@@ -5,6 +5,8 @@
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <mix = 'http://www.jcp.org/jcr/mix/1.0'>
 
+[foomix:trainingNodetypes] mixin
+
 [foomix:colorizable] mixin
  - color (string, choicelist[resourceBundle]) nofulltext < '#FF0000', '#00FF00', '#0000FF'
 
@@ -91,11 +93,6 @@
 
 [foont:counter] > jnt:content, jmix:autoPublish
  - count (long) = 0 mandatory autocreated
-
-[foomix:categorySubscription] > jmix:autoPublish mixin
- extends = jnt:category
- - emails (string) multiple
- - confirmedEmails (string) multiple
 
 [foont:formCategory] > jnt:content, jmix:basicContent
 

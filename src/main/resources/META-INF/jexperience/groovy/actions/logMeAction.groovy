@@ -6,7 +6,7 @@ import java.util.logging.Logger
 
 @Action(id = "logMeAction", actionExecutor = "groovy:logMeAction")
 def execute() {
-    Logger logger = Logger.getLogger("")
+    Logger logger = Logger.getLogger("logMeAction")
     CustomObjectMapper objectMapper = CustomObjectMapper.getObjectMapper() as CustomObjectMapper
     logger.info "Event: ${objectMapper.writeValueAsString(event)}"
     EventService.NO_CHANGE

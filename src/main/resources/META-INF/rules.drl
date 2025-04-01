@@ -14,14 +14,6 @@ global Service service
 global Logger logger
 global JCRContentUtils jcrUtils
 
-rule "Update page pending modifications"
-    when
-        A node is published
-    then
-        Log "Update page pending modifications"
-        Execute the action "newpublication" now on the node
-end
-
 rule "Increment counter"
     when
         A node is published

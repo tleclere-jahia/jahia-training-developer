@@ -37,6 +37,7 @@ public class SamplePublicationListener implements PublicationEventListener {
 
     private static final String FIRST_PUBLICATION_DATE = "firstPublicationDate";
     private static final String MIXIN_PUBLICATION_METADATA = "foomix:publicationMetaData";
+    private static final String MIXIN_TRAINING_NODETYPES = "foomix:trainingNodetypes";
 
     @Reference
     private JCRPublicationService jcrPublicationService;
@@ -58,28 +59,30 @@ public class SamplePublicationListener implements PublicationEventListener {
     public void onPublicationCompleted(PublicationEvent publicationEvent) {
         JCRSessionWrapper jcrSessionWrapper = publicationEvent.getDestinationSession();
         if (Constants.LIVE_WORKSPACE.equals(jcrSessionWrapper.getWorkspace().getName())) {
-            logger.info("<<< Start publicationEvent on live workspace");
+            logger.debug("<<< Start publicationEvent on live workspace");
             Set<String> uuidsToPublish = new HashSet<>();
             publicationEvent.getContentPublicationInfos().forEach(info -> {
                 String nodePath = info.getNodePath();
-                logger.info("{}Node: {}", StringUtils.repeat(" ", 4), nodePath);
+                logger.debug("{}Node: {}", StringUtils.repeat(" ", 4), nodePath);
                 if (CollectionUtils.isNotEmpty(info.getPublicationLanguages())) {
                     info.getPublicationLanguages().forEach(language -> {
-                        logger.info("{}language: {}", StringUtils.repeat(" ", 4 * 2), language);
+                        logger.debug("{}language: {}", StringUtils.repeat(" ", 4 * 2), language);
                         uuidsToPublish.addAll(setFirstPublicationDate(jcrSessionWrapper.getUser(), LanguageCodeConverters.languageCodeToLocale(language), nodePath));
                     });
                 } else {
-                    logger.info("{}no language", StringUtils.repeat(" ", 4 * 2));
+                    logger.debug("{}no language", StringUtils.repeat(" ", 4 * 2));
                     uuidsToPublish.addAll(setFirstPublicationDate(jcrSessionWrapper.getUser(), null, nodePath));
                 }
             });
-            try {
-                jcrPublicationService.publish(uuidsToPublish.stream().filter(Objects::nonNull).collect(Collectors.toList()),
-                        Constants.EDIT_WORKSPACE, Constants.LIVE_WORKSPACE, Collections.singletonList(FIRST_PUBLICATION_DATE));
-            } catch (RepositoryException e) {
-                logger.error("", e);
+            if (!uuidsToPublish.isEmpty()) {
+                try {
+                    jcrPublicationService.publish(uuidsToPublish.stream().filter(Objects::nonNull).collect(Collectors.toList()),
+                            Constants.EDIT_WORKSPACE, Constants.LIVE_WORKSPACE, Collections.singletonList(FIRST_PUBLICATION_DATE));
+                } catch (RepositoryException e) {
+                    logger.error("", e);
+                }
             }
-            logger.info(">>> End publicationEvent on live workspace");
+            logger.debug(">>> End publicationEvent on live workspace");
         }
     }
 
@@ -89,9 +92,11 @@ public class SamplePublicationListener implements PublicationEventListener {
                 Set<String> uuidsToPublish = new HashSet<>();
                 if (session.nodeExists(nodePath)) {
                     JCRNodeWrapper node = session.getNode(nodePath);
-                    uuidsToPublish.add(setFirstPublicationDateOnNode(node, session));
-                    if (locale != null) {
-                        uuidsToPublish.add(setFirstPublicationDateOnNode(node.getOrCreateI18N(locale), session));
+                    if (node.isNodeType(MIXIN_TRAINING_NODETYPES)) {
+                        uuidsToPublish.add(setFirstPublicationDateOnNode(node, session));
+                        if (locale != null) {
+                            uuidsToPublish.add(setFirstPublicationDateOnNode(node.getOrCreateI18N(locale), session));
+                        }
                     }
                 }
                 return uuidsToPublish;
@@ -108,7 +113,7 @@ public class SamplePublicationListener implements PublicationEventListener {
                 node.addMixin(MIXIN_PUBLICATION_METADATA);
             }
             Calendar currentDate = Calendar.getInstance();
-            logger.info("{}Set first publication date: {} for node {}", StringUtils.repeat(" ", 4 * 2), ISO8601.format(currentDate), node.getPath());
+            logger.debug("{}Set first publication date: {} for node {}", StringUtils.repeat(" ", 4 * 2), ISO8601.format(currentDate), node.getPath());
             node.setProperty(FIRST_PUBLICATION_DATE, currentDate);
             session.save();
             return node.getIdentifier();

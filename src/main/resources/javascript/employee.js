@@ -10,7 +10,7 @@ const sayHi = (event, url, successMessage, errorMessage) => {
     return false;
 };
 
-const sendJExperienceEvent = (event, currentNodeIdentifier, mainResourceType, interests, errorMessage) => {
+const clickByInterest = (event, currentNodeIdentifier, mainResourceType, interests, errorMessage) => {
     event.preventDefault();
 
     if (!wem) {
@@ -28,7 +28,7 @@ const sendJExperienceEvent = (event, currentNodeIdentifier, mainResourceType, in
             console.log('successfulEventSubmission');
         }, () => {
             console.error(`failedEventSubmission: ${errorMessage}`);
-        })
+        });
     } catch (e) {
         console.error(e);
     }

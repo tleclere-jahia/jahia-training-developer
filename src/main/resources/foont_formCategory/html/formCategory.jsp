@@ -23,7 +23,7 @@
         <input id="next" type="button" value="Next"/>
     </div>
 
-    <div style="display: none">
+    <div>
         <jcr:node var="categories" path="/sites/systemsite/categories"/>
         <ul>
             <c:forEach items="${jcr:getChildrenOfType(categories, 'jnt:category')}" var="category">
@@ -34,7 +34,7 @@
                 </label></li>
             </c:forEach>
         </ul>
-        <input id="subscribe" type="button" value="Subscribe"/>
     </div>
+
+    <input type="submit" value="<fmt:message key="label.clickme"/>"/>
 </form>
-<template:addResources type="javascript" resources="categorySubscription.js"/>
