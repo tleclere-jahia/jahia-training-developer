@@ -72,7 +72,7 @@
         <jahia-oauth.version>3.3.0</jahia-oauth.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
         <jahia-oauth-aws-cognito.version>2.2.13</jahia-oauth-aws-cognito.version>
-        <jexperience.version>3.5.1</jexperience.version>
+        <jexperience.version>3.5.2</jexperience.version>
         <module-manager.version>2.11.0</module-manager.version>
         <server-availability-manager.version>3.3.0</server-availability-manager.version>
         <jahia-depends>
