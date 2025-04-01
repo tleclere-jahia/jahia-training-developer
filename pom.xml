@@ -69,6 +69,9 @@
         <graphql-dxm-provider.version>3.4.0</graphql-dxm-provider.version>
         <jahia.version>8.2.1.0</jahia.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
+        <jahia-oauth.version>3.3.0</jahia-oauth.version>
+        <jahia-authentication.version>1.8.0</jahia-authentication.version>
+        <jahia-oauth-aws-cognito.version>2.2.13</jahia-oauth-aws-cognito.version>
         <jexperience.version>3.5.1</jexperience.version>
         <module-manager.version>2.11.0</module-manager.version>
         <server-availability-manager.version>3.3.0</server-availability-manager.version>
@@ -80,6 +83,17 @@
         <import-package>graphql.annotations.annotationTypes;version="[7.2,99)"</import-package>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/fonts</jahia-static-resources>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>2.20.94</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>com.graphql-java</groupId>
@@ -161,7 +175,13 @@
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>jahia-oauth</artifactId>
-            <version>3.3.0</version>
+            <version>${jahia-oauth.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.community</groupId>
+            <artifactId>jahia-oauth-aws-cognito</artifactId>
+            <version>${jahia-oauth-aws-cognito.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -207,39 +227,6 @@
             <artifactId>jexperience</artifactId>
             <version>${jexperience.version}</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jahia.test</groupId>
-            <artifactId>module-test-framework</artifactId>
-            <version>${jahia.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jahia.test</groupId>
-            <artifactId>jahia-test-module</artifactId>
-            <version>${jahia.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jahia.modules</groupId>
-            <artifactId>location</artifactId>
-            <version>${location.version}</version>
-            <scope>test</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.jahia.modules</groupId>
-            <artifactId>rating</artifactId>
-            <version>${rating.version}</version>
-            <scope>test</scope>
-            <optional>true</optional>
         </dependency>
     </dependencies>
     <repositories>
