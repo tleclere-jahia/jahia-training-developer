@@ -71,7 +71,6 @@
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
         <jahia-oauth.version>3.3.0</jahia-oauth.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
-        <jahia-oauth-aws-cognito.version>2.2.13</jahia-oauth-aws-cognito.version>
         <jexperience.version>3.5.2</jexperience.version>
         <module-manager.version>2.11.0</module-manager.version>
         <server-availability-manager.version>3.3.0</server-availability-manager.version>
@@ -83,17 +82,6 @@
         <import-package>graphql.annotations.annotationTypes;version="[7.2,99)"</import-package>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/fonts</jahia-static-resources>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>software.amazon.awssdk</groupId>
-                <artifactId>bom</artifactId>
-                <version>2.20.94</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>com.graphql-java</groupId>
@@ -176,12 +164,6 @@
             <groupId>org.jahia.modules</groupId>
             <artifactId>jahia-oauth</artifactId>
             <version>${jahia-oauth.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jahia.community</groupId>
-            <artifactId>jahia-oauth-aws-cognito</artifactId>
-            <version>${jahia-oauth-aws-cognito.version}</version>
             <scope>provided</scope>
         </dependency>
 

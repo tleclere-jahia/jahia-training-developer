@@ -3,7 +3,6 @@
   - "mvn:org.jahia.modules/workflow-extender/1.1.0-SNAPSHOT"
   - "mvn:org.jahia.modules/jahia-authentication/1.8.0"
   - "mvn:org.jahia.modules/jahia-oauth/3.3.0"
-  - "mvn:org.jahia.community/jahia-oauth-aws-cognito/2.2.13"
   - "mvn:org.jahia.modules/location/3.2.0"
   - "mvn:org.jahia.modules/rating/3.3.0"
   - "mvn:org.jahia.modules/jexperience/3.5.2"
