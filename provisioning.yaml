@@ -3,6 +3,7 @@
   - "mvn:org.jahia.modules/jahia-authentication/1.8.0"
   - "mvn:org.jahia.modules/location/3.2.0"
   - "mvn:org.jahia.modules/rating/3.3.0"
+  - "mvn:org.jahia.modules/jexperience/3.5.1"
   autoStart: true
   uninstallPreviousVersion: true
 # curl -u root:root -X POST http://localhost:8080/modules/api/provisioning --form script="@provisioning.yaml;type=text/yaml"

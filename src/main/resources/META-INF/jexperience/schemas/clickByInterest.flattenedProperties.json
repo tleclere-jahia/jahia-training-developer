@@ -1,0 +1,18 @@
+{
+  "$id": "https://jexperience.jahia.com/schemas/json/events/clickByInterest/flattenedProperties/1-0-0",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "self":{
+    "vendor": "org.foo.modules.jahia-training-developer.jexperience",
+    "name": "clickByInterest flattenedProperties",
+    "format":"jsonschema",
+    "version":"1-0-0"
+  },
+  "title": "ClickByInterest flattenedProperties",
+  "type": "object",
+  "properties" : {
+    "interests": {
+      "$ref" : "https://unomi.apache.org/schemas/json/interests/1-0-0"
+    }
+  },
+  "unevaluatedProperties" : false
+}

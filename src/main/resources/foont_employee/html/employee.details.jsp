@@ -9,6 +9,7 @@
 <%@ taglib prefix="query" uri="http://www.jahia.org/tags/queryLib" %>
 <%@ taglib prefix="utility" uri="http://www.jahia.org/tags/utilityLib" %>
 <%@ taglib prefix="s" uri="http://www.jahia.org/tags/search" %>
+<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 <%--@elvariable id="currentNode" type="org.jahia.services.content.JCRNodeWrapper"--%>
 <%--@elvariable id="out" type="java.io.PrintWriter"--%>
 <%--@elvariable id="script" type="org.jahia.services.render.scripting.Script"--%>
@@ -61,7 +62,37 @@
     </c:if>
 </dl>
 
+<template:addResources type="javascript" resources="employee.js"/>
 <ul>
+    <li>
+        <c:set var="interests" value="null"/>
+        <c:if test="${not empty currentNode.properties['wem:interests']}">
+            <c:set var="interests">
+                <json:object>
+                    <c:forEach items="${currentNode.properties['wem:interests']}" var="interest">
+                        <c:choose>
+                            <c:when test="${fn:contains(interest, ':')}">
+                                <c:set var="i" value="${fn:split(interest, ':')}"/>
+                                <fmt:parseNumber value="${i[1]}" var="weight"/>
+                                <json:property name="${fn:toLowerCase(fn:trim(i[0]))}" value="${weight}"/>
+                            </c:when>
+                            <c:when test="${not fn:contains(interest, ':')}">
+                                <json:property name="${fn:toLowerCase(fn:trim(interest))}" value="${1}"/>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
+                </json:object>
+            </c:set>
+        </c:if>
+        <a href="#"
+           onclick='return sendJExperienceEvent(event,
+                   "${currentNode.identifier}",
+                   "${currentNode.primaryNodeTypeName}",
+           ${interests},
+                   "<fmt:message key="foont_employee.jExperienceMe.error"/>")'>
+            <fmt:message key="foont_employee.jExperienceMe"/>
+        </a>
+    </li>
     <li>
         <c:url var="downloadUrl" value="${url.base}${currentNode.path}.vcf"/>
         <a href="${downloadUrl}"><fmt:message key="foont_employee.downloadVcf"/></a>
@@ -78,12 +109,12 @@
                 <c:url var="sayHiUrl" value="${url.base}${currentNode.path}.hi.do">
                     <c:param name="ajax" value="${true}"/>
                 </c:url>
-                <template:addResources type="javascript" resources="employee.js"/>
                 <a href="#" onclick="return sayHi(event,
                         '${sayHiUrl}',
                         '<fmt:message key="foont_employee.sayHiInAjax.success"/>',
-                        '<fmt:message key="foont_employee.sayHiInAjax.error"/>')"><fmt:message
-                        key="foont_employee.sayHiInAjax"/></a>
+                        '<fmt:message key="foont_employee.sayHiInAjax.error"/>')">
+                    <fmt:message key="foont_employee.sayHiInAjax"/>
+                </a>
             </li>
         </c:if>
     </c:if>
