@@ -12,6 +12,7 @@
 
 [foont:employee] > jnt:content, mix:title, foomix:trainingComponents, jmix:locationAware, jmix:mainResource, jmix:description
  - jcr:title (string) mandatory primary
+ - picto (string, choicelist[picto])
  - jcr:description (string, textarea) i18n boost=1.5
  - firstname (string) mandatory < '^\\D+$'
  - lastname (string) mandatory

@@ -51,7 +51,7 @@
     <parent>
         <groupId>org.jahia.modules</groupId>
         <artifactId>jahia-modules</artifactId>
-        <version>8.2.0.6</version>
+        <version>8.2.1.0</version>
     </parent>
     <groupId>org.foo.modules</groupId>
     <artifactId>jahia-training-developer</artifactId>
@@ -65,13 +65,12 @@
         <url>https://github.com/tleclere-jahia/jahia-training-developer</url>
     </scm>
     <properties>
-        <jahia.plugin.version>6.10</jahia.plugin.version>
-        <external-provider-users-groups.version>2.3.0</external-provider-users-groups.version>
-        <graphql-dxm-provider.version>3.0.0</graphql-dxm-provider.version>
-        <jahia.version>8.2.0.6</jahia.version>
+        <external-provider-users-groups.version>2.5.0</external-provider-users-groups.version>
+        <graphql-dxm-provider.version>3.4.0</graphql-dxm-provider.version>
+        <jahia.version>8.2.1.0</jahia.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
-        <module-manager.version>2.9.1</module-manager.version>
-        <server-availability-manager.version>3.2.0</server-availability-manager.version>
+        <module-manager.version>2.11.0</module-manager.version>
+        <server-availability-manager.version>3.3.0</server-availability-manager.version>
         <jahia-depends>
             default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>
