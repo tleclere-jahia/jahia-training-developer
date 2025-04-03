@@ -3,7 +3,7 @@
                    xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
                    xmlns:drools="http://www.jboss.org/drools"
                    xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd"
-                   id="D_CustomWorkflow" targetNamespace="http://www.jboss.org/drools">
+                   targetNamespace="http://www.jboss.org/drools">
     <bpmn2:itemDefinition id="ID_String" structureRef="String"/>
     <bpmn2:itemDefinition id="ID_List" isCollection="true" structureRef="java.util.List"/>
     <bpmn2:itemDefinition id="ID_Boolean" structureRef="Boolean"/>
@@ -11,7 +11,7 @@
     <bpmn2:itemDefinition id="ID_Locale" structureRef="java.util.Locale"/>
     <bpmn2:itemDefinition id="ID_WorkflowDefinition" structureRef="org.jahia.services.workflow.WorkflowDefinition"/>
     <bpmn2:itemDefinition id="ID_WorkflowVariable" structureRef="org.jahia.services.workflow.WorkflowVariable"/>
-    <bpmn2:process id="custom-workflow" name="custom-workflow" isExecutable="true" drools:version="1" drools:packageName="org.foo.modules.jahia.workflow">
+    <bpmn2:process id="custom-workflow" name="custom-workflow" isExecutable="true" drools:packageName="org.foo.modules.jahia.workflow">
         <bpmn2:property id="outcome" itemSubjectRef="ID_String" name="outcome"/>
         <bpmn2:property id="nodeId" itemSubjectRef="ID_String" name="nodeId"/>
         <bpmn2:property id="nodePath" itemSubjectRef="ID_String" name="nodePath"/>
@@ -25,42 +25,111 @@
         <bpmn2:property id="value" itemSubjectRef="ID_WorkflowVariable" name="value"/>
         <bpmn2:property id="randomValue" itemSubjectRef="ID_Integer" name="randomValue"/>
         <bpmn2:startEvent id="StartEvent" name="Start Event">
-            <bpmn2:outgoing>SF_StartEvent_TaskCustom</bpmn2:outgoing>
+            <bpmn2:outgoing>SF_StartEvent_PG_TaskCustom_SendMail</bpmn2:outgoing>
         </bpmn2:startEvent>
-        <bpmn2:sequenceFlow id="SF_StartEvent_TaskCustom" sourceRef="StartEvent" targetRef="TaskCustom"/>
-        <bpmn2:task id="TaskCustom" name="Random task" drools:taskName="Random task">
-            <bpmn2:incoming>SF_StartEvent_TaskCustom</bpmn2:incoming>
-            <bpmn2:outgoing>SF_TaskCustom_EndEvent</bpmn2:outgoing>
+        <bpmn2:sequenceFlow id="SF_StartEvent_PG_TaskCustom_SendMail" sourceRef="StartEvent"
+                            targetRef="PG_Diverging_TaskCustom_SendMail"/>
+        <bpmn2:parallelGateway id="PG_Diverging_TaskCustom_SendMail" gatewayDirection="Diverging">
+            <bpmn2:incoming>SF_StartEvent_PG_TaskCustom_SendMail</bpmn2:incoming>
+            <bpmn2:outgoing>SF_PG_Diverging_TaskCustom_SendMail_TaskCustom</bpmn2:outgoing>
+            <bpmn2:outgoing>SF_PG_Diverging_TaskCustom_SendMail_SendMail</bpmn2:outgoing>
+        </bpmn2:parallelGateway>
+        <bpmn2:sequenceFlow id="SF_PG_Diverging_TaskCustom_SendMail_TaskCustom"
+                            sourceRef="PG_Diverging_TaskCustom_SendMail" targetRef="TaskCustom"/>
+        <bpmn2:task id="TaskCustom" name="Simple task" drools:taskName="Simple task">
+            <bpmn2:incoming>SF_PG_Diverging_TaskCustom_SendMail_TaskCustom</bpmn2:incoming>
+            <bpmn2:outgoing>SF_TaskCustom_PG_Converging_TaskCustom_SendMail</bpmn2:outgoing>
             <bpmn2:ioSpecification>
-                <bpmn2:dataInput id="DI_NodeIds" itemSubjectRef="ID_List" isCollection="true" name="nodeIds"/>
-                <bpmn2:dataInput id="DI_Workspace" itemSubjectRef="ID_String" name="workspace"/>
-                <bpmn2:dataInput id="DI_Value" itemSubjectRef="ID_WorkflowVariable" name="value"/>
-                <bpmn2:dataOutput id="DO_RandomValue" itemSubjectRef="ID_Integer" name="randomValue"/>
+                <bpmn2:dataInput id="DI_TaskCustom_NodeIds" itemSubjectRef="ID_List" isCollection="true"
+                                 name="nodeIds"/>
+                <bpmn2:dataInput id="DI_TaskCustom_Workspace" itemSubjectRef="ID_String" name="workspace"/>
+                <bpmn2:dataInput id="DI_TaskCustom_Value" itemSubjectRef="ID_WorkflowVariable" name="value"/>
+                <bpmn2:dataOutput id="DO_TaskCustom_RandomValue" itemSubjectRef="ID_Integer" name="randomValue"/>
                 <bpmn2:inputSet>
-                    <bpmn2:dataInputRefs>DI_NodeIds</bpmn2:dataInputRefs>
-                    <bpmn2:dataInputRefs>DI_Workspace</bpmn2:dataInputRefs>
-                    <bpmn2:dataInputRefs>DI_Value</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_TaskCustom_NodeIds</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_TaskCustom_Workspace</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_TaskCustom_Value</bpmn2:dataInputRefs>
                 </bpmn2:inputSet>
                 <bpmn2:outputSet>
-                    <bpmn2:dataOutputRefs>DO_RandomValue</bpmn2:dataOutputRefs>
+                    <bpmn2:dataOutputRefs>DO_TaskCustom_RandomValue</bpmn2:dataOutputRefs>
                 </bpmn2:outputSet>
             </bpmn2:ioSpecification>
             <bpmn2:dataInputAssociation>
                 <bpmn2:sourceRef>nodeIds</bpmn2:sourceRef>
-                <bpmn2:targetRef>DI_NodeIds</bpmn2:targetRef>
+                <bpmn2:targetRef>DI_TaskCustom_NodeIds</bpmn2:targetRef>
             </bpmn2:dataInputAssociation>
             <bpmn2:dataInputAssociation>
                 <bpmn2:sourceRef>workspace</bpmn2:sourceRef>
-                <bpmn2:targetRef>DI_Workspace</bpmn2:targetRef>
+                <bpmn2:targetRef>DI_TaskCustom_Workspace</bpmn2:targetRef>
             </bpmn2:dataInputAssociation>
             <bpmn2:dataOutputAssociation>
-                <bpmn2:sourceRef>DO_RandomValue</bpmn2:sourceRef>
+                <bpmn2:sourceRef>DO_TaskCustom_RandomValue</bpmn2:sourceRef>
                 <bpmn2:targetRef>randomValue</bpmn2:targetRef>
             </bpmn2:dataOutputAssociation>
         </bpmn2:task>
-        <bpmn2:sequenceFlow id="SF_TaskCustom_EndEvent" sourceRef="TaskCustom" targetRef="EndEvent"/>
+        <bpmn2:sequenceFlow id="SF_PG_Diverging_TaskCustom_SendMail_SendMail"
+                            sourceRef="PG_Diverging_TaskCustom_SendMail" targetRef="SendMail"/>
+        <bpmn2:task id="SendMail" name="Send Mail" drools:taskName="Send mail">
+            <bpmn2:incoming>SF_PG_Diverging_TaskCustom_SendMail_SendMail</bpmn2:incoming>
+            <bpmn2:outgoing>SF_SendMail_PG_Converging_TaskCustom_SendMail</bpmn2:outgoing>
+            <bpmn2:ioSpecification>
+                <bpmn2:dataInput id="DI_SendMail_NodeIds" itemSubjectRef="ID_List" isCollection="true" name="nodeIds"/>
+                <bpmn2:dataInput id="DI_SendMail_Workspace" itemSubjectRef="ID_String" name="workspace"/>
+                <bpmn2:dataInput id="DI_SendMail_User" itemSubjectRef="ID_String" name="user"/>
+                <bpmn2:dataInput id="DI_SendMail_Workflow" itemSubjectRef="ID_WorkflowDefinition" name="workflow"/>
+                <bpmn2:dataInput id="DI_SendMail_TemplateKey" itemSubjectRef="ID_String" name="templateKey"/>
+                <bpmn2:dataInput id="DI_SendMail_Locale" itemSubjectRef="ID_Locale" name="locale"/>
+                <bpmn2:inputSet>
+                    <bpmn2:dataInputRefs>DI_SendMail_NodeIds</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_SendMail_Workspace</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_SendMail_User</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_SendMail_Workflow</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_SendMail_TemplateKey</bpmn2:dataInputRefs>
+                    <bpmn2:dataInputRefs>DI_SendMail_Locale</bpmn2:dataInputRefs>
+                </bpmn2:inputSet>
+                <bpmn2:outputSet/>
+            </bpmn2:ioSpecification>
+            <bpmn2:dataInputAssociation>
+                <bpmn2:sourceRef>nodeIds</bpmn2:sourceRef>
+                <bpmn2:targetRef>DI_SendMail_NodeIds</bpmn2:targetRef>
+            </bpmn2:dataInputAssociation>
+            <bpmn2:dataInputAssociation>
+                <bpmn2:sourceRef>workspace</bpmn2:sourceRef>
+                <bpmn2:targetRef>DI_SendMail_Workspace</bpmn2:targetRef>
+            </bpmn2:dataInputAssociation>
+            <bpmn2:dataInputAssociation>
+                <bpmn2:sourceRef>user</bpmn2:sourceRef>
+                <bpmn2:targetRef>DI_SendMail_User</bpmn2:targetRef>
+            </bpmn2:dataInputAssociation>
+            <bpmn2:dataInputAssociation>
+                <bpmn2:sourceRef>workflow</bpmn2:sourceRef>
+                <bpmn2:targetRef>DI_SendMail_Workflow</bpmn2:targetRef>
+            </bpmn2:dataInputAssociation>
+            <bpmn2:dataInputAssociation>
+                <bpmn2:targetRef>DI_SendMail_TemplateKey</bpmn2:targetRef>
+                <bpmn2:assignment>
+                    <bpmn2:from xsi:type="bpmn2:tFormalExpression">mail-template</bpmn2:from>
+                    <bpmn2:to xsi:type="bpmn2:tFormalExpression">DI_SendMail_Workspace</bpmn2:to>
+                </bpmn2:assignment>
+            </bpmn2:dataInputAssociation>
+            <bpmn2:dataInputAssociation>
+                <bpmn2:sourceRef>locale</bpmn2:sourceRef>
+                <bpmn2:targetRef>DI_SendMail_Locale</bpmn2:targetRef>
+            </bpmn2:dataInputAssociation>
+        </bpmn2:task>
+        <bpmn2:sequenceFlow id="SF_TaskCustom_PG_Converging_TaskCustom_SendMail" sourceRef="TaskCustom"
+                            targetRef="PG_Converging_TaskCustom_SendMail"/>
+        <bpmn2:sequenceFlow id="SF_SendMail_PG_Converging_TaskCustom_SendMail" sourceRef="SendMail"
+                            targetRef="PG_Converging_TaskCustom_SendMail"/>
+        <bpmn2:parallelGateway id="PG_Converging_TaskCustom_SendMail" gatewayDirection="Converging">
+            <bpmn2:incoming>SF_TaskCustom_PG_Converging_TaskCustom_SendMail</bpmn2:incoming>
+            <bpmn2:incoming>SF_SendMail_PG_Converging_TaskCustom_SendMail</bpmn2:incoming>
+            <bpmn2:outgoing>SF_PG_Converging_TaskCustom_SendMail_EndEvent</bpmn2:outgoing>
+        </bpmn2:parallelGateway>
+        <bpmn2:sequenceFlow id="SF_PG_Converging_TaskCustom_SendMail_EndEvent"
+                            sourceRef="PG_Converging_TaskCustom_SendMail" targetRef="EndEvent"/>
         <bpmn2:endEvent id="EndEvent" name="End Event">
-            <bpmn2:incoming>SF_TaskCustom_EndEvent</bpmn2:incoming>
+            <bpmn2:incoming>SF_PG_Converging_TaskCustom_SendMail_EndEvent</bpmn2:incoming>
         </bpmn2:endEvent>
     </bpmn2:process>
 </bpmn2:definitions>

@@ -20,7 +20,7 @@ import java.util.Random;
 public class SimpleWorkItemHandler implements WorkItemHandler {
     private static final Logger logger = LoggerFactory.getLogger(SimpleWorkItemHandler.class);
 
-    private static final String TASK_NAME = "Random task";
+    private static final String TASK_NAME = "Simple task";
 
     @Reference
     private WorkflowService workflowService;
