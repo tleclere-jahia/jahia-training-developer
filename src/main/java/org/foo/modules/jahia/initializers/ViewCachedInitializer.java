@@ -9,7 +9,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.jahia.data.templates.JahiaTemplatesPackage;
 import org.jahia.osgi.BundleUtils;
 import org.jahia.registries.ServicesRegistry;
-import org.jahia.services.SpringContextSingleton;
 import org.jahia.services.cache.CacheHelper;
 import org.jahia.services.cache.ModuleClassLoaderAwareCacheEntry;
 import org.jahia.services.cache.ehcache.EhCacheProvider;
@@ -28,6 +27,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,12 +51,14 @@ public class ViewCachedInitializer implements ModuleChoiceListInitializer {
 
     private Bundle bundle;
     private CacheManager cacheManager;
+    @Reference
+    private EhCacheProvider ehCacheProvider;
     private Ehcache cache;
 
     @Activate
     private void onActivate(BundleContext bundleContext) {
         bundle = bundleContext.getBundle();
-        cacheManager = ((EhCacheProvider) SpringContextSingleton.getInstance().getContext().getBean("ehCacheProvider")).getCacheManager();
+        cacheManager = ehCacheProvider.getCacheManager();
         CacheConfiguration cacheConfiguration = cacheManager.getConfiguration().getDefaultCacheConfiguration() != null ?
                 cacheManager.getConfiguration().getDefaultCacheConfiguration().clone() :
                 new CacheConfiguration();
