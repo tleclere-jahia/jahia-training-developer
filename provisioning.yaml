@@ -13,7 +13,3 @@
 - editConfiguration: "org.jahia.modules.jcontent"
   properties:
     hideLegacyPageComposer: "false"
-
-- editConfiguration: "org.foo.modules.jahiatrainingdeveloper"
-  properties:
-    pictoUrl: ""

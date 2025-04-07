@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-@Component(service = ModuleChoiceListInitializer.class, configurationPid = "org.foo.modules.jahiatrainingdeveloper")
+@Component(service = ModuleChoiceListInitializer.class, configurationPid = "org.foo.modules.jahiatrainingdeveloper.picto")
 @Designate(ocd = PictoInitializer.Config.class)
 public class PictoInitializer implements ModuleChoiceListInitializer {
     private static final Logger logger = LoggerFactory.getLogger(PictoInitializer.class);
