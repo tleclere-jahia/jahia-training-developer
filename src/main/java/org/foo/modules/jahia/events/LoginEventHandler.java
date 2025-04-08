@@ -29,7 +29,7 @@ public class LoginEventHandler implements EventHandler {
     public void handleEvent(Event event) {
         logger.info("Received OSGi event: {}", event);
         try {
-            jcrTemplate.doExecuteWithSystemSessionAsUser(null, Constants.EDIT_WORKSPACE, null, session -> {
+            jcrTemplate.doExecuteWithSystemSessionAsUser(null, Constants.LIVE_WORKSPACE, null, session -> {
                 JCRUserNode user = jahiaUserManagerService.lookupUser(((JahiaUser) event.getProperty("user")).getUsername(), session);
                 user.setProperty("lastLogin", Calendar.getInstance());
                 user.saveSession();
