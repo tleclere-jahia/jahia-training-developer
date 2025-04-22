@@ -186,3 +186,9 @@
 
 [foomix:publicationMetaData] mixin
  - firstPublicationDate (date) protected
+
+[foont:uniqueTitle] > jnt:content, jmix:basicContent, mix:title
+ - jcr:title (string) mandatory
+ - url (string)
+ - mobileUrl (string)
+ - fallbackUrl (string)
