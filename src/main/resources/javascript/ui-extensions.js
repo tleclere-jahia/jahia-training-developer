@@ -71,5 +71,84 @@ window.jahia.uiExtender.registry.add('callback', 'jahia-training-developer-ui-ex
             },
             accordions: ['lienservicepicker-accordionItem'],
         });
+
+        window.jahia.uiExtender.registry.add('accordionItem', 'picker-pages-jmixlink', window.jahia.jcontent.jcontentUtils.mergeDeep({}, window.jahia.uiExtender.registry.get('accordionItem', 'picker-pages'), {
+            targets: [],
+            label: 'Custom Page Picker',
+            rootPath: '/sites/{site}',
+            treeConfig: {
+                hideRoot: false,
+                openableTypes: ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite'],
+                selectableTypes: ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite']
+            },
+            tableConfig: {
+                defaultViewType: 'pages',
+                /*viewSelector: false,*/
+                openableTypes: ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite'],
+                listTypes: ['jnt:page', 'jmix:link', 'jnt:file']
+            },
+            getPathForItem: node => {
+                // Override getPathForItem to avoid crashing when selecting /sites/THE_SITE/home due to ancestors of home being a virtualsite.
+                const pages = node.ancestors
+                    .filter(n => n.primaryNodeType.name === 'jnt:page' || n.primaryNodeType.name === 'jnt:virtualsite');
+                return pages[pages.length - 1].path;
+            }
+        }));
+
+        window.jahia.uiExtender.registry.add('accordionItem', 'picker-media1', window.jahia.jcontent.jcontentUtils.mergeDeep({}, window.jahia.uiExtender.registry.get('accordionItem', 'picker-media'), {
+            targets: [],
+            label: 'Custom File Picker',
+            rootPath: '/sites/{site}/files',
+            treeConfig: {
+                hideRoot: false,
+                openableTypes: ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite', 'jnt:contentFolder', 'jnt:folder'],
+                selectableTypes: ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite', 'jnt:contentFolder', 'jnt:folder']
+            },
+            tableConfig: {
+                defaultViewType: 'pages',
+                viewSelector: false,
+                openableTypes: ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite', 'jnt:contentFolder', 'jnt:folder'],
+                listTypes: ['jnt:page', 'jmix:link', 'jnt:file']
+            }
+
+        }));
+        window.jahia.uiExtender.registry.add('pickerConfiguration', 'jmixlink', {
+            showOnlyNodesWithTemplates: false,
+            searchContentType: 'jmix:editorialContent',
+            selectableTypesTable: ['jmix:link', 'jnt:page', 'jnt:file'],
+            accordions: ['picker-pages-jmixlink', 'picker-media1']
+        });
+
+        window.jahia.uiExtender.registry.get('pickerConfiguration', 'editoriallink').showOnlyNodesWithTemplates = false;
+        window.jahia.uiExtender.registry.get('pickerConfiguration', 'editoriallink').selectableTypesTable = ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite', 'jmix:link'];
+        window.jahia.uiExtender.registry.get('accordionItem', 'picker-editoriallink').treeConfig.selectableTypes = ['jnt:page', 'jnt:navMenuText', 'jnt:virtualsite', 'jmix:link'];
+        window.jahia.uiExtender.registry.get('accordionItem', 'picker-editoriallink').tableConfig.queryHandler.getTreeParams = options => {
+            const {path, openPaths, openableTypes, selectableTypes, sort, hideRoot} = options;
+            const treeParams = {
+                rootPaths: [path],
+                openPaths: [...new Set([path, ...openPaths])],
+                selectedPaths: [],
+                openableTypes,
+                selectableTypes,
+                hideRoot: hideRoot !== false,
+                sortBy: sort.orderBy === '' ? null : {
+                    sortType: sort.order === '' ? null : (sort.order === 'DESC' ? 'DESC' : 'ASC'),
+                    fieldName: sort.orderBy === '' ? null : sort.orderBy,
+                    ignoreCase: true
+                }
+            };
+
+            if (options.tableView.viewType === 'pages') {
+                treeParams.openableTypes = ['jmix:mainResource', 'jnt:page', 'jnt:navMenuText'];
+                treeParams.selectableTypes = ['jnt:page', 'jmix:mainResource', 'jmix:link'];
+            } else { // Content
+                treeParams.openableTypes = ['jnt:contentFolder'];
+                treeParams.selectableTypes = ['jmix:mainResource'];
+            }
+
+            treeParams.recursionTypesFilter = {multi: 'NONE', types: ['jmix:mainResource', 'jnt:contentFolder', 'jnt:page', 'jnt:folder', 'jnt:navMenuText']};
+
+            return treeParams;
+        };
     }
 });

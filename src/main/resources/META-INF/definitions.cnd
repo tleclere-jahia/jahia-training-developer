@@ -187,6 +187,12 @@
 [foomix:publicationMetaData] mixin
  - firstPublicationDate (date) protected
 
+[foomix:lienExterne] mixin
+ extends = jnt:externalLink
+ - prefixe (string)
+ - type (string, choicelist[resourceBundle]) < 'document', 'page', 'application'
+ - url (string)
+
 [foont:uniqueTitle] > jnt:content, jmix:basicContent, mix:title
  - jcr:title (string) mandatory
  - url (string)
