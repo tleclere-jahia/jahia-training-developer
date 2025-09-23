@@ -87,11 +87,20 @@ public class LinkInterceptor extends RichTextInterceptor {
             }
             return value;
         });
+        return node.getSession().getValueFactory().createValue(clearDataPath(result));
+    }
 
-        if (!result.equals(content)) {
-            return node.getSession().getValueFactory().createValue(result);
+    private String clearDataPath(String content) {
+        Source source = new Source(content);
+        OutputDocument doc = new OutputDocument(source);
+        for (Element a : source.getAllElements(HTMLElementName.A)) {
+            for (Attribute attribute : a.getAttributes()) {
+                if ("data-path".equals(attribute.getName())) {
+                    doc.replace(attribute.getBegin(), attribute.getEnd(), "");
+                }
+            }
         }
-        return originalValue;
+        return doc.toString();
     }
 
     @Override
