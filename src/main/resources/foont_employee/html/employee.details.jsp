@@ -64,35 +64,39 @@
 
 <template:addResources type="javascript" resources="employee.js"/>
 <ul>
-    <li>
-        <c:set var="interests" value="null"/>
-        <c:if test="${not empty currentNode.properties['wem:interests']}">
-            <c:set var="interests">
-                <json:object>
-                    <c:forEach items="${currentNode.properties['wem:interests']}" var="interest">
-                        <c:choose>
-                            <c:when test="${fn:contains(interest, ':')}">
-                                <c:set var="i" value="${fn:split(interest, ':')}"/>
-                                <fmt:parseNumber value="${i[1]}" var="weight"/>
-                                <json:property name="${fn:toLowerCase(fn:trim(i[0]))}" value="${weight}"/>
-                            </c:when>
-                            <c:when test="${not fn:contains(interest, ':')}">
-                                <json:property name="${fn:toLowerCase(fn:trim(interest))}" value="${1}"/>
-                            </c:when>
-                        </c:choose>
-                    </c:forEach>
-                </json:object>
-            </c:set>
-        </c:if>
-        <a href="#"
-           onclick='return clickByInterest(event,
-                   "${currentNode.identifier}",
-                   "${currentNode.primaryNodeTypeName}",
-                   ${interests},
-                   "<fmt:message key="foont_employee.jExperienceMe.error"/>")'>
-            <fmt:message key="foont_employee.jExperienceMe"/>
-        </a>
-    </li>
+    <c:if test="${not empty currentNode.properties['wem:interests'] or jcr:hasPermission(renderContext.site, 'canAccessJExperience')}">
+        <li>
+            <c:set var="interests" value="null"/>
+            <c:if test="${not empty currentNode.properties['wem:interests']}">
+                <c:set var="interests">
+                    <json:object>
+                        <c:forEach items="${currentNode.properties['wem:interests']}" var="interest">
+                            <c:choose>
+                                <c:when test="${fn:contains(interest, ':')}">
+                                    <c:set var="i" value="${fn:split(interest, ':')}"/>
+                                    <fmt:parseNumber value="${i[1]}" var="weight"/>
+                                    <json:property name="${fn:toLowerCase(fn:trim(i[0]))}" value="${weight}"/>
+                                </c:when>
+                                <c:when test="${not fn:contains(interest, ':')}">
+                                    <json:property name="${fn:toLowerCase(fn:trim(interest))}" value="${1}"/>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                    </json:object>
+                </c:set>
+            </c:if>
+            <c:if test="${jcr:hasPermission(renderContext.site, 'canAccessJExperience')}">
+                <a href="#"
+                   onclick='return clickByInterest(event,
+                           "${currentNode.identifier}",
+                           "${currentNode.primaryNodeTypeName}",
+                       ${interests},
+                           "<fmt:message key="foont_employee.jExperienceMe.error"/>")'>
+                    <fmt:message key="foont_employee.jExperienceMe"/>
+                </a>
+            </c:if>
+        </li>
+    </c:if>
     <li>
         <c:url var="downloadUrl" value="${url.base}${currentNode.path}.vcf"/>
         <a href="${downloadUrl}"><fmt:message key="foont_employee.downloadVcf"/></a>

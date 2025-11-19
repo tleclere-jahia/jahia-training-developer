@@ -75,11 +75,10 @@
         <module-manager.version>2.11.0</module-manager.version>
         <server-availability-manager.version>3.3.0</server-availability-manager.version>
         <jahia-depends>
-            default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,jexperience,location,module-manager,rating,server-availability-manager,workflow-extender
+            default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,jexperience,legacy-default-components,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
-        <import-package>graphql.annotations.annotationTypes;version="[7.2,99)"</import-package>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/fonts</jahia-static-resources>
     </properties>
     <dependencies>
