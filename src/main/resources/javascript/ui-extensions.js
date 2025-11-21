@@ -150,5 +150,28 @@ window.jahia.uiExtender.registry.add('callback', 'jahia-training-developer-ui-ex
 
             return treeParams;
         };
+
+        const baseAccordion = window.jahia.uiExtender.registry.get('accordionItem', 'pages');
+        window.jahia.uiExtender.registry.add('accordionItem', 'customAccordionItem', // Custom accordion
+            baseAccordion, // Extend pages accordion
+            {
+                // Custom properties specified here
+                targets: ['jcontent:2'],
+                label: 'Menu entries',
+                icon: window.jahia.moonstone.toIconComponent('Section'),
+                rootPath: '/sites/{site}',
+                treeConfig: Object.assign({},
+                    baseAccordion.treeConfig,
+                    {
+                        hideRoot: false,
+                        selectableTypes: ['jnt:navMenuText'],
+                        openableTypes: ['jnt:navMenuText'],
+                    }),
+                tableConfig: Object.assign({},
+                    baseAccordion.tableConfig,
+                    {
+                        typeFilter:['jnt:navMenuText']
+                    })
+            });
     }
 });
