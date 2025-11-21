@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Component(service = AbstractServletFilter.class, property = "service.pid=org.foo.modules.jahia.cloudinary")
+@Component(service = AbstractServletFilter.class, configurationPid = "org.foo.modules.jahia.cloudinary")
 public class CloudinaryProxyServlet extends ServletWrappingFilter {
 
     private String authorization;
