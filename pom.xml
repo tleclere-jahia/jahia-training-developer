@@ -67,7 +67,7 @@
     <properties>
         <external-provider-users-groups.version>2.5.0</external-provider-users-groups.version>
         <graphql-dxm-provider.version>3.4.0</graphql-dxm-provider.version>
-        <jahia.version>8.2.1.0</jahia.version>
+        <jahia.version>${parent.version}</jahia.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
         <jahia-oauth.version>3.3.0</jahia-oauth.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
@@ -79,7 +79,7 @@
         </jahia-depends>
         <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
-        <jahia-static-resources>/css,/icons,/images,/img,/javascript,/fonts</jahia-static-resources>
+        <jahia-static-resources>/css,/fonts,/icons,/images,/img,/javascript,/static</jahia-static-resources>
     </properties>
     <dependencies>
         <dependency>
@@ -240,7 +240,6 @@
                     <instructions>
                         <JAX-RS-Alias>/training</JAX-RS-Alias>
                         <JAX-RS-Application>org.foo.modules.jahia.jaxrs.JaxRsConfig</JAX-RS-Application>
-                        <_dsannotations>*</_dsannotations>
                     </instructions>
                 </configuration>
             </plugin>
