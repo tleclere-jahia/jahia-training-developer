@@ -15,7 +15,11 @@
     "cypress": "*",
     "cypress-iframe": "*",
     "cypress-wait-until": "*",
+    "qs": "*",
     "typescript": "*"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@4.6.0",
+  "devDependencies": {
+    "@types/qs": "^6"
+  }
 }
