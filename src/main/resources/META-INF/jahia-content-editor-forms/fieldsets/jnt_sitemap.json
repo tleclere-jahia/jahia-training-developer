@@ -1,0 +1,12 @@
+{
+    "name": "jnt:sitemap",
+    "fields": [
+        {
+            "name": "base",
+            "selectorType": "Picker",
+            "selectorOptionsMap": {
+                "type": "editoriallink"
+            }
+        }
+    ]
+}
