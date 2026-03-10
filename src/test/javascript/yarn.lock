@@ -136,6 +136,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/qs@npm:^6":
+  version: 6.15.0
+  resolution: "@types/qs@npm:6.15.0"
+  checksum: 10c0/1b104cac50e655fc41d7fc1de2c2aba2908c4cf833a555b6808fb4c96752662b439238f2392a15d2590a7a6ca75dbd40e42d9378ac2be0d548ee484954363688
+  languageName: node
+  linkType: hard
+
 "@types/sinonjs__fake-timers@npm:8.1.1":
   version: 8.1.1
   resolution: "@types/sinonjs__fake-timers@npm:8.1.1"
@@ -1090,10 +1097,12 @@ __metadata:
     "@jahia/content-editor-cypress": "npm:*"
     "@jahia/cypress": "npm:*"
     "@types/cypress": "npm:*"
+    "@types/qs": "npm:^6"
     cross-fetch: "npm:*"
     cypress: "npm:*"
     cypress-iframe: "npm:*"
     cypress-wait-until: "npm:*"
+    qs: "npm:*"
     typescript: "npm:*"
   languageName: unknown
   linkType: soft
@@ -1430,6 +1439,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:*":
+  version: 6.15.0
+  resolution: "qs@npm:6.15.0"
+  dependencies:
+    side-channel: "npm:^1.1.0"
+  checksum: 10c0/ff341078a78a991d8a48b4524d52949211447b4b1ad907f489cac0770cbc346a28e47304455c0320e5fb000f8762d64b03331e3b71865f663bf351bcba8cdb4b
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.13.1":
   version: 6.13.1
   resolution: "qs@npm:6.13.1"
@@ -1577,7 +1595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"side-channel@npm:^1.0.6":
+"side-channel@npm:^1.0.6, side-channel@npm:^1.1.0":
   version: 1.1.0
   resolution: "side-channel@npm:1.1.0"
   dependencies:
