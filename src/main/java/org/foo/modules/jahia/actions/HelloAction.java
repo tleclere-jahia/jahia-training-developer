@@ -1,5 +1,6 @@
 package org.foo.modules.jahia.actions;
 
+import org.foo.modules.jahia.jobs.BackgroundSyncJob;
 import org.jahia.bin.Action;
 import org.jahia.bin.ActionResult;
 import org.jahia.services.content.JCRSessionWrapper;
@@ -8,6 +9,7 @@ import org.jahia.services.render.Resource;
 import org.jahia.services.render.URLResolver;
 import org.json.JSONObject;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +22,9 @@ import java.util.Map;
 public class HelloAction extends Action {
     private static final Logger logger = LoggerFactory.getLogger(HelloAction.class);
 
+    @Reference
+    private BackgroundSyncJob backgroundSyncJob;
+
     public HelloAction() {
         setName("hi");
         setRequireAuthenticatedUser(false);
@@ -29,6 +34,8 @@ public class HelloAction extends Action {
 
     @Override
     public ActionResult doExecute(HttpServletRequest httpServletRequest, RenderContext renderContext, Resource resource, JCRSessionWrapper jcrSessionWrapper, Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
+        backgroundSyncJob.reschedule();
+
         String firstname = resource.getNode().getPropertyAsString("firstname");
         String lastname = resource.getNode().getPropertyAsString("lastname");
         logger.info("Hi {} {}!", firstname, lastname);
