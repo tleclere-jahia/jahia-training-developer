@@ -77,9 +77,8 @@
         <jahia-depends>
             default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,jexperience,legacy-default-components,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>
-        <jahia-static-resources>/css,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
+        <jahia-static-resources>/css,/fonts,/icons,/images,/img,/javascript,/pictos</jahia-static-resources>
         <embed-dependency>*; scope=compile|runtime|system; type=!pom; inline=false</embed-dependency>
-        <jahia-static-resources>/css,/fonts,/icons,/images,/img,/javascript,/static</jahia-static-resources>
     </properties>
     <dependencies>
         <dependency>
