@@ -10,7 +10,7 @@ import {autoSplitDialogAction} from "./AutoSplitDialogAction";
 
 export default () => {
     registry.add('callback', 'jahia-training-developer', {
-        targets: ['jahiaApp-init:5'],
+        targets: ['jahiaApp-init:99'],
         callback: async () => {
             await i18next.loadNamespaces('jahia-training-developer');
 

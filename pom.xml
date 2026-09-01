@@ -51,7 +51,7 @@
     <parent>
         <groupId>org.jahia.modules</groupId>
         <artifactId>jahia-modules</artifactId>
-        <version>8.2.1.0</version>
+        <version>8.2.3.0</version>
     </parent>
     <groupId>org.foo.modules</groupId>
     <artifactId>jahia-training-developer</artifactId>
@@ -66,14 +66,14 @@
     </scm>
     <properties>
         <external-provider-users-groups.version>2.5.0</external-provider-users-groups.version>
-        <graphql-dxm-provider.version>3.4.0</graphql-dxm-provider.version>
+        <graphql-dxm-provider.version>3.5.1</graphql-dxm-provider.version>
         <jahia.version>${parent.version}</jahia.version>
         <jahia-authentication.version>1.8.0</jahia-authentication.version>
-        <jahia-oauth.version>3.3.0</jahia-oauth.version>
-        <jahia-authentication.version>1.8.0</jahia-authentication.version>
-        <jexperience.version>3.5.2</jexperience.version>
-        <module-manager.version>2.11.0</module-manager.version>
-        <server-availability-manager.version>3.3.0</server-availability-manager.version>
+        <jahia-oauth.version>5.0.0</jahia-oauth.version>
+        <jahia-authentication.version>2.0.0</jahia-authentication.version>
+        <jexperience.version>3.9.0</jexperience.version>
+        <module-manager.version>2.13.0</module-manager.version>
+        <server-availability-manager.version>3.5.0</server-availability-manager.version>
         <jahia-depends>
             default,external-provider-users-groups,graphql-dxm-provider,jahia-authentication,jexperience,legacy-default-components,location,module-manager,rating,server-availability-manager,workflow-extender
         </jahia-depends>

@@ -4,14 +4,14 @@
 <urlrewrite>
     <rule>
         <name>Redirect site protected</name>
-        <condition name="host">jahia-docker</condition>
+        <condition name="host">jahia.localhost</condition>
         <from>^/?$</from>
         <to>/sites/digitall/home.html</to>
     </rule>
 
     <rule>
         <name>Test gone resource</name>
-        <condition name="host">jahia-docker</condition>
+        <condition name="host">jahia.localhost</condition>
         <from>^/toto$</from>
         <to>/test.html</to>
     </rule>

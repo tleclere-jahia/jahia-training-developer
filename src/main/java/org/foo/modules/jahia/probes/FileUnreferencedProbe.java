@@ -47,15 +47,14 @@ public class FileUnreferencedProbe implements Probe {
                 while (it.hasNext()) {
                     fileNode = (JCRNodeWrapper) it.nextNode();
                     ref = fileNode.getReferences();
-                    if (ref != null && ref.getSize() == 0) {
+                    if (ref == null || ref.getSize() == 0) {
                         logger.debug("File unreferenced: {}", fileNode.getPath());
                         nbFilesUnreferenced++;
-                    } else {
-                        ref = fileNode.getWeakReferences();
-                        if (ref != null && ref.getSize() == 0) {
-                            logger.debug("File unreferenced: {}", fileNode.getPath());
-                            nbFilesUnreferenced++;
-                        }
+                    }
+                    ref = fileNode.getWeakReferences();
+                    if (ref == null || ref.getSize() == 0) {
+                        logger.debug("File unreferenced: {}", fileNode.getPath());
+                        nbFilesUnreferenced++;
                     }
                 }
                 return nbFilesUnreferenced;

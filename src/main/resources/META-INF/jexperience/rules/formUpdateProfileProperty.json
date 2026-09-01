@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "id": "formUpdateProfileProperty",
+    "name": "Update profile property by form submission"
+  },
+  "raiseEventOnlyOnceForSession": false,
+  "condition": {
+    "type": "formEventCondition"
+  },
+  "actions": [
+    {
+      "type": "logMeAction"
+    },
+    {
+      "type": "formUpdateProfilePropertyAction"
+    }
+  ]
+}

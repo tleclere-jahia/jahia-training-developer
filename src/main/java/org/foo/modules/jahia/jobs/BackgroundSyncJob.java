@@ -23,7 +23,7 @@ public class BackgroundSyncJob extends BackgroundJob {
 
     private static final int REPEAT_INTERVAL = 5 * 60 * 1000;
     private static final String TRIGGER_NAME = BackgroundSyncJob.class.getName() + "_trigger";
-    private static final String JOB_GROUP = BackgroundSyncJob.class.getName();
+    private static final String JOB_GROUP = BackgroundSyncJob.class.getSimpleName();
 
     @Reference
     private SchedulerService schedulerService;
