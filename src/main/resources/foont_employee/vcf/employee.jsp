@@ -22,12 +22,16 @@
 <c:set var="phone" value="${currentNode.properties['phone']}"/>
 
 BEGIN:VCARD
+
 FN:<c:out
         value="${currentNode.properties['firstname'].string} ${currentNode.properties['lastname'].string} (${currentNode.properties['jcr:title'].string})"/>
 N:<c:out value="${currentNode.properties['lastname'].string};${currentNode.properties['firstname'].string}"/>
 <c:if test="${not empty jobTitle}">
-    TITLE:<jcr:nodePropertyRenderer node="${currentNode}" name="jobTitle" renderer="resourceBundle"/>
+TITLE:<jcr:nodePropertyRenderer node="${currentNode}" name="jobTitle" renderer="resourceBundle"/>
 </c:if>
+
 <c:if test="${not empty email}">EMAIL:${email.string}</c:if>
+
 <c:if test="${not empty phone}">TEL;TYPE=${phone.string}</c:if>
+
 END:VCARD

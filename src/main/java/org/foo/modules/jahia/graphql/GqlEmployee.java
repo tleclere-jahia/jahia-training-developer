@@ -1,24 +1,23 @@
 package org.foo.modules.jahia.graphql;
 
 import graphql.annotations.annotationTypes.GraphQLField;
-import org.jahia.modules.graphql.provider.dxm.node.GqlJcrNodeImpl;
 import org.jahia.services.content.JCRNodeWrapper;
 
 public class GqlEmployee {
-    private final GqlJcrNodeImpl node;
+    private final JCRNodeWrapper node;
 
     public GqlEmployee(JCRNodeWrapper jcrNodeWrapper) {
-        this.node = new GqlJcrNodeImpl(jcrNodeWrapper);
+        node = jcrNodeWrapper;
     }
 
     @GraphQLField
     public String getFirstname() {
-        return node.getNode().getPropertyAsString("firstname");
+        return node.getPropertyAsString("firstname");
     }
 
     @GraphQLField
     public String getLastname() {
-        return node.getNode().getPropertyAsString("lastname");
+        return node.getPropertyAsString("lastname");
     }
 
     @GraphQLField

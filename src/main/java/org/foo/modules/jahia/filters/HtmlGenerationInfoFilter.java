@@ -45,7 +45,7 @@ public class HtmlGenerationInfoFilter extends AbstractFilter {
     public String execute(String previousOut, RenderContext renderContext, Resource resource, RenderChain chain) {
         long startTime = (long) renderContext.getRequest().getAttribute(ATTRIBUTE_NAME);
         double timeEllapsed = (System.currentTimeMillis() - startTime) / 1000f;
-        logger.info("Time ellapsed: {}s", String.format("%.2f", timeEllapsed));
+        logger.info("Time ellapsed: {}s", String.format("%.4f", timeEllapsed));
 
         Source source = new Source(previousOut);
         OutputDocument outputDocument = new OutputDocument(source);
@@ -54,7 +54,7 @@ public class HtmlGenerationInfoFilter extends AbstractFilter {
             Element bodyElement = bodyElementList.get(bodyElementList.size() - 1);
             EndTag bodyEndTag = bodyElement.getEndTag();
             outputDocument.replace(bodyEndTag.getBegin(), bodyEndTag.getBegin() + 1,
-                    "<!-- Time ellapsed: " + String.format("%.2f", timeEllapsed) + "s --><");
+                    "<!-- Time ellapsed: " + String.format("%.4f", timeEllapsed) + "s --><");
         }
 
         return outputDocument.toString();
