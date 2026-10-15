@@ -7,12 +7,30 @@
 These folders hold end-to-end tests and supporting files for the Cypress Test Runner.
 
 - [e2e](e2e) holds the actual test files, [read more](https://on.cypress.io/writing-and-organizing-tests)
-- [plugins](plugins) allow you to customize how tests are loaded, [read more](https://on.cypress.io/plugins)
-- [support](support) file runs before all tests and is a great place to write or load additional custom commands, [read more](https://on.cypress.io/writing-and-organizing-tests#Support-file)
+- [fixtures](fixtures) holds files sent by the tests, such as the zip imported by the `importNode` provisioning operation
+- [support](support) runs before all tests. [training.ts](support/training.ts) holds the helpers shared by the specs:
+  site setup, GraphQL queries and mutations, node creation.
 
-## `cypress.json` file
+## Running the tests
 
-You can configure project options in the [../cypress.json](../cypress.json) file, see [Cypress configuration doc](https://on.cypress.io/configuration).
+The tests need a running Jahia with the `jahia-training-developer` module deployed, its dependencies, and the
+`dx-base-demo-templates` template set.
+
+```bash
+yarn install
+yarn e2e:ci
+```
+
+The configuration is in [../cypress.config.ts](../cypress.config.ts). These environment variables override the defaults:
+
+| Variable              | Default                  |
+|-----------------------|--------------------------|
+| `JAHIA_URL`           | `http://localhost:8080`  |
+| `SUPER_USER_PASSWORD` | `root`                   |
+| `CYPRESS_TEMPLATE_SET`| `dx-base-demo-templates` |
+
+Each spec creates its own site and deletes it at the end. `platform.test.cy.ts` uses the `digitall` site, because the
+module configuration of `GoneResourceErrorHandler` and of the `/modules/training/test` endpoint names it.
 
 ## More information
 

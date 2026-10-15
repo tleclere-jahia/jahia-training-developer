@@ -31,13 +31,18 @@ public class IncrementAction extends BaseBackgroundAction {
                 JCRNodeWrapper counterNode;
                 if (!systemSession.nodeExists(sitePath + "/counter")) {
                     counterNode = systemSession.getNode(sitePath).addNode("counter", "foont:counter");
+                    // The lock manager refuses to lock or unlock while the session has pending changes
+                    counterNode.saveSession();
                 } else {
                     counterNode = systemSession.getNode(sitePath + "/counter");
                 }
                 counterNode.lockAndStoreToken(getName());
-                counterNode.setProperty("count", counterNode.getProperty("count").getLong() + 1);
-                counterNode.unlock(getName());
-                counterNode.saveSession();
+                try {
+                    counterNode.setProperty("count", counterNode.getProperty("count").getLong() + 1);
+                    counterNode.saveSession();
+                } finally {
+                    counterNode.unlock(getName());
+                }
 
                 return null;
             });

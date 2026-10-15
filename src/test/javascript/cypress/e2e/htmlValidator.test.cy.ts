@@ -1,69 +1,29 @@
-import {createSite, deleteSite, enableModule, publishAndWaitJobEnding} from "@jahia/cypress";
-import gql from "graphql-tag";
+import {addChild, expectServerRejection, setupTrainingSite, teardownTrainingSite} from "../support/training";
 
 describe('Html JCR Validator Test', () => {
-    const siteKey = 'testsite';
-    const langEN = 'en';
-    const languages = langEN;
-    const siteConfig = {
-        languages,
-        templateSet: 'dx-base-demo-templates',
-        serverName: 'jahia-docker',
-        locale: langEN
-    };
+    const siteKey = 'trainingHtmlValidator';
+    const contents = `/sites/${siteKey}/contents`;
 
-    before(() => {
-        createSite(siteKey, siteConfig);
-        enableModule('jahia-training-developer', siteKey);
-        publishAndWaitJobEnding(`/sites/${siteKey}/home`, [langEN]);
-    });
-    after(() => deleteSite(siteKey));
+    before(() => setupTrainingSite(siteKey));
+    after(() => teardownTrainingSite(siteKey));
 
-    beforeEach(() => cy.login());
-    afterEach(() => cy.logout());
-
-    it('Test Html valid', () => {
-        cy.apollo({
-            query: gql`
-            mutation {
-              jcr {
-                mutateNode(pathOrId: "/sites/${siteKey}/contents") {
-                  addChild(
-                    name: "blabla"
-                    primaryNodeType: "foont:text"
-                    properties: [{name: "text", language: "en", value: "<span>blabla</span>"}]
-                  ) {
-                    uuid
-                  }
-                }
-              }
-            }`,
-            errorPolicy: 'all'
-        }).should(result => {
-            expect(result?.errors).not.to.exist;
-            expect(result?.errors).to.be.undefined;
-            expect(result?.data?.jcr?.mutateNode?.addChild?.uuid).not.to.be.undefined;
+    it('accepts a well-formed rich text', () => {
+        addChild(contents, 'valid-html', 'foont:text', [{name: 'text', value: '<span>blabla</span>'}]).should(result => {
+            expect(result.errors).to.be.undefined;
+            expect(result.data.jcr.addNode.uuid).to.be.a('string');
         });
     });
-    it('Test Html not valid', () => {
-        cy.apollo({
-            query: gql`
-            mutation {
-              jcr {
-                mutateNode(pathOrId: "/sites/${siteKey}/contents") {
-                  addChild(
-                    name: "blabla2"
-                    primaryNodeType: "foont:text"
-                    properties: [{name: "text", language: "en", value: "<span>blabla"}]
-                  ) {
-                    uuid
-                  }
-                }
-              }
-            }`,
-            errorPolicy: 'all'
-        }).should(result => {
-            expect(result?.errors).to.exist;
-        });
+
+    it('rejects a rich text with an unclosed tag', () => {
+        addChild(contents, 'unclosed-html', 'foont:text', [{name: 'text', value: '<span>blabla'}])
+            .should(result => expectServerRejection(result, 'text'));
+    });
+
+    it('validates the rich text of a table cell too', () => {
+        addChild(contents, 'table', 'foont:table').should(result => expect(result.errors).to.be.undefined);
+        addChild(`${contents}/table/header`, 'bad-cell', 'foont:tcell', [
+            {name: 'type', value: 'foomix:tCellTextType'},
+            {name: 'value', value: '<p>unclosed'}
+        ], ['foomix:tCellTextType']).should(result => expectServerRejection(result, 'value'));
     });
 });
