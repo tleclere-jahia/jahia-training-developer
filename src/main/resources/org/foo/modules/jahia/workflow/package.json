@@ -1,6 +1,6 @@
 {
   "name": "custom-workflow",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.18.0",
   "scripts": {
     "start": "vite"
   },
