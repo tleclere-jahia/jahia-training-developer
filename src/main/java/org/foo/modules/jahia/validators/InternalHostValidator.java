@@ -1,6 +1,5 @@
 package org.foo.modules.jahia.validators;
 
-import org.apache.commons.lang.StringUtils;
 import org.jahia.osgi.BundleUtils;
 import org.jahia.services.content.decorator.JCRSiteNode;
 import org.jahia.services.render.RenderContext;
@@ -20,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InternalHostValidator implements ConstraintValidator<InternalHost, FoomixTextValidator> {
     private static final Logger logger = LoggerFactory.getLogger(InternalHostValidator.class);
@@ -67,21 +67,38 @@ public class InternalHostValidator implements ConstraintValidator<InternalHost, 
                 return false;
             }
 
-            return htmlTagAttributeTraverser.traverse(value, (String v, RenderContext context, String tagName, String attrName, Resource resource) -> {
-                try {
-                    URI uri = new URI(v);
-                    if (BundleUtils.getOsgiService(JahiaSitesService.class, null).getSitesNodeList().stream()
-                            .map(JCRSiteNode::getAllServerNames)
-                            .flatMap(Collection::stream)
-                            .noneMatch(serverName -> StringUtils.equals(uri.getHost(), serverName))) {
-                        return v;
-                    }
-                } catch (URISyntaxException | RepositoryException e) {
-                    logger.error("", e);
+            // The traverser ignores a null returned by the visitor, so the visitor records the internal host instead.
+            AtomicBoolean internalHostFound = new AtomicBoolean(false);
+            htmlTagAttributeTraverser.traverse(value, (String v, RenderContext context, String tagName, String attrName, Resource resource) -> {
+                if (!internalHostFound.get() && isInternalHost(v)) {
+                    internalHostFound.set(true);
                 }
-                return null;
-            }) != null;
+                return v;
+            });
+            return !internalHostFound.get();
         } catch (Exception e) {
+            logger.error("", e);
+            return false;
+        }
+    }
+
+    private boolean isInternalHost(String url) {
+        String host;
+        try {
+            host = new URI(url).getHost();
+        } catch (URISyntaxException e) {
+            // Internal references are stored as ##cms-context##/{mode}/{lang}/##ref:linkN##.html, which is not a valid URI
+            return false;
+        }
+        if (host == null) {
+            return false;
+        }
+        try {
+            return BundleUtils.getOsgiService(JahiaSitesService.class, null).getSitesNodeList().stream()
+                    .map(JCRSiteNode::getAllServerNames)
+                    .flatMap(Collection::stream)
+                    .anyMatch(host::equalsIgnoreCase);
+        } catch (RepositoryException e) {
             logger.error("", e);
             return false;
         }
