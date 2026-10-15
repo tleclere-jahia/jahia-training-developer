@@ -19,3 +19,13 @@ node_modules
 src/main/resources/javascript/apps
 .yarn
 .pnp*
+
+# Secrets — never commit real credentials; provisioning.yaml references ${env:...} instead
+*.env
+.env.*
+*-secrets.properties
+.jahia-secrets/
+
+# Cypress run output
+src/test/javascript/cypress/screenshots
+src/test/javascript/cypress/videos
